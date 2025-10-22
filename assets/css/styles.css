@@ -1,34 +1,331 @@
 
+/* Design system — Импровизация: живо, смело, с теплом */
 :root{
-  --bg:#FAF7F2;--fg:#222;--accent:#B05E25;--accent-2:#5FD1FF;--muted:#666;--card:#fff;
+  --bg:#FAF7F2;
+  --fg:#1F1B16;
+  --muted:#6a645c;
+
+  --accent:#B05E25;    /* терракотовый — тепло, сцена */
+  --accent-2:#5FD1FF;  /* воздушный — лёгкость, игра */
+  --accent-3:#FF7A59;  /* акцент для микродинамики */
+
+  --card:#ffffff;
+  --border:#e6e1da;
+
+  --radius:16px;
+  --radius-sm:12px;
+
+  --shadow-sm: 0 4px 16px rgba(0,0,0,.06);
+  --shadow-md: 0 10px 30px rgba(0,0,0,.12);
 }
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-.container{max-width:1100px;margin:0 auto;padding:24px}
-.nav{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:14px 0}
-.nav a.logo{font-weight:800;letter-spacing:.5px;color:var(--fg)}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+  background:var(--bg);
+  color:var(--fg);
+  line-height:1.6;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Ссылки — мягкое подчёркивание-волна */
+a{
+  color:var(--accent);
+  text-decoration:none;
+  position:relative;
+  background-image:linear-gradient(to right,var(--accent),var(--accent));
+  background-size:0% 2px;
+  background-repeat:no-repeat;
+  background-position:0 100%;
+  transition:background-size .28s ease;
+}
+a:hover{background-size:100% 2px}
+
+.container{max-width:1120px;margin:0 auto;padding:22px}
+
+/* Навигация — липкая, с лёгким блюром */
+.nav{
+  position:sticky; top:0; z-index:50;
+  display:flex; gap:18px; align-items:center; justify-content:space-between;
+  padding:12px 0;
+  background:color-mix(in oklab, var(--bg) 82%, #fff 18%);
+  backdrop-filter:saturate(120%) blur(10px);
+  border-bottom:1px solid color-mix(in srgb, var(--border) 65%, transparent);
+}
+.nav a.logo{
+  font-weight:800; letter-spacing:.4px; color:var(--fg);
+  white-space:nowrap;
+}
 .nav .menu{display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 18px;border-radius:12px;font-weight:600}
-.btn.secondary{background:var(--accent-2);color:#0b2239}
-.hero{padding:64px 0}
-.hero h1{font-size:42px;line-height:1.1;margin:0 0 12px}
+.nav .menu a{color:inherit;opacity:.9}
+.nav .menu a:hover{opacity:1}
+
+/* Кнопки — упругие */
+.btn{
+  display:inline-block;
+  color:#0b2239;
+  background:linear-gradient(180deg, color-mix(in oklab, var(--accent-2) 88%, #fff 12%), var(--accent-2));
+  padding:12px 18px;
+  border-radius:var(--radius-sm);
+  font-weight:700;
+  box-shadow:0 6px 14px rgba(95,209,255,.35);
+  transform:translateY(0);
+  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+  background-image:linear-gradient(180deg, color-mix(in oklab, var(--accent-2) 88%, #fff 12%), var(--accent-2));
+}
+.btn:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(95,209,255,.45)}
+.btn:active{transform:translateY(0); filter:saturate(95%)}
+.btn.secondary{
+  background:linear-gradient(180deg, color-mix(in oklab, var(--accent) 88%, #fff 12%), var(--accent));
+  color:#fff;
+  box-shadow:0 6px 16px rgba(176,94,37,.35);
+}
+
+/* Хиро — «дыхание сцены» с мягкими пятнами */
+.hero{
+  position:relative; overflow:hidden;
+  padding:90px 0;
+  background:
+    radial-gradient(600px 280px at 85% -10%, rgba(95,209,255,.22), transparent 60%),
+    radial-gradient(600px 300px at 10% 110%, rgba(176,94,37,.18), transparent 60%),
+    var(--bg);
+  border-bottom:1px solid color-mix(in srgb, var(--border) 75%, transparent);
+}
+.hero::before{
+  content:"";
+  position:absolute; inset:-20% -10% auto -10%; height:60%;
+  background:
+    radial-gradient(45% 60% at 60% 40%, rgba(255,122,89,.20), transparent 60%),
+    radial-gradient(40% 55% at 35% 70%, rgba(95,209,255,.18), transparent 60%);
+  filter:blur(20px) saturate(110%);
+  animation:blobMove 16s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes blobMove{
+  0%{transform:translate3d(0,0,0) rotate(0deg)}
+  100%{transform:translate3d(2%, -2%, 0) rotate(6deg)}
+}
+.hero h1{
+  margin:0 0 12px;
+  line-height:1.08;
+  font-weight:900;
+  font-size:clamp(34px, 5.2vw, 54px);
+  letter-spacing:.2px;
+}
 .hero p{font-size:18px;color:var(--muted);margin:0 0 18px}
+
+/* Сетки */
 .grid{display:grid;gap:16px}
 .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.card{background:var(--card);border-radius:16px;padding:18px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
-.badge{display:inline-block;padding:6px 10px;border:1px solid #e6e1da;border-radius:999px;color:var(--muted);font-size:12px}
-.section h2{margin:28px 0 12px}
-footer{margin-top:48px;background:#111;color:#ddd}
-footer a{color:#ddd}
-.footer-inner{display:grid;gap:16px;grid-template-columns:1fr auto}
+
+/* Карточки — «подхват партнёра» */
+.card{
+  background:linear-gradient(0deg, #fff, #fff) padding-box,
+             radial-gradient(120% 120% at 0% 0%, rgba(176,94,37,.12), rgba(95,209,255,.12)) border-box;
+  border:1px solid transparent;
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow-sm);
+  transition:transform .2s ease, box-shadow .25s ease, border-color .2s ease;
+  will-change:transform;
+}
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-md);
+  border-color:color-mix(in srgb, var(--accent) 35%, #fff);
+}
+
+/* Бейджи */
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  color:var(--muted);
+  font-size:12px;
+  letter-spacing:.3px;
+  background:#fff8;
+  backdrop-filter:saturate(110%) blur(2px);
+}
+
+/* Заголовки секций */
+.section h2{
+  margin:32px 0 14px;
+  line-height:1.25;
+  font-size:clamp(22px, 3.2vw, 30px);
+  position:relative;
+  display:inline-block;
+}
+.section h2::after{
+  content:"";
+  position:absolute; left:0; bottom:-6px; height:6px; width:42%;
+  background:linear-gradient(90deg, var(--accent), color-mix(in oklab, var(--accent-2) 60%, var(--accent) 40%));
+  border-radius:999px;
+  opacity:.2;
+}
+
+/* Таблицы */
 .table{width:100%;border-collapse:collapse}
 .table th,.table td{border-bottom:1px solid #eee;padding:10px;text-align:left}
-.form input, .form select, .form textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;background:#fff}
-.form .row{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.form button{margin-top:8px}
-.avatar{width:120px;height:120px;border-radius:16px;object-fit:cover}
-.kicker{font-weight:700;color:var(--accent)}
+
+/* Формы */
+.form input, .form select, .form textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  background:#fff;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.form input:focus, .form select:focus, .form textarea:focus{
+  outline:none;
+  border-color:color-mix(in srgb, var(--accent-2) 55%, #999);
+  box-shadow:0 0 0 4px color-mix(in srgb, var(--accent-2) 18%, transparent);
+}
+.form .row{
+  display:grid;
+  gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+}
+/* Вертикальный ритм между элементами формы */
+.form > * + *{ margin-top:12px }
+/* Текстовая область — удобнее печатать и тянуть */
+.form textarea{ min-height:110px; resize:vertical }
+/* Чекбокс согласия — в одну строку, кликабелен по всей надписи */
+.form label.note{
+  display:inline-flex; align-items:center; gap:10px;
+  cursor:pointer; user-select:none;
+}
+.form label.note input[type="checkbox"]{
+  width:18px; height:18px; margin:0; flex:0 0 auto;
+  accent-color: var(--accent);
+}
+/* Кнопка формы — согласованно с общим ритмом */
+.form button{ display:block; margin:16px auto 0 }
+
+/* Аватары */
+.avatar{
+  width:120px;height:120px;object-fit:cover;border-radius:16px;
+  border:1px solid var(--border);
+  box-shadow:0 4px 14px rgba(0,0,0,.08);
+}
+
+/* Микротипографика */
+.kicker{font-weight:800;color:var(--accent);letter-spacing:.3px;text-transform:uppercase;font-size:12px}
 .note{color:#555;font-size:14px}
+
+/* Цена в карточке курса */
+.price b{font-size:clamp(18px, 3.4vw, 24px)}
+
+/* Подвал — тёплая сцена */
+footer{
+  margin-top:56px;
+  background:
+    radial-gradient(100% 120% at 100% 0%, rgba(176,94,37,.15), transparent 60%) #111;
+  color:#ddd;
+}
+footer a{color:#ddd}
+.footer-inner{display:grid;gap:16px;grid-template-columns:1fr auto; padding:26px 0}
+
+/* Плавные появления без JS */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(10px)}
+  to{opacity:1; transform:translateY(0)}
+}
+.section .grid > *{
+  animation:fadeUp .5s ease both;
+}
+.section .grid > *:nth-child(1){animation-delay:.00s}
+.section .grid > *:nth-child(2){animation-delay:.06s}
+.section .grid > *:nth-child(3){animation-delay:.12s}
+.section .grid > *:nth-child(4){animation-delay:.18s}
+
+/* Доступность: уважение к тем, кто без анимаций */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important}
+}
+
+/* ————————————————————————————————————————————————
+   Meta-message tuning: «ты давно ищешь это — доверься импульсу и приходи»
+   Тёплые акценты, импульс CTA, адаптив без JS
+   ———————————————————————————————————————————————— */
+
+/* Палитра: мягче и теплее */
+:root{
+  --accent:#E26A3F;    /* тёплый коралл — доверие/приглашение */
+  --accent-2:#6FD9FF;  /* воздушный акцент для вторичных CTA */
+  --accent-3:#FF9A6B;  /* «импульс» — для микродинамики */
+}
+
+/* Переопределения CTA под «импульс» и приглашение */
+.btn{
+  color:#fff;
+  background:linear-gradient(180deg,
+    color-mix(in oklab, var(--accent-3) 88%, #fff 12%),
+    var(--accent)
+  );
+  box-shadow:0 8px 18px rgba(226,106,63,.35);
+  animation:ctaImpulse 7s ease-in-out infinite;
+}
+.btn:hover{transform:translateY(-2px); box-shadow:0 12px 26px rgba(226,106,63,.45)}
+.btn:active{transform:translateY(0); filter:saturate(96%)}
+.btn.secondary{
+  background:linear-gradient(180deg,
+    color-mix(in oklab, var(--accent-2) 88%, #fff 12%),
+    var(--accent-2)
+  );
+  color:#0b2239;
+  box-shadow:0 8px 18px rgba(111,217,255,.35);
+}
+@keyframes ctaImpulse{
+  0%,96%{transform:translateY(0); box-shadow:0 6px 14px rgba(226,106,63,.30)}
+  98%{transform:translateY(-3px); box-shadow:0 14px 30px rgba(226,106,63,.40)}
+  100%{transform:translateY(0); box-shadow:0 6px 14px rgba(226,106,63,.30)}
+}
+.btn:hover,.btn:focus-visible{animation-play-state:paused}
+
+/* Респонсивные таблицы и крупные тапы в формах */
+.table{display:block; overflow-x:auto; -webkit-overflow-scrolling:touch}
+.form input,.form select,.form textarea{min-height:44px}
+
+/* Адаптив: без изменения текстов, акцент — на ясные CTA и лёгкость восприятия */
+@media (max-width: 960px){
+  .container{max-width:900px; padding:20px}
+  .hero{padding:72px 0}
+}
+@media (max-width: 760px){
+  .container{padding:18px}
+  .nav{padding:10px 0; gap:10px}
+  /* Горизонтальная прокрутка меню — без JS, удобно большим пальцем */
+  .nav .menu{
+    order:3; width:100%;
+    overflow-x:auto; white-space:nowrap; gap:10px;
+    padding-bottom:8px; margin-top:6px;
+    scrollbar-width:none;
+  }
+  .nav .menu::-webkit-scrollbar{display:none}
+  .nav .menu a{
+    display:inline-block; padding:8px 10px;
+    border-radius:12px; border:1px solid var(--border); background:#fff;
+  }
+  .footer-inner{grid-template-columns:1fr; text-align:left}
+  .hero{padding:56px 0}
+  .grid.cols-2{grid-template-columns:1fr}
+  .card{padding:16px}
+  .avatar{width:92px; height:92px}
+  .btn{width:100%; text-align:center}
+  .form .btn{width:auto}
+  .hero p{font-size:16px}
+}
+@media (max-width: 420px){
+  .avatar{width:80px; height:80px}
+  .container{padding:16px}
+}
+
+/* Уважение к тем, кто отключил анимации */
+@media (prefers-reduced-motion: reduce){
+  .btn{animation:none !important}
+}

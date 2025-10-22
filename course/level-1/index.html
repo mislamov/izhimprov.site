@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Импровизация: Первый вдох — Школа Ижевского Импрова</title>
+<title>Импровизация: Первый шаг — Школа Ижевского Импрова</title>
 <link rel="stylesheet" href="/assets/css/styles.css"/>
 </head>
 <body>
@@ -26,8 +26,9 @@
 <section class="hero">
   <div class="container">
     <div class="badge">Скоро старт</div>
-    <h1>Импровизация: Первый вдох</h1>
-    <p>8×3 часа + выпускное шоу • группа 8–14 • ДК Металлург</p>
+    <h1>Импровизация: Первый шаг</h1>
+    <p>8 занятий по 3 часа + выпускное шоу • группа 8–14 • ДК Металлург</p>
+    <p class="price"><s>19&nbsp;700 ₽</s> <b>11&nbsp;700 ₽</b></p>
     <a class="btn" href="#form">Оставить заявку</a>
   </div>
 </section>
@@ -61,15 +62,73 @@
   <div class="container">
     <div class="card">
       <h3 id="form">Заявка на курс</h3>
-      <form class="form" action="#" method="post">
+      <form class="form" id="courseForm" action="https://t.me/Maratsky" method="get" target="_blank">
         <div class="row">
-          <input required placeholder="Имя"/>
-          <input required placeholder="Телефон"/>
+          <input name="name" required placeholder="Имя"/>
+          <input name="phone" required placeholder="Телефон"/>
         </div>
-        <textarea rows="3" placeholder="Комментарий"></textarea>
-        <label class="note"><input type="checkbox" required/> Согласен с политикой конфиденциальности</label>
+        <textarea name="comment" rows="3" placeholder="Комментарий"></textarea>
+        <label class="note">
+          <input type="checkbox" required/>
+          Согласен с <a href="/legal/privacy/" target="_blank" rel="noopener" onclick="event.stopPropagation();">политикой конфиденциальности</a>
+        </label>
         <button class="btn" type="submit">Оставить заявку</button>
       </form>
+      <div class="note">Оплата: только картами «Мир».</div>
+      <script>
+      (function(){
+        const form = document.getElementById('courseForm');
+        if(!form) return;
+
+        // Валидация на русском: собственные сообщения ошибок
+        const nameInput = form.querySelector('input[name="name"]');
+        const phoneInput = form.querySelector('input[name="phone"]');
+        const consent = form.querySelector('label.note input[type="checkbox"]');
+        function ruValidate(el, requiredMsg, extra){
+          if(!el) return;
+          el.addEventListener('invalid', function(){
+            el.setCustomValidity('');
+            if(el.validity.valueMissing){
+              el.setCustomValidity(requiredMsg);
+            } else if (extra){
+              const msg = extra(el);
+              if(msg) el.setCustomValidity(msg);
+            }
+          });
+          ['input','change'].forEach(ev => el.addEventListener(ev, ()=> el.setCustomValidity('')));
+        }
+        ruValidate(nameInput, 'Введите имя');
+        ruValidate(phoneInput, 'Укажите телефон');
+        ruValidate(consent, 'Нужно согласиться с политикой конфиденциальности');
+
+        form.addEventListener('submit', async function(e){
+          e.preventDefault();
+          if(!form.checkValidity()){ form.reportValidity(); return; }
+          const name = form.querySelector('input[name="name"]').value.trim();
+          const phone = form.querySelector('input[name="phone"]').value.trim();
+          const comment = form.querySelector('textarea[name="comment"]').value.trim();
+
+          const plain = [
+            'Здравствуйте! Хочу записаться на курс «Импровизация: Первый шаг».',
+            'Меня зовут: ' + (name || '—'),
+            'Телефон для связи: ' + (phone || '—'),
+            (comment ? ('Комментарий: ' + comment) : 'Комментарий: —')
+          ].join('\n');
+
+          const text = encodeURIComponent(plain);
+          const deep = 'tg://resolve?domain=Maratsky&text=' + text;
+          const share = 'https://t.me/share/url?url=' + encodeURIComponent('https://izhimpro.ru/course/level-1/') + '&text=' + text;
+
+          let fallbackTimer = setTimeout(function(){
+            window.open(share, '_blank');
+          }, 450);
+
+          window.location.href = deep;
+
+          try { await navigator.clipboard.writeText(plain); } catch(_) {}
+        });
+      })();
+      </script>
     </div>
   </div>
 </section>
