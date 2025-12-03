@@ -12,9 +12,9 @@
     <nav class="nav">
       <a class="logo" href="/">Школа Ижевского Импрова</a>
       <div class="menu">
-        <a href="/courses/">Курсы</a>
+        <a href="/courses/">Программы</a>
         <a href="/try/">Пробное занятие</a>
-        <a href="/teachers/">Преподаватели</a>
+        <a href="/teachers/">Команда</a>
         <a href="/faq/">FAQ</a>
         <a href="/contacts/">Контакты</a>
       </div>
@@ -35,16 +35,16 @@
 <section class="section">
   <div class="container grid cols-2">
     <div class="card">
-      <h3>Чему научитесь</h3>
+      <h3>Какие навыки вы будете развивать</h3>
       <ul>
-        <li>Уверенность и свобода на сцене и в жизни</li>
-        <li>Командность, принятие и поддержка партнёра</li>
-        <li>Быстрая генерация идей и креативное мышление</li>
-        <li>Голос, статус, взаимодействие с залом</li>
+        <li>Потренируете уверенность и свободу на сцене и в жизни</li>
+        <li>Потренируете командность, принятие и поддержку партнёра</li>
+        <li>Потренируете быструю генерацию идей и креативное мышление</li>
+        <li>Потренируете голос, статус и взаимодействие с залом</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Программа (8 занятий)</h3>
+      <h3>Программа (8 встреч)</h3>
       <ol>
         <li>Импров‑принципы, безопасность, «Да‑и…»</li>
         <li>Статусы, эмоции, слушание</li>
@@ -61,7 +61,7 @@
 <section class="section">
   <div class="container">
     <div class="card">
-      <h3 id="form">Заявка на курс</h3>
+      <h3 id="form">Заявка на участие</h3>
       <form class="form" id="courseForm" action="https://t.me/Maratsky" method="get" target="_blank">
         <div class="row">
           <input name="name" required placeholder="Имя"/>
@@ -74,7 +74,7 @@
         </label>
         <button class="btn" type="submit">Оставить заявку</button>
       </form>
-      <div class="note">Оплата: только картами «Мир».</div>
+      <div class="note">Оплата участия: только картами «Мир».</div>
       <script>
       (function(){
         const form = document.getElementById('courseForm');
@@ -109,7 +109,7 @@
           const comment = form.querySelector('textarea[name="comment"]').value.trim();
 
           const plain = [
-            'Здравствуйте! Хочу записаться на курс «Импровизация: Первый шаг».',
+            'Здравствуйте! Хочу участвовать в программе «Импровизация: Первый шаг» (серия клубных встреч по импровизации).',
             'Меня зовут: ' + (name || '—'),
             'Телефон для связи: ' + (phone || '—'),
             (comment ? ('Комментарий: ' + comment) : 'Комментарий: —')
@@ -137,8 +137,9 @@
     <footer>
       <div class="container footer-inner">
         <div>
-          <div>© 2025 Школа Ижевского Импрова — Импровизация для жизни и сцены</div>
+          <div> 2025 Школа Ижевского Импрова — Импровизация для жизни и сцены</div>
           <div class="note">ИП Исламов Марат Шамилевич • ОГРНИП 322183200021584 • ИНН 183114070226</div>
+          <div class="note">Мы не являемся образовательной организацией и не выдаём дипломы или удостоверения. Наши занятия — это клубные практики и тренировки по импровизации для развития навыков и удовольствия.</div>
         </div>
         <div style="text-align:right">
           <a href="/legal/offer/">Оферта</a> • <a href="/legal/privacy/">Политика</a> • <a href="/rules/">Правила</a>
