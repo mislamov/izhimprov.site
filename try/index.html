@@ -28,7 +28,7 @@
     <div class="badge">Каждое воскресенье</div>
     <h1>Пробное занятие</h1>
     <p>2,5‑часовая практика по импровизации • 550 ₽ • группа 8–14 человек</p>
-    <a class="btn" href="#form">Выбрать дату</a>
+    <a class="btn" href="#form">Оставить заявку</a>
   </div>
 </section>
 <section class="section">
@@ -44,44 +44,13 @@
     </div>
     <div class="card">
       <h3 id="form">Запись</h3>
-      <form class="form" id="tryForm" action="https://t.me/Maratsky" method="get" target="_blank">
+      <form class="form" id="tryForm">
         <div class="row">
           <input name="name" required placeholder="Имя"/>
           <input name="phone" required placeholder="Телефон"/>
         </div>
         <div class="row">
           <input name="tg" placeholder="Telegram (необязательно)"/>
-          <input type="hidden" name="date" required/>
-          <div class="date-field" id="dateField">
-            <input type="text" id="dateDisplay" placeholder="Выберите дату" readonly aria-haspopup="dialog" aria-expanded="false" aria-controls="dateCalendar"/>
-            <button type="button" class="date-toggle" aria-label="Открыть календарь">📅</button>
-            <div id="dateCalendar" class="calendar-popover" role="dialog" aria-label="Выбор даты (воскресенья)" hidden>
-              <div class="calendar-header">
-                <button type="button" class="cal-nav prev" aria-label="Предыдущий месяц">‹</button>
-                <div class="month"></div>
-                <button type="button" class="cal-nav next" aria-label="Следующий месяц">›</button>
-              </div>
-              <div class="calendar-grid calendar-weekdays"></div>
-              <div class="calendar-grid calendar-days"></div>
-            </div>
-          </div>
-          <style>
-            .date-field{position:relative; display:flex; align-items:center; gap:8px}
-            .date-field input[readonly]{background:#fff;border:1px solid #ddd;border-radius:10px;padding:12px;flex:1 1 auto;cursor:pointer}
-            .date-field .date-toggle{border:1px solid var(--border);background:#fff;border-radius:10px;padding:8px 10px;cursor:pointer; margin:0;}
-            .calendar-popover{position:absolute; top:calc(100% + 8px); left:0; z-index:40; min-width:260px; background:#fff;border:1px solid #ddd;border-radius:12px;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
-            .calendar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-            .calendar-header .month{text-transform:capitalize;font-weight:700}
-            .cal-nav{border:1px solid var(--border);background:#fff;border-radius:10px;padding:6px 10px;cursor:pointer}
-            .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-            .calendar-weekdays div{font-size:12px;color:var(--muted);text-align:center}
-            .calendar-day{padding:8px 0;border-radius:10px;text-align:center;user-select:none}
-            .calendar-day.disabled{opacity:.35;pointer-events:none;background:#f4f1ec}
-            .calendar-day.sunday{background:linear-gradient(0deg,#fff,#fff) padding-box;border:1px dashed var(--border);cursor:pointer; margin:0}
-            .calendar-day.sunday:hover{background:color-mix(in oklab,var(--accent-2) 20%, #fff 80%)}
-            .calendar-day.selected{outline:2px solid var(--accent-2);background:#fff; margin:0}
-          </style>
-          <div class="note">Доступны только воскресенья</div>
         </div>
         <textarea name="comment" rows="3" placeholder="Комментарий"></textarea>
         <label class="note">
@@ -89,120 +58,19 @@
           Согласен с <a href="/legal/privacy/" target="_blank" rel="noopener" onclick="event.stopPropagation();">политикой конфиденциальности</a>
         </label>
         <button class="btn" type="submit">Оставить заявку</button>
+        <div class="note" id="tryFormStatus" aria-live="polite"></div>
       </form>
       <script>
       (function(){
         const form = document.getElementById('tryForm');
         if(!form) return;
 
-        // Календарь: RU и только воскресенья (выпадающий поповер)
-        const dateInput = form.querySelector('input[name="date"]');
-        (function initCalendar(){
-          if(!dateInput) return;
-          const dateField = document.getElementById('dateField');
-          const dateDisplay = document.getElementById('dateDisplay');
-          const cal = document.getElementById('dateCalendar');
-          const monthEl = cal.querySelector('.month');
-          const wdEl = cal.querySelector('.calendar-weekdays');
-          const daysEl = cal.querySelector('.calendar-days');
-          const toggleBtn = dateField.querySelector('.date-toggle');
-
-          const fmtISO = (d)=>[d.getFullYear(), String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-');
-          const formatRu = (d)=>{
-            const s = d.toLocaleDateString('ru-RU',{weekday:'short', day:'2-digit', month:'long'});
-            return s.charAt(0).toUpperCase()+s.slice(1);
-          };
-          const ruHeader = (y,m)=>{
-            const s = new Date(y,m,1).toLocaleDateString('ru-RU',{month:'long',year:'numeric'});
-            return s.charAt(0).toUpperCase()+s.slice(1);
-          };
-          const startOfDay = (d)=> new Date(d.getFullYear(), d.getMonth(), d.getDate());
-          const today = startOfDay(new Date());
-          let view = { y: today.getFullYear(), m: today.getMonth() };
-          let selected = null;
-
-          const nextSunday = (from)=>{
-            const d = startOfDay(from);
-            const day = d.getDay(); // 0=Вс
-            const delta = (7 - day) % 7;
-            if(delta===0) d.setDate(d.getDate()+7); else d.setDate(d.getDate()+delta);
-            return d;
-          };
-          selected = nextSunday(today);
-          dateInput.value = fmtISO(selected);
-          if(dateDisplay) dateDisplay.value = formatRu(selected);
-
-          const wds = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
-          wdEl.innerHTML = wds.map(s=>`<div class="calendar-weekday">${s}</div>`).join('');
-
-          function render(){
-            monthEl.textContent = ruHeader(view.y, view.m);
-            daysEl.innerHTML = '';
-            const first = new Date(view.y, view.m, 1);
-            const lastDay = new Date(view.y, view.m+1, 0).getDate();
-            const shift = (first.getDay()+6)%7; // понедельник=0
-            for(let i=0;i<shift;i++){
-              const ph = document.createElement('div'); ph.className='calendar-day disabled'; daysEl.appendChild(ph);
-            }
-            for(let d=1; d<=lastDay; d++){
-              const cur = new Date(view.y, view.m, d);
-              const isSunday = cur.getDay()===0;
-              const isPast = startOfDay(cur) < today;
-              const el = document.createElement(isSunday && !isPast ? 'button':'div');
-              el.className = 'calendar-day' + (isSunday ? ' sunday' : ' disabled') + (isPast ? ' disabled' : '');
-              if(el.tagName==='BUTTON'){ el.type='button'; }
-              el.textContent = d;
-              if(selected && cur.getTime()===selected.getTime()){ el.classList.add('selected'); }
-              if(isSunday && !isPast){
-                el.addEventListener('click', ()=>{
-                  selected = cur;
-                  dateInput.value = fmtISO(cur);
-                  if(dateDisplay) dateDisplay.value = formatRu(cur);
-                  [...daysEl.querySelectorAll('.calendar-day.selected')].forEach(n=>n.classList.remove('selected'));
-                  el.classList.add('selected');
-                  closeCal();
-                });
-              }
-              daysEl.appendChild(el);
-            }
-          }
-
-          function openCal(){
-            cal.hidden = false;
-            if(dateDisplay) dateDisplay.setAttribute('aria-expanded','true');
-          }
-          function closeCal(){
-            cal.hidden = true;
-            if(dateDisplay) dateDisplay.setAttribute('aria-expanded','false');
-          }
-          function toggleCal(){
-            if(cal.hidden) openCal(); else closeCal();
-          }
-
-          if(dateDisplay) dateDisplay.addEventListener('click', toggleCal);
-          if(toggleBtn) toggleBtn.addEventListener('click', toggleCal);
-
-          document.addEventListener('click', (e)=>{
-            if(!cal.contains(e.target) && !dateField.contains(e.target)) closeCal();
-          });
-          document.addEventListener('keydown', (e)=>{
-            if(e.key === 'Escape') closeCal();
-          });
-
-          cal.querySelector('.cal-nav.prev').addEventListener('click', ()=>{
-            view.m--; if(view.m<0){view.m=11; view.y--;} render();
-          });
-          cal.querySelector('.cal-nav.next').addEventListener('click', ()=>{
-            view.m++; if(view.m>11){view.m=0; view.y++;} render();
-          });
-
-          render();
-        })();
-
         // Валидация на русском: собственные сообщения ошибок
         const nameInput = form.querySelector('input[name="name"]');
         const phoneInput = form.querySelector('input[name="phone"]');
         const consent = form.querySelector('label.note input[type="checkbox"]');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const statusEl = document.getElementById('tryFormStatus');
         function ruValidate(el, requiredMsg, extra){
           if(!el) return;
           el.addEventListener('invalid', function(){
@@ -218,48 +86,72 @@
         }
         ruValidate(nameInput, 'Введите имя');
         ruValidate(phoneInput, 'Укажите телефон');
-        ruValidate(dateInput, 'Выберите дату');
         ruValidate(consent, 'Нужно согласиться с политикой конфиденциальности');
+
+        function fallbackToTelegram(payload){
+          const plain = [
+            'Здравствуйте! Хочу записаться на пробное занятие по импровизации.',
+            'Меня зовут: ' + (payload.fio || '—'),
+            'Телефон для связи: ' + (payload.tel || '—'),
+            (payload.comment ? ('Комментарий: ' + payload.comment) : 'Комментарий: —')
+          ].join('\n');
+          const text = encodeURIComponent(plain);
+          const deep = 'tg://resolve?domain=Maratsky&text=' + text;
+          const share = 'https://t.me/share/url?url=' + encodeURIComponent('https://izhimpro.ru/try/') + '&text=' + text;
+
+          setTimeout(function(){
+            window.open(share, '_blank');
+          }, 450);
+
+          try { window.location.href = deep; } catch(_) {}
+        }
 
 
         form.addEventListener('submit', async function(e){
           e.preventDefault();
           if(!form.checkValidity()){ form.reportValidity(); return; }
-          const name = form.querySelector('input[name="name"]').value.trim();
-          const phone = form.querySelector('input[name="phone"]').value.trim();
+          const fio = form.querySelector('input[name="name"]').value.trim();
+          const tel = form.querySelector('input[name="phone"]').value.trim();
           const tg = form.querySelector('input[name="tg"]').value.trim();
-          const date = form.querySelector('input[name="date"]').value;
           const comment = form.querySelector('textarea[name="comment"]').value.trim();
+          const normalizedTg = tg ? '@' + tg.replace(/^@/, '') : '';
+          const finalComment = [
+            comment,
+            normalizedTg ? ('Telegram: ' + normalizedTg) : ''
+          ].filter(Boolean).join('\n');
+          const payload = {
+            fio: fio,
+            tel: tel,
+            comment: finalComment || '—'
+          };
 
-          const plain = [
-            'Здравствуйте! Хочу записаться на пробное занятие по импровизации.',
-            'Меня зовут: ' + (name || '—'),
-            'Телефон для связи: ' + (phone || '—'),
-            (tg ? ('Telegram: @' + tg.replace(/^@/, '')) : 'Telegram: —'),
-            'Удобная дата: ' + (date || '—'),
-            (comment ? ('Комментарий: ' + comment) : 'Комментарий: —')
-          ].join('\n');
+          if(statusEl) statusEl.textContent = 'Отправляем заявку...';
+          if(submitBtn) submitBtn.disabled = true;
 
-          const text = encodeURIComponent(plain);
-
-          // 1) Попытка открыть приложение Telegram и сразу чат с @Maratsky c текстом
-          const deep = 'tg://resolve?domain=Maratsky&text=' + text;
-
-          // 2) Запасной вариант — веб-ссылка с предзаполненным текстом (потребуется выбрать получателя)
-          const share = 'https://t.me/share/url?url=' + encodeURIComponent('https://izhimpro.ru/try/') + '&text=' + text;
-
-          // Пытаемся открыть приложение
-          let fallbackTimer = setTimeout(function(){
-            window.open(share, '_blank');
-          }, 450);
-
-          // Навигация через deep-link (если не получится — сработает таймер выше)
-          window.location.href = deep;
-
-          // На всякий случай положим текст в буфер обмена
           try {
-            await navigator.clipboard.writeText(plain);
-          } catch(_) {}
+            const res = await fetch('https://dark-brook-67a3.islamov-marat.workers.dev/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+
+            if(!res.ok){
+              throw new Error('HTTP ' + res.status);
+            }
+
+            const data = await res.json();
+            if(!data || data.success !== true){
+              throw new Error('API success=false');
+            }
+
+            form.reset();
+            if(statusEl) statusEl.textContent = 'Заявка отправлена. Мы свяжемся с вами.';
+          } catch (err) {
+            if(statusEl) statusEl.textContent = 'Не удалось отправить автоматически. Откроем Telegram для отправки заявки.';
+            fallbackToTelegram(payload);
+          } finally {
+            if(submitBtn) submitBtn.disabled = false;
+          }
         });
       })();
       </script>
