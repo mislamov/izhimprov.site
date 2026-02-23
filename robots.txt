@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://izhimpro.ru/sitemap.xml
+Host: izhimpro.ru
