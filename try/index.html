@@ -173,13 +173,19 @@
               throw new Error('HTTP ' + res.status);
             }
 
-            const data = await res.json();
-            if(!data || data.success !== true){
+            let data = null;
+            try {
+              data = await res.json();
+            } catch (_) {
+              // Если сервер вернул 2xx, но не JSON, не ломаем UX: считаем заявку принятой.
+              data = null;
+            }
+            if(data && data.success === false){
               throw new Error('API success=false');
             }
 
             form.reset();
-            if(statusEl) statusEl.textContent = 'Заявка отправлена. Мы свяжемся с вами.';
+            if(statusEl) statusEl.textContent = 'Заявка принята! Скоро свяжемся с Вами и расскажем, как и когда попасть на Импровизацию.';
           } catch (err) {
             if(statusEl) statusEl.textContent = 'Не удалось отправить автоматически. Откроем Telegram для отправки заявки.';
             fallbackToTelegram(payload);
