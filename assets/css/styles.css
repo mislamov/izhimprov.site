@@ -347,17 +347,23 @@ footer a{color:#ddd}
     border-radius:12px; border:1px solid var(--border); background:#fff;
   }
   .footer-inner{grid-template-columns:1fr; text-align:left}
-  .hero{padding:56px 0}
+  .hero{padding:34px 0 28px}
+  .hero h1{margin:0 0 8px; font-size:clamp(28px, 8.5vw, 40px); line-height:1.08}
+  .hero p{font-size:16px; margin:0 0 12px}
+  .hero .note{font-size:13px}
+  .hero .btn + .btn{margin-top:10px}
   .grid.cols-2{grid-template-columns:1fr}
   .card{padding:16px}
   .avatar{width:92px; height:92px}
   .btn{width:100%; text-align:center}
   .form .btn{width:auto}
-  .hero p{font-size:16px}
 }
 @media (max-width: 420px){
   .avatar{width:80px; height:80px}
   .container{padding:16px}
+  .hero{padding:26px 0 22px}
+  .hero h1{font-size:30px}
+  .hero p{font-size:15px; margin-bottom:10px}
 }
 
 /* Уважение к тем, кто отключил анимации */
