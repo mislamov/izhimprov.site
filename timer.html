@@ -10,6 +10,8 @@
       width: 100%;
       height: 100%;
       background: #05070d;
+      -webkit-user-select: none;
+      user-select: none;
     }
     #timer-host {
       width: 100%;
@@ -31,6 +33,8 @@
           width: 100%;
           height: 100%;
           color-scheme: dark;
+          -webkit-user-select: none;
+          user-select: none;
         }
 
         .fullscreen-timer-container {
@@ -58,6 +62,8 @@
           font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
           color: var(--timer-text-color);
           box-sizing: border-box;
+          -webkit-user-select: none;
+          user-select: none;
         }
 
         .fullscreen-timer-container *,
@@ -293,6 +299,15 @@
           .timer { font-size: calc(clamp(3.5rem, 22vw, 20rem) * var(--timer-font-scale)); }
           .timer.overtime { font-size: calc(clamp(2.5rem, 16vw, 14rem) * var(--timer-font-scale)); }
           .timer-wrap { gap: 1rem; }
+          .icon-btn {
+            width: 2rem;
+            height: 2rem;
+            font-size: 0.95rem;
+          }
+          .icon-btn svg {
+            width: 0.95rem;
+            height: 0.95rem;
+          }
         }
 
         @media (max-width: 480px) {
@@ -307,6 +322,15 @@
           .play-btn { width: clamp(50px, 10vw, 70px); height: clamp(50px, 10vw, 70px); }
           .timer-wrap { gap: 0.8rem; }
           .seconds { font-size: 0.4em; margin-left: 0.05em; }
+          .icon-btn {
+            width: 1.8rem;
+            height: 1.8rem;
+            font-size: 0.85rem;
+          }
+          .icon-btn svg {
+            width: 0.82rem;
+            height: 0.82rem;
+          }
         }
 
         @media (max-height: 500px) and (orientation: landscape) {
@@ -405,6 +429,40 @@
       fontScale = clamp(nextScale, MIN_FONT_SCALE, MAX_FONT_SCALE);
       containerEl.style.setProperty("--timer-font-scale", String(fontScale));
       localStorage.setItem(FONT_SCALE_KEY, String(fontScale));
+    }
+
+    function bindHoldRepeat(buttonEl, action) {
+      let timeoutId = null;
+      let intervalId = null;
+
+      function clearTimers() {
+        if (timeoutId !== null) {
+          clearTimeout(timeoutId);
+          timeoutId = null;
+        }
+        if (intervalId !== null) {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
+      }
+
+      function start() {
+        action();
+        clearTimers();
+        timeoutId = setTimeout(function () {
+          intervalId = setInterval(action, 70);
+        }, 260);
+      }
+
+      buttonEl.addEventListener("pointerdown", function (e) {
+        if (e.button !== 0) return;
+        start();
+      });
+      buttonEl.addEventListener("pointerup", clearTimers);
+      buttonEl.addEventListener("pointerleave", clearTimers);
+      buttonEl.addEventListener("pointercancel", clearTimers);
+      buttonEl.addEventListener("lostpointercapture", clearTimers);
+      buttonEl.addEventListener("contextmenu", function (e) { e.preventDefault(); });
     }
 
     function readState() {
@@ -526,8 +584,8 @@
     renderFullscreenIcon();
     setInterval(tick, 250);
     playBtn.addEventListener("click", startFromPause);
-    fontMinusBtn.addEventListener("click", function () { applyFontScale(fontScale - FONT_SCALE_STEP); });
-    fontPlusBtn.addEventListener("click", function () { applyFontScale(fontScale + FONT_SCALE_STEP); });
+    bindHoldRepeat(fontMinusBtn, function () { applyFontScale(fontScale - FONT_SCALE_STEP); });
+    bindHoldRepeat(fontPlusBtn, function () { applyFontScale(fontScale + FONT_SCALE_STEP); });
     fullscreenBtn.addEventListener("click", toggleFullscreen);
     document.addEventListener("fullscreenchange", renderFullscreenIcon);
     setTimerBtn.addEventListener("click", function () {
