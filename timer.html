@@ -39,6 +39,7 @@
           --timer-bg-c3: #05070d;
           --timer-text-color: #e5e7eb;
           --timer-ring-color: rgba(229, 231, 235, 0.07);
+          --timer-font-scale: 1;
 
           position: relative;
           min-height: 100vh;
@@ -124,7 +125,7 @@
           position: relative;
           z-index: 1;
           display: inline-block;
-          font-size: clamp(4rem, 25vw, 28rem);
+          font-size: calc(clamp(4rem, 25vw, 28rem) * var(--timer-font-scale));
           font-weight: 700;
           letter-spacing: 0.04em;
           line-height: 1;
@@ -179,7 +180,7 @@
         }
 
         .timer.overtime {
-          font-size: clamp(3rem, 18vw, 17rem);
+          font-size: calc(clamp(3rem, 18vw, 17rem) * var(--timer-font-scale));
         }
 
         .play-btn {
@@ -222,6 +223,15 @@
           right: clamp(0.5rem, 2vw, 1rem);
           bottom: clamp(0.5rem, 2vw, 1rem);
           z-index: 2;
+        }
+
+        .left-controls {
+          position: fixed;
+          left: clamp(0.5rem, 2vw, 1rem);
+          bottom: clamp(0.5rem, 2vw, 1rem);
+          z-index: 2;
+          display: flex;
+          gap: 0.45rem;
         }
 
         .top-controls {
@@ -280,8 +290,8 @@
             -webkit-mask: radial-gradient(circle, transparent calc(50% - 10px), #000 calc(50% - 9px));
             mask: radial-gradient(circle, transparent calc(50% - 10px), #000 calc(50% - 9px));
           }
-          .timer { font-size: clamp(3.5rem, 22vw, 20rem); }
-          .timer.overtime { font-size: clamp(2.5rem, 16vw, 14rem); }
+          .timer { font-size: calc(clamp(3.5rem, 22vw, 20rem) * var(--timer-font-scale)); }
+          .timer.overtime { font-size: calc(clamp(2.5rem, 16vw, 14rem) * var(--timer-font-scale)); }
           .timer-wrap { gap: 1rem; }
         }
 
@@ -292,8 +302,8 @@
             -webkit-mask: radial-gradient(circle, transparent calc(50% - 8px), #000 calc(50% - 7px));
             mask: radial-gradient(circle, transparent calc(50% - 8px), #000 calc(50% - 7px));
           }
-          .timer { font-size: clamp(3rem, 20vw, 16rem); }
-          .timer.overtime { font-size: clamp(2rem, 14vw, 12rem); }
+          .timer { font-size: calc(clamp(3rem, 20vw, 16rem) * var(--timer-font-scale)); }
+          .timer.overtime { font-size: calc(clamp(2rem, 14vw, 12rem) * var(--timer-font-scale)); }
           .play-btn { width: clamp(50px, 10vw, 70px); height: clamp(50px, 10vw, 70px); }
           .timer-wrap { gap: 0.8rem; }
           .seconds { font-size: 0.4em; margin-left: 0.05em; }
@@ -304,8 +314,8 @@
             width: min(60vmin, min(90vh, 500px));
             height: min(60vmin, min(90vh, 500px));
           }
-          .timer { font-size: clamp(2.5rem, 15vh, 12rem); }
-          .timer.overtime { font-size: clamp(2rem, 12vh, 10rem); }
+          .timer { font-size: calc(clamp(2.5rem, 15vh, 12rem) * var(--timer-font-scale)); }
+          .timer.overtime { font-size: calc(clamp(2rem, 12vh, 10rem) * var(--timer-font-scale)); }
           .timer-wrap { gap: 0.6rem; }
         }
       </style>
@@ -326,6 +336,10 @@
         <div class="controls">
           <button class="btn" id="setTimerBtn" type="button">--:--</button>
         </div>
+        <div class="left-controls">
+          <button class="icon-btn" id="fontMinusBtn" type="button" aria-label="Decrease timer font" title="Decrease timer font">-</button>
+          <button class="icon-btn" id="fontPlusBtn" type="button" aria-label="Increase timer font" title="Increase timer font">+</button>
+        </div>
         <div class="top-controls">
           <button class="icon-btn" id="fullscreenBtn" type="button" aria-label="Toggle fullscreen" title="Toggle fullscreen">
             <svg id="fullscreenIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -338,7 +352,12 @@
 
     const STORAGE_KEY = "fullscreen-timer-state-v2";
     const LEGACY_END_TS_KEY = "fullscreen-timer-end-ts";
+    const FONT_SCALE_KEY = "fullscreen-timer-font-scale-v1";
     const DEFAULT_DURATION_MS = 30 * 60 * 1000;
+    const DEFAULT_FONT_SCALE = 1;
+    const MIN_FONT_SCALE = 0.6;
+    const MAX_FONT_SCALE = 1.6;
+    const FONT_SCALE_STEP = 0.05;
 
     const containerEl = shadow.getElementById("container");
     const timerEl = shadow.getElementById("timer");
@@ -348,9 +367,12 @@
     const secondsEl = shadow.getElementById("seconds");
     const playBtn = shadow.getElementById("playBtn");
     const setTimerBtn = shadow.getElementById("setTimerBtn");
+    const fontMinusBtn = shadow.getElementById("fontMinusBtn");
+    const fontPlusBtn = shadow.getElementById("fontPlusBtn");
     const fullscreenBtn = shadow.getElementById("fullscreenBtn");
     const fullscreenIcon = shadow.getElementById("fullscreenIcon");
     const progressRing = shadow.getElementById("progressRing");
+    let fontScale = DEFAULT_FONT_SCALE;
 
     function formatTime(totalMs) {
       const isNegative = totalMs < 0;
@@ -367,6 +389,22 @@
 
     function writeState(next) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function loadFontScale() {
+      const raw = Number(localStorage.getItem(FONT_SCALE_KEY));
+      if (!Number.isFinite(raw)) return DEFAULT_FONT_SCALE;
+      return clamp(raw, MIN_FONT_SCALE, MAX_FONT_SCALE);
+    }
+
+    function applyFontScale(nextScale) {
+      fontScale = clamp(nextScale, MIN_FONT_SCALE, MAX_FONT_SCALE);
+      containerEl.style.setProperty("--timer-font-scale", String(fontScale));
+      localStorage.setItem(FONT_SCALE_KEY, String(fontScale));
     }
 
     function readState() {
@@ -484,9 +522,12 @@
     }
 
     tick();
+    applyFontScale(loadFontScale());
     renderFullscreenIcon();
     setInterval(tick, 250);
     playBtn.addEventListener("click", startFromPause);
+    fontMinusBtn.addEventListener("click", function () { applyFontScale(fontScale - FONT_SCALE_STEP); });
+    fontPlusBtn.addEventListener("click", function () { applyFontScale(fontScale + FONT_SCALE_STEP); });
     fullscreenBtn.addEventListener("click", toggleFullscreen);
     document.addEventListener("fullscreenchange", renderFullscreenIcon);
     setTimerBtn.addEventListener("click", function () {
