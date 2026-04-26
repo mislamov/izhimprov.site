@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fullscreen Timer</title>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      position: relative;
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(
+        circle at 30% 20%,
+        var(--bg-c1, #1f2937) 0%,
+        var(--bg-c2, #0b1220) 55%,
+        var(--bg-c3, #05070d) 100%
+      );
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #e5e7eb;
+    }
+
+    .bg-pulse {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(251, 146, 60, 0.35) 0%, rgba(127, 29, 29, 0.45) 55%, rgba(17, 24, 39, 0) 100%);
+      opacity: 0;
+      z-index: 0;
+    }
+
+    body.overtime .bg-pulse {
+      animation: bg-pulse 0.7s infinite alternate;
+    }
+
+    @keyframes bg-pulse {
+      from {
+        opacity: 0.16;
+      }
+      to {
+        opacity: 0.48;
+      }
+    }
+
+    .timer-wrap {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 1.2rem;
+      isolation: isolate;
+    }
+
+    .progress-ring {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(75vmin, min(80vh, 920px));
+      height: min(75vmin, min(80vh, 920px));
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg at 50% 50%,
+        var(--ring-color, rgba(229, 231, 235, 0.07)) 0deg var(--progress-deg, 360deg),
+        transparent var(--progress-deg, 360deg) 360deg
+      );
+      /* Show only a thin ring, not a filled disk */
+      -webkit-mask: radial-gradient(circle, transparent calc(50% - 14px), #000 calc(50% - 13px));
+      mask: radial-gradient(circle, transparent calc(50% - 14px), #000 calc(50% - 13px));
+      z-index: 0;
+      pointer-events: none;
+      filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.25));
+    }
+
+    .progress-ring::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid rgba(229, 231, 235, 0.06);
+    }
+
+    .timer {
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      font-size: clamp(4rem, 25vw, 28rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      user-select: none;
+      text-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .minutes {
+      display: block;
+      color: #f3f4f6;
+      text-align: center;
+    }
+
+    .minutes-sign {
+      margin-right: 0.02em;
+    }
+
+    .minutes-leading {
+      opacity: 0.42;
+    }
+
+    .seconds {
+      position: absolute;
+      left: 100%;
+      top: 0;
+      font-size: 0.45em;
+      opacity: 0.52;
+      line-height: 1;
+      margin-left: 0.08em;
+    }
+
+    .timer.urgent {
+      display: inline-flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .timer.urgent .minutes {
+      display: inline;
+      text-align: left;
+      font-size: 1.22em;
+    }
+
+    .timer.urgent .seconds {
+      position: static;
+      font-size: 0.82em;
+      opacity: 1;
+      margin-left: 0.04em;
+      align-self: flex-start;
+      line-height: 1;
+    }
+
+    .timer.overtime {
+      font-size: clamp(3rem, 18vw, 17rem);
+    }
+
+    .play-btn {
+      width: clamp(60px, 8vw, 86px);
+      height: clamp(60px, 8vw, 86px);
+      border-radius: 50%;
+      border: 2px solid rgba(229, 231, 235, 0.6);
+      background: rgba(17, 24, 39, 0.58);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 120ms ease, background 120ms ease;
+      pointer-events: auto;
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      z-index: 10;
+      margin: 0;
+      padding: 0;
+    }
+
+    .play-btn:hover {
+      background: rgba(31, 41, 55, 0.75);
+      transform: scale(1.03);
+    }
+
+    .play-btn[hidden] {
+      display: none;
+    }
+
+    .play-icon {
+      width: clamp(20px, 3vw, 28px);
+      height: clamp(20px, 3vw, 28px);
+      pointer-events: none;
+    }
+
+    .controls {
+      position: fixed;
+      right: clamp(0.5rem, 2vw, 1rem);
+      bottom: clamp(0.5rem, 2vw, 1rem);
+      z-index: 2;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: clamp(0.5rem, 1.5vw, 0.7rem) clamp(0.8rem, 2.5vw, 1rem);
+      font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+      font-weight: 600;
+      cursor: pointer;
+      color: #e5e7eb;
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .btn:hover {
+      background: rgba(31, 41, 55, 0.9);
+    }
+
+    /* Мобильные устройства */
+    @media (max-width: 768px) {
+      .progress-ring {
+        width: min(70vmin, min(75vh, 600px));
+        height: min(70vmin, min(75vh, 600px));
+        -webkit-mask: radial-gradient(circle, transparent calc(50% - 10px), #000 calc(50% - 9px));
+        mask: radial-gradient(circle, transparent calc(50% - 10px), #000 calc(50% - 9px));
+      }
+
+      .timer {
+        font-size: clamp(3.5rem, 22vw, 20rem);
+      }
+
+      .timer.overtime {
+        font-size: clamp(2.5rem, 16vw, 14rem);
+      }
+
+      .timer-wrap {
+        gap: 1rem;
+      }
+    }
+
+    /* Очень маленькие экраны */
+    @media (max-width: 480px) {
+      .progress-ring {
+        width: min(65vmin, min(70vh, 400px));
+        height: min(65vmin, min(70vh, 400px));
+        -webkit-mask: radial-gradient(circle, transparent calc(50% - 8px), #000 calc(50% - 7px));
+        mask: radial-gradient(circle, transparent calc(50% - 8px), #000 calc(50% - 7px));
+      }
+
+      .timer {
+        font-size: clamp(3rem, 20vw, 16rem);
+      }
+
+      .timer.overtime {
+        font-size: clamp(2rem, 14vw, 12rem);
+      }
+
+      .play-btn {
+        width: clamp(50px, 10vw, 70px);
+        height: clamp(50px, 10vw, 70px);
+      }
+
+      .timer-wrap {
+        gap: 0.8rem;
+      }
+
+      .seconds {
+        font-size: 0.4em;
+        margin-left: 0.05em;
+      }
+    }
+
+    /* Горизонтальная ориентация на мобильных */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .progress-ring {
+        width: min(60vmin, min(90vh, 500px));
+        height: min(60vmin, min(90vh, 500px));
+      }
+
+      .timer {
+        font-size: clamp(2.5rem, 15vh, 12rem);
+      }
+
+      .timer.overtime {
+        font-size: clamp(2rem, 12vh, 10rem);
+      }
+
+      .timer-wrap {
+        gap: 0.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pulse" id="bgPulse" aria-hidden="true"></div>
+  <main class="timer-wrap">
+    <div class="progress-ring" id="progressRing" aria-hidden="true"></div>
+    <div class="timer" id="timer">
+      <span class="minutes" id="minutes"><span class="minutes-sign" id="minutesSign"></span><span class="minutes-leading" id="minutesLeading"></span><span id="minutesMain">30</span></span><span class="seconds" id="seconds">:00</span>
+    </div>
+    <button class="play-btn" id="playBtn" type="button" aria-label="Play">
+      <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <polygon points="5,3 19,12 5,21"/>
+      </svg>
+    </button>
+  </main>
+  <div class="controls">
+    <button class="btn" id="setTimerBtn" type="button">--:--</button>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "fullscreen-timer-state-v2";
+    const LEGACY_END_TS_KEY = "fullscreen-timer-end-ts";
+    const DEFAULT_DURATION_MS = 30 * 60 * 1000;
+    const timerEl = document.getElementById("timer");
+    const minutesSignEl = document.getElementById("minutesSign");
+    const minutesLeadingEl = document.getElementById("minutesLeading");
+    const minutesMainEl = document.getElementById("minutesMain");
+    const secondsEl = document.getElementById("seconds");
+    const playBtn = document.getElementById("playBtn");
+    const setTimerBtn = document.getElementById("setTimerBtn");
+    const progressRing = document.getElementById("progressRing");
+
+    function formatTime(totalMs) {
+      const isNegative = totalMs < 0;
+      const totalSeconds = Math.ceil(Math.abs(totalMs) / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      const hasLeadingZero = minutes >= 0 && minutes < 10;
+      return {
+        sign: isNegative ? "-" : "",
+        minutesLeading: hasLeadingZero ? "0" : "",
+        minutesMain: String(minutes),
+        seconds: ":" + String(seconds).padStart(2, "0")
+      };
+    }
+
+    function writeState(next) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    }
+
+    function readState() {
+      const now = Date.now();
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw);
+          if (
+            parsed &&
+            parsed.mode === "running" &&
+            Number.isFinite(parsed.endTimestamp) &&
+            Number.isFinite(parsed.totalDurationMs) &&
+            parsed.totalDurationMs > 0
+          ) {
+            return { mode: "running", endTimestamp: parsed.endTimestamp, totalDurationMs: parsed.totalDurationMs };
+          }
+          if (
+            parsed &&
+            parsed.mode === "paused" &&
+            Number.isFinite(parsed.remainingMs) &&
+            parsed.remainingMs > 0 &&
+            Number.isFinite(parsed.totalDurationMs) &&
+            parsed.totalDurationMs > 0
+          ) {
+            return { mode: "paused", remainingMs: parsed.remainingMs, totalDurationMs: parsed.totalDurationMs };
+          }
+        } catch (_) {}
+      }
+
+      const legacyEndTs = Number(localStorage.getItem(LEGACY_END_TS_KEY));
+      if (Number.isFinite(legacyEndTs) && legacyEndTs > now) {
+        const remainingMs = legacyEndTs - now;
+        const migrated = { mode: "running", endTimestamp: legacyEndTs, totalDurationMs: remainingMs };
+        writeState(migrated);
+        localStorage.removeItem(LEGACY_END_TS_KEY);
+        return migrated;
+      }
+
+      const initial = { mode: "running", endTimestamp: now + DEFAULT_DURATION_MS, totalDurationMs: DEFAULT_DURATION_MS };
+      writeState(initial);
+      return initial;
+    }
+
+    function parseDurationInput(raw) {
+      if (!raw) return null;
+      const value = raw.trim();
+      if (!value) return null;
+
+      if (/^\d+$/.test(value)) {
+        const minutes = Number(value);
+        if (minutes > 0) return minutes * 60 * 1000;
+        return null;
+      }
+
+      const mmss = value.match(/^(\d{1,3}):([0-5]\d)$/);
+      if (!mmss) return null;
+
+      const minutes = Number(mmss[1]);
+      const seconds = Number(mmss[2]);
+      const totalMs = (minutes * 60 + seconds) * 1000;
+      return totalMs > 0 ? totalMs : null;
+    }
+
+    function startNewCountdown(durationMs) {
+      timerState = { mode: "paused", remainingMs: durationMs, totalDurationMs: durationMs };
+      writeState(timerState);
+      tick();
+    }
+
+    function startFromPause() {
+      if (!timerState || timerState.mode !== "paused") return;
+      timerState = {
+        mode: "running",
+        endTimestamp: Date.now() + timerState.remainingMs,
+        totalDurationMs: timerState.totalDurationMs
+      };
+      writeState(timerState);
+      tick();
+    }
+
+    let timerState = readState();
+
+    function tick() {
+      const now = Date.now();
+      let remaining = 0;
+
+      if (timerState.mode === "running") {
+        remaining = timerState.endTimestamp - now;
+      } else {
+        remaining = timerState.remainingMs;
+      }
+
+      const formatted = formatTime(remaining);
+      minutesSignEl.textContent = formatted.sign;
+      minutesLeadingEl.textContent = formatted.minutesLeading;
+      minutesMainEl.textContent = formatted.minutesMain;
+      secondsEl.textContent = formatted.seconds;
+      playBtn.hidden = !(timerState.mode === "paused" && remaining > 0);
+      const isUrgent = remaining > 0 && remaining < 5 * 60 * 1000;
+      const isOvertime = remaining < 0;
+      timerEl.classList.toggle("urgent", isUrgent);
+      timerEl.classList.toggle("overtime", isOvertime);
+      document.body.classList.toggle("overtime", isOvertime);
+
+      const total = timerState.totalDurationMs > 0 ? timerState.totalDurationMs : DEFAULT_DURATION_MS;
+      const progress = Math.max(0, Math.min(1, remaining / total));
+      const progressDeg = (1 - progress) * 360;
+      progressRing.style.setProperty("--progress-deg", String(progressDeg) + "deg");
+      progressRing.style.setProperty(
+        "--ring-color",
+        remaining > 0 && remaining < 2 * 60 * 1000 ? "rgba(251, 146, 60, 0.24)" : "rgba(229, 231, 235, 0.07)"
+      );
+      if (isOvertime) {
+        document.body.style.setProperty("--bg-c1", "#6b2d14");
+        document.body.style.setProperty("--bg-c2", "#2f120b");
+        document.body.style.setProperty("--bg-c3", "#140906");
+      } else if (remaining > 0 && remaining < 2 * 60 * 1000) {
+        document.body.style.setProperty("--bg-c1", "#7c2d12");
+        document.body.style.setProperty("--bg-c2", "#4a1d0f");
+        document.body.style.setProperty("--bg-c3", "#1f0f0a");
+      } else {
+        document.body.style.setProperty("--bg-c1", "#1f2937");
+        document.body.style.setProperty("--bg-c2", "#0b1220");
+        document.body.style.setProperty("--bg-c3", "#05070d");
+      }
+
+    }
+
+    tick();
+    setInterval(tick, 250);
+    playBtn.addEventListener("click", startFromPause);
+
+    setTimerBtn.addEventListener("click", function () {
+      const raw = prompt("Введите минуты (например 25) или формат MM:SS", "30:00");
+      const duration = parseDurationInput(raw);
+      if (!duration) return;
+      startNewCountdown(duration);
+    });
+  </script>
+</body>
+</html>
