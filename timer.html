@@ -420,6 +420,8 @@
     const progressRing = shadow.getElementById("progressRing");
     let fontScale = DEFAULT_FONT_SCALE;
     let controlsHideTimer = null;
+    let wakeLockSentinel = null;
+    let wakeLockPending = false;
 
     function formatTime(totalMs) {
       const isNegative = totalMs < 0;
@@ -454,6 +456,39 @@
       localStorage.setItem(FONT_SCALE_KEY, String(fontScale));
     }
 
+    async function requestWakeLock() {
+      if (!("wakeLock" in navigator)) return;
+      if (document.hidden || wakeLockSentinel || wakeLockPending) return;
+      wakeLockPending = true;
+      try {
+        wakeLockSentinel = await navigator.wakeLock.request("screen");
+        wakeLockSentinel.addEventListener("release", function () {
+          wakeLockSentinel = null;
+        });
+      } catch (_) {
+      } finally {
+        wakeLockPending = false;
+      }
+    }
+
+    async function releaseWakeLock() {
+      if (!wakeLockSentinel) return;
+      try {
+        await wakeLockSentinel.release();
+      } catch (_) {
+      } finally {
+        wakeLockSentinel = null;
+      }
+    }
+
+    function syncWakeLock() {
+      if (timerState.mode === "running" && !document.hidden) {
+        void requestWakeLock();
+      } else {
+        void releaseWakeLock();
+      }
+    }
+
     function setControlsVisible(visible) {
       containerEl.classList.toggle("controls-hidden", !visible);
     }
@@ -470,6 +505,7 @@
     function registerUserActivity() {
       setControlsVisible(true);
       scheduleControlsAutoHide();
+      syncWakeLock();
     }
 
     function bindHoldRepeat(buttonEl, action) {
@@ -552,6 +588,7 @@
     function startNewCountdown(durationMs) {
       timerState = { mode: "paused", remainingMs: durationMs, totalDurationMs: durationMs };
       writeState(timerState);
+      syncWakeLock();
       tick();
     }
 
@@ -559,6 +596,7 @@
       if (!timerState || timerState.mode !== "paused") return;
       timerState = { mode: "running", endTimestamp: Date.now() + timerState.remainingMs, totalDurationMs: timerState.totalDurationMs };
       writeState(timerState);
+      syncWakeLock();
       tick();
     }
 
@@ -599,6 +637,7 @@
         containerEl.style.setProperty("--timer-bg-c2", "#0b1220");
         containerEl.style.setProperty("--timer-bg-c3", "#05070d");
       }
+      syncWakeLock();
     }
 
     function renderFullscreenIcon() {
@@ -630,6 +669,8 @@
     bindHoldRepeat(fontPlusBtn, function () { applyFontScale(fontScale + FONT_SCALE_STEP); });
     fullscreenBtn.addEventListener("click", toggleFullscreen);
     document.addEventListener("fullscreenchange", renderFullscreenIcon);
+    document.addEventListener("visibilitychange", syncWakeLock);
+    window.addEventListener("beforeunload", function () { void releaseWakeLock(); });
     containerEl.addEventListener("touchstart", registerUserActivity, { passive: true });
     containerEl.addEventListener("touchmove", registerUserActivity, { passive: true });
     document.addEventListener("mousemove", registerUserActivity, { passive: true });
