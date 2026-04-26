@@ -224,6 +224,13 @@
           z-index: 2;
         }
 
+        .top-controls {
+          position: fixed;
+          right: clamp(0.5rem, 2vw, 1rem);
+          top: clamp(0.5rem, 2vw, 1rem);
+          z-index: 2;
+        }
+
         .btn {
           border: 0;
           border-radius: 999px;
@@ -239,6 +246,31 @@
 
         .btn:hover {
           background: rgba(31, 41, 55, 0.9);
+        }
+
+        .icon-btn {
+          width: clamp(2.2rem, 5vw, 2.8rem);
+          height: clamp(2.2rem, 5vw, 2.8rem);
+          border: 0;
+          border-radius: 999px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          color: #e5e7eb;
+          background: rgba(17, 24, 39, 0.85);
+          backdrop-filter: blur(5px);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+          padding: 0;
+        }
+
+        .icon-btn:hover {
+          background: rgba(31, 41, 55, 0.9);
+        }
+
+        .icon-btn svg {
+          width: clamp(1rem, 2.6vw, 1.25rem);
+          height: clamp(1rem, 2.6vw, 1.25rem);
         }
 
         @media (max-width: 768px) {
@@ -294,6 +326,13 @@
         <div class="controls">
           <button class="btn" id="setTimerBtn" type="button">--:--</button>
         </div>
+        <div class="top-controls">
+          <button class="icon-btn" id="fullscreenBtn" type="button" aria-label="Toggle fullscreen" title="Toggle fullscreen">
+            <svg id="fullscreenIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M21 21h-5v-5"/>
+            </svg>
+          </button>
+        </div>
       </div>
     `;
 
@@ -309,6 +348,8 @@
     const secondsEl = shadow.getElementById("seconds");
     const playBtn = shadow.getElementById("playBtn");
     const setTimerBtn = shadow.getElementById("setTimerBtn");
+    const fullscreenBtn = shadow.getElementById("fullscreenBtn");
+    const fullscreenIcon = shadow.getElementById("fullscreenIcon");
     const progressRing = shadow.getElementById("progressRing");
 
     function formatTime(totalMs) {
@@ -423,9 +464,31 @@
       }
     }
 
+    function renderFullscreenIcon() {
+      const isFs = !!document.fullscreenElement;
+      fullscreenIcon.innerHTML = isFs
+        ? '<path d="M9 9H4V4M15 9h5V4M9 15H4v5M20 20h-5v-5"/>'
+        : '<path d="M8 3H3v5M16 3h5v5M8 21H3v-5M21 21h-5v-5"/>';
+      fullscreenBtn.setAttribute("aria-label", isFs ? "Exit fullscreen" : "Enter fullscreen");
+      fullscreenBtn.setAttribute("title", isFs ? "Exit fullscreen" : "Enter fullscreen");
+    }
+
+    async function toggleFullscreen() {
+      try {
+        if (document.fullscreenElement) {
+          await document.exitFullscreen();
+        } else {
+          await document.documentElement.requestFullscreen();
+        }
+      } catch (_) {}
+    }
+
     tick();
+    renderFullscreenIcon();
     setInterval(tick, 250);
     playBtn.addEventListener("click", startFromPause);
+    fullscreenBtn.addEventListener("click", toggleFullscreen);
+    document.addEventListener("fullscreenchange", renderFullscreenIcon);
     setTimerBtn.addEventListener("click", function () {
       const raw = prompt("Введите минуты (например 25) или формат MM:SS", "30:00");
       const duration = parseDurationInput(raw);
