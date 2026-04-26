@@ -367,7 +367,7 @@
         <div class="top-controls">
           <button class="icon-btn" id="fullscreenBtn" type="button" aria-label="Toggle fullscreen" title="Toggle fullscreen">
             <svg id="fullscreenIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M21 21h-5v-5"/>
+              <path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/>
             </svg>
           </button>
         </div>
@@ -563,8 +563,8 @@
     function renderFullscreenIcon() {
       const isFs = !!document.fullscreenElement;
       fullscreenIcon.innerHTML = isFs
-        ? '<path d="M9 9H4V4M15 9h5V4M9 15H4v5M20 20h-5v-5"/>'
-        : '<path d="M8 3H3v5M16 3h5v5M8 21H3v-5M21 21h-5v-5"/>';
+        ? '<path d="M9 9H4V4M15 9h5V4M9 15H4v5M15 20h5v-5"/>'
+        : '<path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/>';
       fullscreenBtn.setAttribute("aria-label", isFs ? "Exit fullscreen" : "Enter fullscreen");
       fullscreenBtn.setAttribute("title", isFs ? "Exit fullscreen" : "Enter fullscreen");
     }
