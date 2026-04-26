@@ -5,348 +5,320 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fullscreen Timer</title>
   <style>
-    html,
-    body {
+    html, body {
       margin: 0;
-      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #05070d;
+    }
+    #timer-host {
       width: 100%;
       height: 100%;
     }
-
-    .fullscreen-timer-container {
-      --timer-bg-c1: #1f2937;
-      --timer-bg-c2: #0b1220;
-      --timer-bg-c3: #05070d;
-      --timer-text-color: #e5e7eb;
-      --timer-ring-color: rgba(229, 231, 235, 0.07);
-      --timer-ring-color-warning: rgba(251, 146, 60, 0.24);
-      
-      position: relative;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      min-height: 100dvh;
-      height: 100vh;
-      height: 100dvh;
-      display: grid;
-      place-items: center;
-      background: radial-gradient(
-        circle at 30% 20%,
-        var(--timer-bg-c1) 0%,
-        var(--timer-bg-c2) 55%,
-        var(--timer-bg-c3) 100%
-      );
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      color: var(--timer-text-color);
-      box-sizing: border-box;
-      overflow: hidden;
-    }
-
-    .fullscreen-timer-container *,
-    .fullscreen-timer-container *::before,
-    .fullscreen-timer-container *::after {
-      box-sizing: border-box;
-    }
-
-    .fullscreen-timer-container {
-      color-scheme: dark;
-    }
-
-    .fullscreen-timer-container .bg-pulse {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(circle at 50% 50%, rgba(251, 146, 60, 0.35) 0%, rgba(127, 29, 29, 0.45) 55%, rgba(17, 24, 39, 0) 100%);
-      opacity: 0;
-      z-index: 0;
-    }
-
-    .fullscreen-timer-container.is-overtime .bg-pulse {
-      animation: bg-pulse 0.7s infinite alternate;
-    }
-
-    @keyframes bg-pulse {
-      from {
-        opacity: 0.16;
-      }
-      to {
-        opacity: 0.48;
-      }
-    }
-
-    .fullscreen-timer-container .timer-wrap {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      justify-items: center;
-      gap: 1.2rem;
-      isolation: isolate;
-    }
-
-    .fullscreen-timer-container .progress-ring {
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: min(75vmin, min(80vh, 920px));
-      height: min(75vmin, min(80vh, 920px));
-      border-radius: 50%;
-      background: conic-gradient(
-        from 0deg at 50% 50%,
-        var(--timer-ring-color) 0deg var(--progress-deg, 360deg),
-        transparent var(--progress-deg, 360deg) 360deg
-      );
-      /* Show only a thin ring, not a filled disk */
-      -webkit-mask: radial-gradient(circle, transparent calc(50% - 14px), #000 calc(50% - 13px));
-      mask: radial-gradient(circle, transparent calc(50% - 14px), #000 calc(50% - 13px));
-      z-index: 0;
-      pointer-events: none;
-      filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.25));
-    }
-
-    .fullscreen-timer-container .progress-ring::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 2px solid rgba(229, 231, 235, 0.06);
-    }
-
-    .fullscreen-timer-container .timer {
-      position: relative;
-      z-index: 1;
-      display: inline-block;
-      font-size: clamp(4rem, 25vw, 28rem);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      line-height: 1;
-      font-variant-numeric: tabular-nums;
-      user-select: none;
-      text-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
-    }
-
-    .fullscreen-timer-container .minutes {
-      display: block;
-      color: #f3f4f6;
-      text-align: center;
-    }
-
-    .fullscreen-timer-container .minutes-sign {
-      margin-right: 0.02em;
-    }
-
-    .fullscreen-timer-container .minutes-leading {
-      opacity: 0.42;
-    }
-
-    .fullscreen-timer-container .seconds {
-      position: absolute;
-      left: 100%;
-      top: 0;
-      font-size: 0.45em;
-      opacity: 0.52;
-      line-height: 1;
-      margin-left: 0.08em;
-    }
-
-    .fullscreen-timer-container .timer.urgent {
-      display: inline-flex;
-      align-items: flex-start;
-      justify-content: center;
-    }
-
-    .fullscreen-timer-container .timer.urgent .minutes {
-      display: inline;
-      text-align: left;
-      font-size: 1.22em;
-    }
-
-    .fullscreen-timer-container .timer.urgent .seconds {
-      position: static;
-      font-size: 0.82em;
-      opacity: 1;
-      margin-left: 0.04em;
-      align-self: flex-start;
-      line-height: 1;
-    }
-
-    .fullscreen-timer-container .timer.overtime {
-      font-size: clamp(3rem, 18vw, 17rem);
-    }
-
-    .fullscreen-timer-container .play-btn {
-      width: clamp(60px, 8vw, 86px);
-      height: clamp(60px, 8vw, 86px);
-      border-radius: 50%;
-      border: 2px solid rgba(229, 231, 235, 0.6);
-      background: rgba(17, 24, 39, 0.58);
-      color: #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 120ms ease, background 120ms ease;
-      pointer-events: auto;
-      -webkit-tap-highlight-color: transparent;
-      position: relative;
-      z-index: 10;
-      margin: 0;
-      padding: 0;
-    }
-
-    .fullscreen-timer-container .play-btn:hover {
-      background: rgba(31, 41, 55, 0.75);
-      transform: scale(1.03);
-    }
-
-    .fullscreen-timer-container .play-btn[hidden] {
-      display: none;
-    }
-
-    .fullscreen-timer-container .play-icon {
-      width: clamp(20px, 3vw, 28px);
-      height: clamp(20px, 3vw, 28px);
-      pointer-events: none;
-    }
-
-    .fullscreen-timer-container .controls {
-      position: fixed;
-      right: clamp(0.5rem, 2vw, 1rem);
-      bottom: clamp(0.5rem, 2vw, 1rem);
-      z-index: 2;
-    }
-
-    .fullscreen-timer-container .btn {
-      border: 0;
-      border-radius: 999px;
-      padding: clamp(0.5rem, 1.5vw, 0.7rem) clamp(0.8rem, 2.5vw, 1rem);
-      font-size: clamp(0.8rem, 2.5vw, 0.95rem);
-      font-weight: 600;
-      cursor: pointer;
-      color: #e5e7eb;
-      background: rgba(17, 24, 39, 0.85);
-      backdrop-filter: blur(5px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-    }
-
-    .fullscreen-timer-container .btn:hover {
-      background: rgba(31, 41, 55, 0.9);
-    }
-
-    /* Мобильные устройства */
-    @media (max-width: 768px) {
-      .fullscreen-timer-container .progress-ring {
-        width: min(70vmin, min(75vh, 600px));
-        height: min(70vmin, min(75vh, 600px));
-        -webkit-mask: radial-gradient(circle, transparent calc(50% - 10px), #000 calc(50% - 9px));
-        mask: radial-gradient(circle, transparent calc(50% - 10px), #000 calc(50% - 9px));
-      }
-
-      .fullscreen-timer-container .timer {
-        font-size: clamp(3.5rem, 22vw, 20rem);
-      }
-
-      .fullscreen-timer-container .timer.overtime {
-        font-size: clamp(2.5rem, 16vw, 14rem);
-      }
-
-      .fullscreen-timer-container .timer-wrap {
-        gap: 1rem;
-      }
-    }
-
-    /* Очень маленькие экраны */
-    @media (max-width: 480px) {
-      .fullscreen-timer-container .progress-ring {
-        width: min(65vmin, min(70vh, 400px));
-        height: min(65vmin, min(70vh, 400px));
-        -webkit-mask: radial-gradient(circle, transparent calc(50% - 8px), #000 calc(50% - 7px));
-        mask: radial-gradient(circle, transparent calc(50% - 8px), #000 calc(50% - 7px));
-      }
-
-      .fullscreen-timer-container .timer {
-        font-size: clamp(3rem, 20vw, 16rem);
-      }
-
-      .fullscreen-timer-container .timer.overtime {
-        font-size: clamp(2rem, 14vw, 12rem);
-      }
-
-      .fullscreen-timer-container .play-btn {
-        width: clamp(50px, 10vw, 70px);
-        height: clamp(50px, 10vw, 70px);
-      }
-
-      .fullscreen-timer-container .timer-wrap {
-        gap: 0.8rem;
-      }
-
-      .fullscreen-timer-container .seconds {
-        font-size: 0.4em;
-        margin-left: 0.05em;
-      }
-    }
-
-    /* Горизонтальная ориентация на мобильных */
-    @media (max-height: 500px) and (orientation: landscape) {
-      .fullscreen-timer-container .progress-ring {
-        width: min(60vmin, min(90vh, 500px));
-        height: min(60vmin, min(90vh, 500px));
-      }
-
-      .fullscreen-timer-container .timer {
-        font-size: clamp(2.5rem, 15vh, 12rem);
-      }
-
-      .fullscreen-timer-container .timer.overtime {
-        font-size: clamp(2rem, 12vh, 10rem);
-      }
-
-      .fullscreen-timer-container .timer-wrap {
-        gap: 0.6rem;
-      }
-    }
   </style>
 </head>
-<body class="fullscreen-timer-container">
-  <div class="bg-pulse" id="bgPulse" aria-hidden="true"></div>
-  <main class="timer-wrap">
-    <div class="progress-ring" id="progressRing" aria-hidden="true"></div>
-    <div class="timer" id="timer">
-      <span class="minutes" id="minutes"><span class="minutes-sign" id="minutesSign"></span><span class="minutes-leading" id="minutesLeading"></span><span id="minutesMain">30</span></span><span class="seconds" id="seconds">:00</span>
-    </div>
-    <button class="play-btn" id="playBtn" type="button" aria-label="Play">
-      <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <polygon points="5,3 19,12 5,21"/>
-      </svg>
-    </button>
-  </main>
-  <div class="controls">
-    <button class="btn" id="setTimerBtn" type="button">--:--</button>
-  </div>
+<body>
+  <div id="timer-host"></div>
 
   <script>
+    const host = document.getElementById("timer-host");
+    const shadow = host.attachShadow({ mode: "open" });
+
+    shadow.innerHTML = `
+      <style>
+        :host {
+          display: block;
+          width: 100%;
+          height: 100%;
+          color-scheme: dark;
+        }
+
+        .fullscreen-timer-container {
+          --timer-bg-c1: #1f2937;
+          --timer-bg-c2: #0b1220;
+          --timer-bg-c3: #05070d;
+          --timer-text-color: #e5e7eb;
+          --timer-ring-color: rgba(229, 231, 235, 0.07);
+
+          position: relative;
+          min-height: 100vh;
+          min-height: 100dvh;
+          height: 100vh;
+          height: 100dvh;
+          display: grid;
+          place-items: center;
+          overflow: hidden;
+          background: radial-gradient(
+            circle at 30% 20%,
+            var(--timer-bg-c1) 0%,
+            var(--timer-bg-c2) 55%,
+            var(--timer-bg-c3) 100%
+          );
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+          color: var(--timer-text-color);
+          box-sizing: border-box;
+        }
+
+        .fullscreen-timer-container *,
+        .fullscreen-timer-container *::before,
+        .fullscreen-timer-container *::after {
+          box-sizing: border-box;
+        }
+
+        .bg-pulse {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          background: radial-gradient(circle at 50% 50%, rgba(251, 146, 60, 0.35) 0%, rgba(127, 29, 29, 0.45) 55%, rgba(17, 24, 39, 0) 100%);
+          opacity: 0;
+          z-index: 0;
+        }
+
+        .fullscreen-timer-container.is-overtime .bg-pulse {
+          animation: bg-pulse 0.7s infinite alternate;
+        }
+
+        @keyframes bg-pulse {
+          from { opacity: 0.16; }
+          to { opacity: 0.48; }
+        }
+
+        .timer-wrap {
+          position: relative;
+          z-index: 1;
+          display: grid;
+          justify-items: center;
+          gap: 1.2rem;
+          isolation: isolate;
+        }
+
+        .progress-ring {
+          position: fixed;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: min(75vmin, min(80vh, 920px));
+          height: min(75vmin, min(80vh, 920px));
+          border-radius: 50%;
+          background: conic-gradient(
+            from 0deg at 50% 50%,
+            var(--timer-ring-color) 0deg var(--progress-deg, 360deg),
+            transparent var(--progress-deg, 360deg) 360deg
+          );
+          -webkit-mask: radial-gradient(circle, transparent calc(50% - 14px), #000 calc(50% - 13px));
+          mask: radial-gradient(circle, transparent calc(50% - 14px), #000 calc(50% - 13px));
+          z-index: 0;
+          pointer-events: none;
+          filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.25));
+        }
+
+        .progress-ring::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          border: 2px solid rgba(229, 231, 235, 0.06);
+        }
+
+        .timer {
+          position: relative;
+          z-index: 1;
+          display: inline-block;
+          font-size: clamp(4rem, 25vw, 28rem);
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          line-height: 1;
+          font-variant-numeric: tabular-nums;
+          user-select: none;
+          text-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .minutes {
+          display: block;
+          color: #f3f4f6;
+          text-align: center;
+        }
+
+        .minutes-sign {
+          margin-right: 0.02em;
+        }
+
+        .minutes-leading {
+          opacity: 0.42;
+        }
+
+        .seconds {
+          position: absolute;
+          left: 100%;
+          top: 0;
+          font-size: 0.45em;
+          opacity: 0.52;
+          line-height: 1;
+          margin-left: 0.08em;
+        }
+
+        .timer.urgent {
+          display: inline-flex;
+          align-items: flex-start;
+          justify-content: center;
+        }
+
+        .timer.urgent .minutes {
+          display: inline;
+          text-align: left;
+          font-size: 1.22em;
+        }
+
+        .timer.urgent .seconds {
+          position: static;
+          font-size: 0.82em;
+          opacity: 1;
+          margin-left: 0.04em;
+          align-self: flex-start;
+          line-height: 1;
+        }
+
+        .timer.overtime {
+          font-size: clamp(3rem, 18vw, 17rem);
+        }
+
+        .play-btn {
+          width: clamp(60px, 8vw, 86px);
+          height: clamp(60px, 8vw, 86px);
+          border-radius: 50%;
+          border: 2px solid rgba(229, 231, 235, 0.6);
+          background: rgba(17, 24, 39, 0.58);
+          color: #e5e7eb;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: transform 120ms ease, background 120ms ease;
+          pointer-events: auto;
+          -webkit-tap-highlight-color: transparent;
+          position: relative;
+          z-index: 10;
+          margin: 0;
+          padding: 0;
+        }
+
+        .play-btn:hover {
+          background: rgba(31, 41, 55, 0.75);
+          transform: scale(1.03);
+        }
+
+        .play-btn[hidden] {
+          display: none;
+        }
+
+        .play-icon {
+          width: clamp(20px, 3vw, 28px);
+          height: clamp(20px, 3vw, 28px);
+          pointer-events: none;
+        }
+
+        .controls {
+          position: fixed;
+          right: clamp(0.5rem, 2vw, 1rem);
+          bottom: clamp(0.5rem, 2vw, 1rem);
+          z-index: 2;
+        }
+
+        .btn {
+          border: 0;
+          border-radius: 999px;
+          padding: clamp(0.5rem, 1.5vw, 0.7rem) clamp(0.8rem, 2.5vw, 1rem);
+          font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+          font-weight: 600;
+          cursor: pointer;
+          color: #e5e7eb;
+          background: rgba(17, 24, 39, 0.85);
+          backdrop-filter: blur(5px);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .btn:hover {
+          background: rgba(31, 41, 55, 0.9);
+        }
+
+        @media (max-width: 768px) {
+          .progress-ring {
+            width: min(70vmin, min(75vh, 600px));
+            height: min(70vmin, min(75vh, 600px));
+            -webkit-mask: radial-gradient(circle, transparent calc(50% - 10px), #000 calc(50% - 9px));
+            mask: radial-gradient(circle, transparent calc(50% - 10px), #000 calc(50% - 9px));
+          }
+          .timer { font-size: clamp(3.5rem, 22vw, 20rem); }
+          .timer.overtime { font-size: clamp(2.5rem, 16vw, 14rem); }
+          .timer-wrap { gap: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+          .progress-ring {
+            width: min(65vmin, min(70vh, 400px));
+            height: min(65vmin, min(70vh, 400px));
+            -webkit-mask: radial-gradient(circle, transparent calc(50% - 8px), #000 calc(50% - 7px));
+            mask: radial-gradient(circle, transparent calc(50% - 8px), #000 calc(50% - 7px));
+          }
+          .timer { font-size: clamp(3rem, 20vw, 16rem); }
+          .timer.overtime { font-size: clamp(2rem, 14vw, 12rem); }
+          .play-btn { width: clamp(50px, 10vw, 70px); height: clamp(50px, 10vw, 70px); }
+          .timer-wrap { gap: 0.8rem; }
+          .seconds { font-size: 0.4em; margin-left: 0.05em; }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+          .progress-ring {
+            width: min(60vmin, min(90vh, 500px));
+            height: min(60vmin, min(90vh, 500px));
+          }
+          .timer { font-size: clamp(2.5rem, 15vh, 12rem); }
+          .timer.overtime { font-size: clamp(2rem, 12vh, 10rem); }
+          .timer-wrap { gap: 0.6rem; }
+        }
+      </style>
+
+      <div class="fullscreen-timer-container" id="container">
+        <div class="bg-pulse" aria-hidden="true"></div>
+        <main class="timer-wrap">
+          <div class="progress-ring" id="progressRing" aria-hidden="true"></div>
+          <div class="timer" id="timer">
+            <span class="minutes" id="minutes"><span class="minutes-sign" id="minutesSign"></span><span class="minutes-leading" id="minutesLeading"></span><span id="minutesMain">30</span></span><span class="seconds" id="seconds">:00</span>
+          </div>
+          <button class="play-btn" id="playBtn" type="button" aria-label="Play">
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <polygon points="5,3 19,12 5,21"></polygon>
+            </svg>
+          </button>
+        </main>
+        <div class="controls">
+          <button class="btn" id="setTimerBtn" type="button">--:--</button>
+        </div>
+      </div>
+    `;
+
     const STORAGE_KEY = "fullscreen-timer-state-v2";
     const LEGACY_END_TS_KEY = "fullscreen-timer-end-ts";
     const DEFAULT_DURATION_MS = 30 * 60 * 1000;
-    const timerEl = document.getElementById("timer");
-    const minutesSignEl = document.getElementById("minutesSign");
-    const minutesLeadingEl = document.getElementById("minutesLeading");
-    const minutesMainEl = document.getElementById("minutesMain");
-    const secondsEl = document.getElementById("seconds");
-    const playBtn = document.getElementById("playBtn");
-    const setTimerBtn = document.getElementById("setTimerBtn");
-    const progressRing = document.getElementById("progressRing");
+
+    const containerEl = shadow.getElementById("container");
+    const timerEl = shadow.getElementById("timer");
+    const minutesSignEl = shadow.getElementById("minutesSign");
+    const minutesLeadingEl = shadow.getElementById("minutesLeading");
+    const minutesMainEl = shadow.getElementById("minutesMain");
+    const secondsEl = shadow.getElementById("seconds");
+    const playBtn = shadow.getElementById("playBtn");
+    const setTimerBtn = shadow.getElementById("setTimerBtn");
+    const progressRing = shadow.getElementById("progressRing");
 
     function formatTime(totalMs) {
       const isNegative = totalMs < 0;
       const totalSeconds = Math.ceil(Math.abs(totalMs) / 1000);
       const minutes = Math.floor(totalSeconds / 60);
       const seconds = totalSeconds % 60;
-      const hasLeadingZero = minutes >= 0 && minutes < 10;
       return {
         sign: isNegative ? "-" : "",
-        minutesLeading: hasLeadingZero ? "0" : "",
+        minutesLeading: minutes < 10 ? "0" : "",
         minutesMain: String(minutes),
         seconds: ":" + String(seconds).padStart(2, "0")
       };
@@ -362,23 +334,10 @@
       if (raw) {
         try {
           const parsed = JSON.parse(raw);
-          if (
-            parsed &&
-            parsed.mode === "running" &&
-            Number.isFinite(parsed.endTimestamp) &&
-            Number.isFinite(parsed.totalDurationMs) &&
-            parsed.totalDurationMs > 0
-          ) {
+          if (parsed && parsed.mode === "running" && Number.isFinite(parsed.endTimestamp) && Number.isFinite(parsed.totalDurationMs) && parsed.totalDurationMs > 0) {
             return { mode: "running", endTimestamp: parsed.endTimestamp, totalDurationMs: parsed.totalDurationMs };
           }
-          if (
-            parsed &&
-            parsed.mode === "paused" &&
-            Number.isFinite(parsed.remainingMs) &&
-            parsed.remainingMs > 0 &&
-            Number.isFinite(parsed.totalDurationMs) &&
-            parsed.totalDurationMs > 0
-          ) {
+          if (parsed && parsed.mode === "paused" && Number.isFinite(parsed.remainingMs) && parsed.remainingMs > 0 && Number.isFinite(parsed.totalDurationMs) && parsed.totalDurationMs > 0) {
             return { mode: "paused", remainingMs: parsed.remainingMs, totalDurationMs: parsed.totalDurationMs };
           }
         } catch (_) {}
@@ -402,19 +361,13 @@
       if (!raw) return null;
       const value = raw.trim();
       if (!value) return null;
-
-      if (/^\d+$/.test(value)) {
+      if (/^\\d+$/.test(value)) {
         const minutes = Number(value);
-        if (minutes > 0) return minutes * 60 * 1000;
-        return null;
+        return minutes > 0 ? minutes * 60 * 1000 : null;
       }
-
-      const mmss = value.match(/^(\d{1,3}):([0-5]\d)$/);
+      const mmss = value.match(/^(\\d{1,3}):([0-5]\\d)$/);
       if (!mmss) return null;
-
-      const minutes = Number(mmss[1]);
-      const seconds = Number(mmss[2]);
-      const totalMs = (minutes * 60 + seconds) * 1000;
+      const totalMs = (Number(mmss[1]) * 60 + Number(mmss[2])) * 1000;
       return totalMs > 0 ? totalMs : null;
     }
 
@@ -426,11 +379,7 @@
 
     function startFromPause() {
       if (!timerState || timerState.mode !== "paused") return;
-      timerState = {
-        mode: "running",
-        endTimestamp: Date.now() + timerState.remainingMs,
-        totalDurationMs: timerState.totalDurationMs
-      };
+      timerState = { mode: "running", endTimestamp: Date.now() + timerState.remainingMs, totalDurationMs: timerState.totalDurationMs };
       writeState(timerState);
       tick();
     }
@@ -439,54 +388,44 @@
 
     function tick() {
       const now = Date.now();
-      let remaining = 0;
-
-      if (timerState.mode === "running") {
-        remaining = timerState.endTimestamp - now;
-      } else {
-        remaining = timerState.remainingMs;
-      }
-
+      const remaining = timerState.mode === "running" ? (timerState.endTimestamp - now) : timerState.remainingMs;
       const formatted = formatTime(remaining);
+
       minutesSignEl.textContent = formatted.sign;
       minutesLeadingEl.textContent = formatted.minutesLeading;
       minutesMainEl.textContent = formatted.minutesMain;
       secondsEl.textContent = formatted.seconds;
+
       playBtn.hidden = !(timerState.mode === "paused" && remaining > 0);
       const isUrgent = remaining > 0 && remaining < 5 * 60 * 1000;
       const isOvertime = remaining < 0;
       timerEl.classList.toggle("urgent", isUrgent);
       timerEl.classList.toggle("overtime", isOvertime);
-      document.body.classList.toggle("is-overtime", isOvertime);
+      containerEl.classList.toggle("is-overtime", isOvertime);
 
       const total = timerState.totalDurationMs > 0 ? timerState.totalDurationMs : DEFAULT_DURATION_MS;
       const progress = Math.max(0, Math.min(1, remaining / total));
-      const progressDeg = (1 - progress) * 360;
-      progressRing.style.setProperty("--progress-deg", String(progressDeg) + "deg");
-      progressRing.style.setProperty(
-        "--timer-ring-color",
-        remaining > 0 && remaining < 2 * 60 * 1000 ? "rgba(251, 146, 60, 0.24)" : "rgba(229, 231, 235, 0.07)"
-      );
-      if (isOvertime) {
-        document.body.style.setProperty("--timer-bg-c1", "#6b2d14");
-        document.body.style.setProperty("--timer-bg-c2", "#2f120b");
-        document.body.style.setProperty("--timer-bg-c3", "#140906");
-      } else if (remaining > 0 && remaining < 2 * 60 * 1000) {
-        document.body.style.setProperty("--timer-bg-c1", "#7c2d12");
-        document.body.style.setProperty("--timer-bg-c2", "#4a1d0f");
-        document.body.style.setProperty("--timer-bg-c3", "#1f0f0a");
-      } else {
-        document.body.style.setProperty("--timer-bg-c1", "#1f2937");
-        document.body.style.setProperty("--timer-bg-c2", "#0b1220");
-        document.body.style.setProperty("--timer-bg-c3", "#05070d");
-      }
+      progressRing.style.setProperty("--progress-deg", String((1 - progress) * 360) + "deg");
+      containerEl.style.setProperty("--timer-ring-color", remaining > 0 && remaining < 2 * 60 * 1000 ? "rgba(251, 146, 60, 0.24)" : "rgba(229, 231, 235, 0.07)");
 
+      if (isOvertime) {
+        containerEl.style.setProperty("--timer-bg-c1", "#6b2d14");
+        containerEl.style.setProperty("--timer-bg-c2", "#2f120b");
+        containerEl.style.setProperty("--timer-bg-c3", "#140906");
+      } else if (remaining > 0 && remaining < 2 * 60 * 1000) {
+        containerEl.style.setProperty("--timer-bg-c1", "#7c2d12");
+        containerEl.style.setProperty("--timer-bg-c2", "#4a1d0f");
+        containerEl.style.setProperty("--timer-bg-c3", "#1f0f0a");
+      } else {
+        containerEl.style.setProperty("--timer-bg-c1", "#1f2937");
+        containerEl.style.setProperty("--timer-bg-c2", "#0b1220");
+        containerEl.style.setProperty("--timer-bg-c3", "#05070d");
+      }
     }
 
     tick();
     setInterval(tick, 250);
     playBtn.addEventListener("click", startFromPause);
-
     setTimerBtn.addEventListener("click", function () {
       const raw = prompt("Введите минуты (например 25) или формат MM:SS", "30:00");
       const duration = parseDurationInput(raw);
