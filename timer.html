@@ -192,6 +192,10 @@
         }
 
         .play-btn {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
           width: clamp(60px, 8vw, 86px);
           height: clamp(60px, 8vw, 86px);
           border-radius: 50%;
@@ -205,7 +209,6 @@
           transition: transform 120ms ease, background 120ms ease;
           pointer-events: auto;
           -webkit-tap-highlight-color: transparent;
-          position: relative;
           z-index: 10;
           margin: 0;
           padding: 0;
@@ -213,7 +216,7 @@
 
         .play-btn:hover {
           background: var(--control-bg-hover);
-          transform: scale(1.03);
+          transform: translate(-50%, -50%) scale(1.03);
         }
 
         .play-btn[hidden] {
@@ -362,7 +365,7 @@
         }
       </style>
 
-      <div class="fullscreen-timer-container" id="container">
+        <div class="fullscreen-timer-container" id="container">
         <div class="bg-pulse" aria-hidden="true"></div>
         <main class="timer-wrap">
           <div class="progress-ring" id="progressRing" aria-hidden="true"></div>
@@ -455,6 +458,18 @@
       containerEl.classList.toggle("controls-hidden", !visible);
     }
 
+    function isControlsVisible() {
+      return !containerEl.classList.contains("controls-hidden");
+    }
+
+    function hideControlsNow() {
+      if (controlsHideTimer !== null) {
+        clearTimeout(controlsHideTimer);
+        controlsHideTimer = null;
+      }
+      setControlsVisible(false);
+    }
+
     function scheduleControlsAutoHide() {
       if (controlsHideTimer !== null) {
         clearTimeout(controlsHideTimer);
@@ -467,6 +482,24 @@
     function registerUserActivity() {
       setControlsVisible(true);
       scheduleControlsAutoHide();
+    }
+
+    function isTapOnControl(target) {
+      return !!target.closest(".controls, .left-controls, .top-controls, .play-btn, .btn, .icon-btn");
+    }
+
+    function handleTouchToggle(event) {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (isTapOnControl(target)) {
+        registerUserActivity();
+        return;
+      }
+      if (isControlsVisible()) {
+        hideControlsNow();
+      } else {
+        registerUserActivity();
+      }
     }
 
     function bindHoldRepeat(buttonEl, action) {
@@ -627,8 +660,7 @@
     bindHoldRepeat(fontPlusBtn, function () { applyFontScale(fontScale + FONT_SCALE_STEP); });
     fullscreenBtn.addEventListener("click", toggleFullscreen);
     document.addEventListener("fullscreenchange", renderFullscreenIcon);
-    document.addEventListener("touchstart", registerUserActivity, { passive: true });
-    document.addEventListener("touchmove", registerUserActivity, { passive: true });
+    containerEl.addEventListener("touchstart", handleTouchToggle, { passive: true });
     document.addEventListener("mousemove", registerUserActivity, { passive: true });
     document.addEventListener("mousedown", registerUserActivity, { passive: true });
     document.addEventListener("wheel", registerUserActivity, { passive: true });
