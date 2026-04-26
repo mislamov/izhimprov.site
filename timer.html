@@ -5,31 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fullscreen Timer</title>
   <style>
-    :root {
-      color-scheme: dark;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
+    .fullscreen-timer-container {
+      --timer-bg-c1: #1f2937;
+      --timer-bg-c2: #0b1220;
+      --timer-bg-c3: #05070d;
+      --timer-text-color: #e5e7eb;
+      --timer-ring-color: rgba(229, 231, 235, 0.07);
+      --timer-ring-color-warning: rgba(251, 146, 60, 0.24);
+      
       position: relative;
       margin: 0;
+      padding: 0;
       min-height: 100vh;
       display: grid;
       place-items: center;
       background: radial-gradient(
         circle at 30% 20%,
-        var(--bg-c1, #1f2937) 0%,
-        var(--bg-c2, #0b1220) 55%,
-        var(--bg-c3, #05070d) 100%
+        var(--timer-bg-c1) 0%,
+        var(--timer-bg-c2) 55%,
+        var(--timer-bg-c3) 100%
       );
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      color: #e5e7eb;
+      color: var(--timer-text-color);
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
-    .bg-pulse {
+    .fullscreen-timer-container *,
+    .fullscreen-timer-container *::before,
+    .fullscreen-timer-container *::after {
+      box-sizing: border-box;
+    }
+
+    .fullscreen-timer-container body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .fullscreen-timer-container {
+      color-scheme: dark;
+    }
+
+    .fullscreen-timer-container .bg-pulse {
       position: fixed;
       inset: 0;
       pointer-events: none;
@@ -38,7 +55,7 @@
       z-index: 0;
     }
 
-    body.overtime .bg-pulse {
+    .fullscreen-timer-container.is-overtime .bg-pulse {
       animation: bg-pulse 0.7s infinite alternate;
     }
 
@@ -51,7 +68,7 @@
       }
     }
 
-    .timer-wrap {
+    .fullscreen-timer-container .timer-wrap {
       position: relative;
       z-index: 1;
       display: grid;
@@ -60,7 +77,7 @@
       isolation: isolate;
     }
 
-    .progress-ring {
+    .fullscreen-timer-container .progress-ring {
       position: fixed;
       left: 50%;
       top: 50%;
@@ -70,7 +87,7 @@
       border-radius: 50%;
       background: conic-gradient(
         from 0deg at 50% 50%,
-        var(--ring-color, rgba(229, 231, 235, 0.07)) 0deg var(--progress-deg, 360deg),
+        var(--timer-ring-color) 0deg var(--progress-deg, 360deg),
         transparent var(--progress-deg, 360deg) 360deg
       );
       /* Show only a thin ring, not a filled disk */
@@ -81,7 +98,7 @@
       filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.25));
     }
 
-    .progress-ring::before {
+    .fullscreen-timer-container .progress-ring::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -89,7 +106,7 @@
       border: 2px solid rgba(229, 231, 235, 0.06);
     }
 
-    .timer {
+    .fullscreen-timer-container .timer {
       position: relative;
       z-index: 1;
       display: inline-block;
@@ -102,21 +119,21 @@
       text-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
     }
 
-    .minutes {
+    .fullscreen-timer-container .minutes {
       display: block;
       color: #f3f4f6;
       text-align: center;
     }
 
-    .minutes-sign {
+    .fullscreen-timer-container .minutes-sign {
       margin-right: 0.02em;
     }
 
-    .minutes-leading {
+    .fullscreen-timer-container .minutes-leading {
       opacity: 0.42;
     }
 
-    .seconds {
+    .fullscreen-timer-container .seconds {
       position: absolute;
       left: 100%;
       top: 0;
@@ -126,19 +143,19 @@
       margin-left: 0.08em;
     }
 
-    .timer.urgent {
+    .fullscreen-timer-container .timer.urgent {
       display: inline-flex;
       align-items: flex-start;
       justify-content: center;
     }
 
-    .timer.urgent .minutes {
+    .fullscreen-timer-container .timer.urgent .minutes {
       display: inline;
       text-align: left;
       font-size: 1.22em;
     }
 
-    .timer.urgent .seconds {
+    .fullscreen-timer-container .timer.urgent .seconds {
       position: static;
       font-size: 0.82em;
       opacity: 1;
@@ -147,11 +164,11 @@
       line-height: 1;
     }
 
-    .timer.overtime {
+    .fullscreen-timer-container .timer.overtime {
       font-size: clamp(3rem, 18vw, 17rem);
     }
 
-    .play-btn {
+    .fullscreen-timer-container .play-btn {
       width: clamp(60px, 8vw, 86px);
       height: clamp(60px, 8vw, 86px);
       border-radius: 50%;
@@ -171,29 +188,29 @@
       padding: 0;
     }
 
-    .play-btn:hover {
+    .fullscreen-timer-container .play-btn:hover {
       background: rgba(31, 41, 55, 0.75);
       transform: scale(1.03);
     }
 
-    .play-btn[hidden] {
+    .fullscreen-timer-container .play-btn[hidden] {
       display: none;
     }
 
-    .play-icon {
+    .fullscreen-timer-container .play-icon {
       width: clamp(20px, 3vw, 28px);
       height: clamp(20px, 3vw, 28px);
       pointer-events: none;
     }
 
-    .controls {
+    .fullscreen-timer-container .controls {
       position: fixed;
       right: clamp(0.5rem, 2vw, 1rem);
       bottom: clamp(0.5rem, 2vw, 1rem);
       z-index: 2;
     }
 
-    .btn {
+    .fullscreen-timer-container .btn {
       border: 0;
       border-radius: 999px;
       padding: clamp(0.5rem, 1.5vw, 0.7rem) clamp(0.8rem, 2.5vw, 1rem);
@@ -206,59 +223,59 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
     }
 
-    .btn:hover {
+    .fullscreen-timer-container .btn:hover {
       background: rgba(31, 41, 55, 0.9);
     }
 
     /* Мобильные устройства */
     @media (max-width: 768px) {
-      .progress-ring {
+      .fullscreen-timer-container .progress-ring {
         width: min(70vmin, min(75vh, 600px));
         height: min(70vmin, min(75vh, 600px));
         -webkit-mask: radial-gradient(circle, transparent calc(50% - 10px), #000 calc(50% - 9px));
         mask: radial-gradient(circle, transparent calc(50% - 10px), #000 calc(50% - 9px));
       }
 
-      .timer {
+      .fullscreen-timer-container .timer {
         font-size: clamp(3.5rem, 22vw, 20rem);
       }
 
-      .timer.overtime {
+      .fullscreen-timer-container .timer.overtime {
         font-size: clamp(2.5rem, 16vw, 14rem);
       }
 
-      .timer-wrap {
+      .fullscreen-timer-container .timer-wrap {
         gap: 1rem;
       }
     }
 
     /* Очень маленькие экраны */
     @media (max-width: 480px) {
-      .progress-ring {
+      .fullscreen-timer-container .progress-ring {
         width: min(65vmin, min(70vh, 400px));
         height: min(65vmin, min(70vh, 400px));
         -webkit-mask: radial-gradient(circle, transparent calc(50% - 8px), #000 calc(50% - 7px));
         mask: radial-gradient(circle, transparent calc(50% - 8px), #000 calc(50% - 7px));
       }
 
-      .timer {
+      .fullscreen-timer-container .timer {
         font-size: clamp(3rem, 20vw, 16rem);
       }
 
-      .timer.overtime {
+      .fullscreen-timer-container .timer.overtime {
         font-size: clamp(2rem, 14vw, 12rem);
       }
 
-      .play-btn {
+      .fullscreen-timer-container .play-btn {
         width: clamp(50px, 10vw, 70px);
         height: clamp(50px, 10vw, 70px);
       }
 
-      .timer-wrap {
+      .fullscreen-timer-container .timer-wrap {
         gap: 0.8rem;
       }
 
-      .seconds {
+      .fullscreen-timer-container .seconds {
         font-size: 0.4em;
         margin-left: 0.05em;
       }
@@ -266,26 +283,26 @@
 
     /* Горизонтальная ориентация на мобильных */
     @media (max-height: 500px) and (orientation: landscape) {
-      .progress-ring {
+      .fullscreen-timer-container .progress-ring {
         width: min(60vmin, min(90vh, 500px));
         height: min(60vmin, min(90vh, 500px));
       }
 
-      .timer {
+      .fullscreen-timer-container .timer {
         font-size: clamp(2.5rem, 15vh, 12rem);
       }
 
-      .timer.overtime {
+      .fullscreen-timer-container .timer.overtime {
         font-size: clamp(2rem, 12vh, 10rem);
       }
 
-      .timer-wrap {
+      .fullscreen-timer-container .timer-wrap {
         gap: 0.6rem;
       }
     }
   </style>
 </head>
-<body>
+<body class="fullscreen-timer-container">
   <div class="bg-pulse" id="bgPulse" aria-hidden="true"></div>
   <main class="timer-wrap">
     <div class="progress-ring" id="progressRing" aria-hidden="true"></div>
@@ -434,28 +451,28 @@
       const isOvertime = remaining < 0;
       timerEl.classList.toggle("urgent", isUrgent);
       timerEl.classList.toggle("overtime", isOvertime);
-      document.body.classList.toggle("overtime", isOvertime);
+      document.body.classList.toggle("is-overtime", isOvertime);
 
       const total = timerState.totalDurationMs > 0 ? timerState.totalDurationMs : DEFAULT_DURATION_MS;
       const progress = Math.max(0, Math.min(1, remaining / total));
       const progressDeg = (1 - progress) * 360;
       progressRing.style.setProperty("--progress-deg", String(progressDeg) + "deg");
       progressRing.style.setProperty(
-        "--ring-color",
+        "--timer-ring-color",
         remaining > 0 && remaining < 2 * 60 * 1000 ? "rgba(251, 146, 60, 0.24)" : "rgba(229, 231, 235, 0.07)"
       );
       if (isOvertime) {
-        document.body.style.setProperty("--bg-c1", "#6b2d14");
-        document.body.style.setProperty("--bg-c2", "#2f120b");
-        document.body.style.setProperty("--bg-c3", "#140906");
+        document.body.style.setProperty("--timer-bg-c1", "#6b2d14");
+        document.body.style.setProperty("--timer-bg-c2", "#2f120b");
+        document.body.style.setProperty("--timer-bg-c3", "#140906");
       } else if (remaining > 0 && remaining < 2 * 60 * 1000) {
-        document.body.style.setProperty("--bg-c1", "#7c2d12");
-        document.body.style.setProperty("--bg-c2", "#4a1d0f");
-        document.body.style.setProperty("--bg-c3", "#1f0f0a");
+        document.body.style.setProperty("--timer-bg-c1", "#7c2d12");
+        document.body.style.setProperty("--timer-bg-c2", "#4a1d0f");
+        document.body.style.setProperty("--timer-bg-c3", "#1f0f0a");
       } else {
-        document.body.style.setProperty("--bg-c1", "#1f2937");
-        document.body.style.setProperty("--bg-c2", "#0b1220");
-        document.body.style.setProperty("--bg-c3", "#05070d");
+        document.body.style.setProperty("--timer-bg-c1", "#1f2937");
+        document.body.style.setProperty("--timer-bg-c2", "#0b1220");
+        document.body.style.setProperty("--timer-bg-c3", "#05070d");
       }
 
     }
