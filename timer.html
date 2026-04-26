@@ -44,6 +44,8 @@
           --timer-text-color: #e5e7eb;
           --timer-ring-color: rgba(229, 231, 235, 0.07);
           --timer-font-scale: 1;
+          --control-bg: rgba(9, 13, 22, 0.34);
+          --control-bg-hover: rgba(15, 23, 36, 0.5);
 
           position: relative;
           min-height: 100vh;
@@ -194,7 +196,7 @@
           height: clamp(60px, 8vw, 86px);
           border-radius: 50%;
           border: 2px solid rgba(229, 231, 235, 0.6);
-          background: rgba(17, 24, 39, 0.58);
+          background: var(--control-bg);
           color: #e5e7eb;
           display: flex;
           align-items: center;
@@ -210,7 +212,7 @@
         }
 
         .play-btn:hover {
-          background: rgba(31, 41, 55, 0.75);
+          background: var(--control-bg-hover);
           transform: scale(1.03);
         }
 
@@ -255,13 +257,13 @@
           font-weight: 600;
           cursor: pointer;
           color: #e5e7eb;
-          background: rgba(17, 24, 39, 0.85);
+          background: var(--control-bg);
           backdrop-filter: blur(5px);
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
         }
 
         .btn:hover {
-          background: rgba(31, 41, 55, 0.9);
+          background: var(--control-bg-hover);
         }
 
         .icon-btn {
@@ -274,19 +276,34 @@
           justify-content: center;
           cursor: pointer;
           color: #e5e7eb;
-          background: rgba(17, 24, 39, 0.85);
+          background: var(--control-bg);
           backdrop-filter: blur(5px);
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
           padding: 0;
         }
 
         .icon-btn:hover {
-          background: rgba(31, 41, 55, 0.9);
+          background: var(--control-bg-hover);
         }
 
         .icon-btn svg {
           width: clamp(1rem, 2.6vw, 1.25rem);
           height: clamp(1rem, 2.6vw, 1.25rem);
+        }
+
+        .controls,
+        .left-controls,
+        .top-controls,
+        .play-btn {
+          transition: opacity 180ms ease;
+        }
+
+        .fullscreen-timer-container.controls-hidden .controls,
+        .fullscreen-timer-container.controls-hidden .left-controls,
+        .fullscreen-timer-container.controls-hidden .top-controls,
+        .fullscreen-timer-container.controls-hidden .play-btn {
+          opacity: 0;
+          pointer-events: none;
         }
 
         @media (max-width: 768px) {
@@ -383,6 +400,7 @@
     const MIN_FONT_SCALE = 0.6;
     const MAX_FONT_SCALE = 1.6;
     const FONT_SCALE_STEP = 0.05;
+    const CONTROLS_IDLE_HIDE_MS = 10000;
 
     const containerEl = shadow.getElementById("container");
     const timerEl = shadow.getElementById("timer");
@@ -398,6 +416,7 @@
     const fullscreenIcon = shadow.getElementById("fullscreenIcon");
     const progressRing = shadow.getElementById("progressRing");
     let fontScale = DEFAULT_FONT_SCALE;
+    let controlsHideTimer = null;
 
     function formatTime(totalMs) {
       const isNegative = totalMs < 0;
@@ -430,6 +449,24 @@
       fontScale = clamp(nextScale, MIN_FONT_SCALE, MAX_FONT_SCALE);
       containerEl.style.setProperty("--timer-font-scale", String(fontScale));
       localStorage.setItem(FONT_SCALE_KEY, String(fontScale));
+    }
+
+    function setControlsVisible(visible) {
+      containerEl.classList.toggle("controls-hidden", !visible);
+    }
+
+    function scheduleControlsAutoHide() {
+      if (controlsHideTimer !== null) {
+        clearTimeout(controlsHideTimer);
+      }
+      controlsHideTimer = setTimeout(function () {
+        setControlsVisible(false);
+      }, CONTROLS_IDLE_HIDE_MS);
+    }
+
+    function registerUserActivity() {
+      setControlsVisible(true);
+      scheduleControlsAutoHide();
     }
 
     function bindHoldRepeat(buttonEl, action) {
@@ -583,12 +620,19 @@
     tick();
     applyFontScale(loadFontScale());
     renderFullscreenIcon();
+    registerUserActivity();
     setInterval(tick, 250);
     playBtn.addEventListener("click", startFromPause);
     bindHoldRepeat(fontMinusBtn, function () { applyFontScale(fontScale - FONT_SCALE_STEP); });
     bindHoldRepeat(fontPlusBtn, function () { applyFontScale(fontScale + FONT_SCALE_STEP); });
     fullscreenBtn.addEventListener("click", toggleFullscreen);
     document.addEventListener("fullscreenchange", renderFullscreenIcon);
+    document.addEventListener("touchstart", registerUserActivity, { passive: true });
+    document.addEventListener("touchmove", registerUserActivity, { passive: true });
+    document.addEventListener("mousemove", registerUserActivity, { passive: true });
+    document.addEventListener("mousedown", registerUserActivity, { passive: true });
+    document.addEventListener("wheel", registerUserActivity, { passive: true });
+    document.addEventListener("keydown", registerUserActivity);
     setTimerBtn.addEventListener("click", function () {
       const raw = prompt("Введите минуты (например 25) или формат MM:SS", "30:00");
       const duration = parseDurationInput(raw);
