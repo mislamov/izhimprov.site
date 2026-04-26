@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fullscreen Timer</title>
   <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+
     .fullscreen-timer-container {
       --timer-bg-c1: #1f2937;
       --timer-bg-c2: #0b1220;
@@ -17,6 +25,9 @@
       margin: 0;
       padding: 0;
       min-height: 100vh;
+      min-height: 100dvh;
+      height: 100vh;
+      height: 100dvh;
       display: grid;
       place-items: center;
       background: radial-gradient(
@@ -35,11 +46,6 @@
     .fullscreen-timer-container *::before,
     .fullscreen-timer-container *::after {
       box-sizing: border-box;
-    }
-
-    .fullscreen-timer-container body {
-      margin: 0;
-      padding: 0;
     }
 
     .fullscreen-timer-container {
