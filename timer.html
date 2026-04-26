@@ -83,7 +83,13 @@
           z-index: 0;
         }
 
+        .fullscreen-timer-container.is-critical .bg-pulse {
+          background: radial-gradient(circle at 50% 50%, rgba(251, 146, 60, 0.36) 0%, rgba(124, 45, 18, 0.5) 55%, rgba(17, 24, 39, 0) 100%);
+          animation: bg-pulse 0.7s infinite alternate;
+        }
+
         .fullscreen-timer-container.is-overtime .bg-pulse {
+          background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.38) 0%, rgba(127, 29, 29, 0.55) 55%, rgba(17, 24, 39, 0) 100%);
           animation: bg-pulse 0.7s infinite alternate;
         }
 
@@ -189,6 +195,17 @@
 
         .timer.overtime {
           font-size: calc(clamp(3rem, 18vw, 17rem) * var(--timer-font-scale));
+        }
+
+        .timer.seconds-only .minutes {
+          display: none;
+        }
+
+        .timer.seconds-only .seconds {
+          position: static;
+          font-size: 1em;
+          opacity: 1;
+          margin-left: 0;
         }
 
         .play-btn {
@@ -614,24 +631,34 @@
 
       playBtn.hidden = !(timerState.mode === "paused" && remaining > 0);
       const isUrgent = remaining > 0 && remaining < 5 * 60 * 1000;
+      const isSecondsOnly = remaining > 0 && remaining < 60 * 1000;
+      const isWarning = remaining > 0 && remaining < 5 * 60 * 1000;
+      const isCritical = remaining > 0 && remaining < 2 * 60 * 1000;
       const isOvertime = remaining < 0;
       timerEl.classList.toggle("urgent", isUrgent);
+      timerEl.classList.toggle("seconds-only", isSecondsOnly);
       timerEl.classList.toggle("overtime", isOvertime);
+      containerEl.classList.toggle("is-warning", isWarning && !isCritical);
+      containerEl.classList.toggle("is-critical", isCritical);
       containerEl.classList.toggle("is-overtime", isOvertime);
 
       const total = timerState.totalDurationMs > 0 ? timerState.totalDurationMs : DEFAULT_DURATION_MS;
       const progress = Math.max(0, Math.min(1, remaining / total));
       progressRing.style.setProperty("--progress-deg", String((1 - progress) * 360) + "deg");
-      containerEl.style.setProperty("--timer-ring-color", remaining > 0 && remaining < 2 * 60 * 1000 ? "rgba(251, 146, 60, 0.24)" : "rgba(229, 231, 235, 0.07)");
+      containerEl.style.setProperty("--timer-ring-color", isCritical ? "rgba(251, 146, 60, 0.24)" : "rgba(229, 231, 235, 0.07)");
 
       if (isOvertime) {
-        containerEl.style.setProperty("--timer-bg-c1", "#6b2d14");
-        containerEl.style.setProperty("--timer-bg-c2", "#2f120b");
-        containerEl.style.setProperty("--timer-bg-c3", "#140906");
-      } else if (remaining > 0 && remaining < 2 * 60 * 1000) {
+        containerEl.style.setProperty("--timer-bg-c1", "#5b1212");
+        containerEl.style.setProperty("--timer-bg-c2", "#2b0a0a");
+        containerEl.style.setProperty("--timer-bg-c3", "#110506");
+      } else if (isCritical) {
         containerEl.style.setProperty("--timer-bg-c1", "#7c2d12");
         containerEl.style.setProperty("--timer-bg-c2", "#4a1d0f");
         containerEl.style.setProperty("--timer-bg-c3", "#1f0f0a");
+      } else if (isWarning) {
+        containerEl.style.setProperty("--timer-bg-c1", "#3a2b24");
+        containerEl.style.setProperty("--timer-bg-c2", "#201a16");
+        containerEl.style.setProperty("--timer-bg-c3", "#0f0c0b");
       } else {
         containerEl.style.setProperty("--timer-bg-c1", "#1f2937");
         containerEl.style.setProperty("--timer-bg-c2", "#0b1220");
