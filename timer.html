@@ -458,18 +458,6 @@
       containerEl.classList.toggle("controls-hidden", !visible);
     }
 
-    function isControlsVisible() {
-      return !containerEl.classList.contains("controls-hidden");
-    }
-
-    function hideControlsNow() {
-      if (controlsHideTimer !== null) {
-        clearTimeout(controlsHideTimer);
-        controlsHideTimer = null;
-      }
-      setControlsVisible(false);
-    }
-
     function scheduleControlsAutoHide() {
       if (controlsHideTimer !== null) {
         clearTimeout(controlsHideTimer);
@@ -482,24 +470,6 @@
     function registerUserActivity() {
       setControlsVisible(true);
       scheduleControlsAutoHide();
-    }
-
-    function isTapOnControl(target) {
-      return !!target.closest(".controls, .left-controls, .top-controls, .play-btn, .btn, .icon-btn");
-    }
-
-    function handleTouchToggle(event) {
-      const target = event.target;
-      if (!(target instanceof Element)) return;
-      if (isTapOnControl(target)) {
-        registerUserActivity();
-        return;
-      }
-      if (isControlsVisible()) {
-        hideControlsNow();
-      } else {
-        registerUserActivity();
-      }
     }
 
     function bindHoldRepeat(buttonEl, action) {
@@ -660,7 +630,8 @@
     bindHoldRepeat(fontPlusBtn, function () { applyFontScale(fontScale + FONT_SCALE_STEP); });
     fullscreenBtn.addEventListener("click", toggleFullscreen);
     document.addEventListener("fullscreenchange", renderFullscreenIcon);
-    containerEl.addEventListener("touchstart", handleTouchToggle, { passive: true });
+    containerEl.addEventListener("touchstart", registerUserActivity, { passive: true });
+    containerEl.addEventListener("touchmove", registerUserActivity, { passive: true });
     document.addEventListener("mousemove", registerUserActivity, { passive: true });
     document.addEventListener("mousedown", registerUserActivity, { passive: true });
     document.addEventListener("wheel", registerUserActivity, { passive: true });
