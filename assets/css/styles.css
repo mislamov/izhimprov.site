@@ -325,6 +325,7 @@ footer a{color:#ddd}
 /* Респонсивные таблицы и крупные тапы в формах */
 .table{display:block; overflow-x:auto; -webkit-overflow-scrolling:touch}
 .form input,.form select,.form textarea{min-height:44px}
+.nav-toggle{display:none}
 
 /* Адаптив: без изменения текстов, акцент — на ясные CTA и лёгкость восприятия */
 @media (max-width: 960px){
