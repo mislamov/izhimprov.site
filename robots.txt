@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /AGENTS.md
 
 Sitemap: https://izhimpro.ru/sitemap.xml
 Host: izhimpro.ru
