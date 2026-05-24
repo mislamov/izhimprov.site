@@ -32,7 +32,7 @@
         <a href="/faq/">FAQ</a>
         <a href="/contacts/">Контакты</a>
       </div>
-      <a class="btn-primary" href="/try/">Записаться</a>
+      <a class="btn-primary" href="/try/" data-track="cta_try_click_header">Записаться</a>
     </nav>
   </header>
 
@@ -44,8 +44,8 @@
         <h1>Импровизация для тех, кто хочет проявляться свободнее</h1>
         <p class="lead">Учимся играть, слышать партнёра, выходить на сцену и не замирать от внутреннего критика. В безопасной группе, через практику и живой контакт.</p>
         <div class="btn-row">
-          <a class="btn-primary" href="/try/">Записаться на пробное</a>
-          <a class="btn-secondary" href="/course/level-1/">Посмотреть курс</a>
+          <a class="btn-primary" href="/try/" data-track="cta_try_click_hero">Записаться на пробное</a>
+          <a class="btn-secondary" href="/course/level-1/" data-track="cta_course_click_home">Посмотреть курс</a>
         </div>
       </div>
     </section>
@@ -92,7 +92,7 @@
           <article class="card stack">
             <h3>Корпоративы и мастер-классы</h3>
             <p class="small">Живой формат для команд: смех, контакт, вовлечение, общая энергия и упражнения без скучных конкурсов.</p>
-            <a class="btn-text" href="/corporate/">Обсудить корпоратив</a>
+            <a class="btn-text" href="/corporate/" data-track="cta_corporate_click_home">Обсудить корпоратив</a>
           </article>
         </div>
       </div>
@@ -125,7 +125,7 @@
         <div class="grid grid-2">
           <article class="card coach-card">
             <div class="coach-top">
-              <img class="avatar" src="/assets/img/marat.jpg" alt="Марат Исламов">
+              <img class="avatar" src="/assets/img/marat.jpg" alt="Марат Исламов" loading="lazy">
               <div>
                 <h3>Марат Исламов</h3>
                 <p class="small">Организатор школы, импровизатор, ИТ-предприниматель.</p>
@@ -136,7 +136,7 @@
           </article>
           <article class="card coach-card">
             <div class="coach-top">
-              <img class="avatar" src="/assets/img/polina.jpg" alt="Полина Мурашова">
+              <img class="avatar" src="/assets/img/polina.jpg" alt="Полина Мурашова" loading="lazy">
               <div>
                 <h3>Полина Мурашова</h3>
                 <p class="small">Ведущая, актриса и импровизатор.</p>
@@ -154,7 +154,7 @@
         <h2>Импровизация для команд</h2>
         <p class="lead">Проводим мастер-классы и корпоративные импровизационные форматы, где команда не сидит в зрительном зале, а включается в общий живой опыт: смеётся, слышит друг друга и выходит из рабочих ролей.</p>
         <div>
-          <a class="btn-primary" href="/corporate/">Обсудить корпоратив</a>
+          <a class="btn-primary" href="/corporate/" data-track="cta_corporate_click_home">Обсудить корпоратив</a>
         </div>
       </div>
     </section>
@@ -162,31 +162,31 @@
     <section>
       <div class="container stack">
         <h2>FAQ</h2>
-        <details open>
+        <details open data-track="faq_open">
           <summary>Нужно ли иметь опыт?</summary>
           <p>Нет. Пробное занятие и курс «Первый шаг» рассчитаны на людей без обязательного сценического опыта.</p>
         </details>
-        <details>
+        <details data-track="faq_open">
           <summary>Я интроверт, мне подойдёт?</summary>
           <p>Да. Импровизация не требует быть громким экстравертом. Мы работаем с вниманием, контактом, партнёрством и постепенным выходом в проявленность.</p>
         </details>
-        <details>
+        <details data-track="faq_open">
           <summary>Будет ли страшно?</summary>
           <p>Может быть немного волнительно — это нормально. Мы не бросаем человека сразу в сложную сцену, а двигаемся через разогрев, игры и простые упражнения.</p>
         </details>
-        <details>
+        <details data-track="faq_open">
           <summary>Нужно ли уметь шутить?</summary>
           <p>Нет. Импровизация не начинается с шуток. Она начинается со слушания, принятия, отклика и игры с тем, что уже происходит.</p>
         </details>
-        <details>
+        <details data-track="faq_open">
           <summary>Можно прийти одному?</summary>
           <p>Да. Большинство участников приходят одни. Группа быстро знакомится через упражнения.</p>
         </details>
-        <details>
+        <details data-track="faq_open">
           <summary>Что надеть?</summary>
           <p>Удобную одежду, в которой можно двигаться. Специальная форма не нужна.</p>
         </details>
-        <details>
+        <details data-track="faq_open">
           <summary>Это образовательный курс?</summary>
           <p>Это клубные практики и тренировки по импровизации для развития навыков и удовольствия. Мы не выдаём дипломы или удостоверения.</p>
         </details>
@@ -216,9 +216,10 @@
   </footer>
 
   <div class="mobile-cta">
-    <a class="btn-primary" href="/try/">Записаться на пробное</a>
+    <a class="btn-primary" href="/try/" data-track="cta_try_click_mobile_sticky">Записаться на пробное</a>
   </div>
 
+  <script src="/assets/js/analytics.js" defer></script>
   <script src="/assets/js/mobile-nav.js" defer></script>
 </body>
 </html>

@@ -126,7 +126,7 @@
     <section id="form" class="section-accent">
       <div class="container stack">
         <h2>Форма заявки</h2>
-        <form class="form" action="#" method="post">
+        <form class="form" data-form-type="corporate" action="#" method="post">
           <div class="form-field">
             <label for="name">Имя</label>
             <input type="text" id="name" name="name" required placeholder="Как вас зовут">
@@ -149,6 +149,14 @@
           </div>
           <button type="submit" class="btn-primary">Обсудить формат</button>
         </form>
+        <div class="form-success" hidden>
+          <p>Заявка принята! Мы свяжемся с вами в ближайшее время.</p>
+          <a class="btn-text" href="https://t.me/improizh">Написать в Telegram</a>
+        </div>
+        <div class="form-error" hidden>
+          <p>Что-то пошло не так. Напишите нам напрямую:</p>
+          <a class="btn-text" href="https://t.me/improizh">@improizh в Telegram</a>
+        </div>
       </div>
     </section>
   </main>
@@ -175,9 +183,11 @@
   </footer>
 
   <div class="mobile-cta">
-    <a class="btn-primary" href="#form">Обсудить формат</a>
+    <a class="btn-primary" href="#form" data-track="cta_try_click_mobile_sticky">Обсудить формат</a>
   </div>
 
+  <script src="/assets/js/analytics.js" defer></script>
+  <script src="/assets/js/form.js" defer></script>
   <script src="/assets/js/mobile-nav.js" defer></script>
 </body>
 </html>

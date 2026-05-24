@@ -558,3 +558,18 @@ footer {
     width: 100%;
   }
 }
+
+.form-success,
+.form-error {
+  padding: 20px 24px;
+  border-radius: var(--radius-small);
+  border: 1px solid var(--color-line);
+}
+
+.form-success {
+  border-color: rgba(100, 200, 100, 0.35);
+}
+
+.form-error {
+  border-color: rgba(254, 77, 0, 0.4);
+}

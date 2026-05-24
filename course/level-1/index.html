@@ -129,7 +129,7 @@
     <section id="form" class="section-accent">
       <div class="container stack">
         <h2>Форма заявки</h2>
-        <form class="form" action="#" method="post">
+        <form class="form" data-form-type="course" action="#" method="post">
           <div class="form-field">
             <label for="name">Имя</label>
             <input type="text" id="name" name="name" required placeholder="Как вас зовут">
@@ -152,25 +152,33 @@
           </div>
           <button type="submit" class="btn-primary">Оставить заявку</button>
         </form>
+        <div class="form-success" hidden>
+          <p>Заявка принята! Мы свяжемся с вами в ближайшее время.</p>
+          <a class="btn-text" href="https://t.me/improizh">Написать в Telegram</a>
+        </div>
+        <div class="form-error" hidden>
+          <p>Что-то пошло не так. Напишите нам напрямую:</p>
+          <a class="btn-text" href="https://t.me/improizh">@improizh в Telegram</a>
+        </div>
       </div>
     </section>
 
     <section>
       <div class="container stack">
         <h2>FAQ</h2>
-        <details open>
+        <details open data-track="faq_open">
           <summary>Нужно ли иметь опыт?</summary>
           <p>Нет. Пробное занятие и курс «Первый шаг» рассчитаны на людей без обязательного сценического опыта.</p>
         </details>
-        <details>
+        <details data-track="faq_open">
           <summary>Я интроверт, мне подойдёт?</summary>
           <p>Да. Импровизация не требует быть громким экстравертом. Мы работаем с вниманием, контактом, партнёрством и постепенным выходом в проявленность.</p>
         </details>
-        <details>
+        <details data-track="faq_open">
           <summary>Будет ли страшно?</summary>
           <p>Может быть немного волнительно — это нормально. Мы не бросаем человека сразу в сложную сцену, а двигаемся через разогрев, игры и простые упражнения.</p>
         </details>
-        <details>
+        <details data-track="faq_open">
           <summary>Это образовательный курс?</summary>
           <p>Это клубные практики и тренировки по импровизации для развития навыков и удовольствия. Мы не выдаём дипломы или удостоверения.</p>
         </details>
@@ -200,9 +208,11 @@
   </footer>
 
   <div class="mobile-cta">
-    <a class="btn-primary" href="#form">Оставить заявку</a>
+    <a class="btn-primary" href="#form" data-track="cta_try_click_mobile_sticky">Оставить заявку</a>
   </div>
 
+  <script src="/assets/js/analytics.js" defer></script>
+  <script src="/assets/js/form.js" defer></script>
   <script src="/assets/js/mobile-nav.js" defer></script>
 </body>
 </html>
