@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap");
-
 :root {
   --color-black: #131313;
   --color-orange: #fe4d00;
@@ -495,5 +493,68 @@ footer {
 
   footer {
     padding-bottom: 92px;
+  }
+}
+
+.form {
+  display: grid;
+  gap: 16px;
+}
+
+.form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.form-field label {
+  font-size: 14px;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  background: var(--color-dark-2);
+  border: 1px solid rgba(238, 231, 213, 0.28);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font: inherit;
+  color: var(--color-milk);
+}
+
+.form input::placeholder,
+.form textarea::placeholder {
+  color: rgba(238, 231, 213, 0.68);
+}
+
+.form input:focus,
+.form textarea:focus {
+  outline: 2px solid #fe4d00;
+  outline-offset: 1px;
+  border-color: #fe4d00;
+}
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.form-check input[type="checkbox"] {
+  margin-top: 4px;
+}
+
+.form-check label {
+  font-size: 14px;
+  color: rgba(238, 231, 213, 0.68);
+}
+
+.form-check a {
+  color: #eee7d5;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .form button[type="submit"] {
+    width: 100%;
   }
 }
