@@ -510,7 +510,7 @@ footer {
   font-size: 14px;
 }
 
-.form input,
+.form input:not([type="checkbox"]),
 .form textarea {
   width: 100%;
   background: var(--color-dark-2);
@@ -540,7 +540,12 @@ footer {
 }
 
 .form-check input[type="checkbox"] {
-  margin-top: 4px;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--color-orange);
+  cursor: pointer;
 }
 
 .form-check label {
