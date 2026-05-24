@@ -578,3 +578,45 @@ footer {
 .form-error {
   border-color: rgba(254, 77, 0, 0.4);
 }
+
+/* Legal and rules pages */
+.legal-page .section {
+  padding: 72px 0 88px;
+}
+
+.legal-doc {
+  display: grid;
+  gap: 18px;
+}
+
+.legal-doc h3 {
+  margin-top: 10px;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.2;
+}
+
+.legal-doc p,
+.legal-doc li {
+  line-height: 1.65;
+}
+
+.legal-doc ul {
+  margin: 4px 0 10px;
+  padding-left: 24px;
+  display: grid;
+  gap: 8px;
+}
+
+.legal-doc .note {
+  color: var(--color-muted);
+}
+
+@media (max-width: 768px) {
+  .legal-page .section {
+    padding: 56px 0 72px;
+  }
+
+  .legal-doc {
+    gap: 14px;
+  }
+}
