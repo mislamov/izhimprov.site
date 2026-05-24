@@ -420,8 +420,12 @@ footer {
 
   .nav {
     min-height: 72px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     padding: 10px 0;
+  }
+
+  .nav > .btn-primary {
+    display: none;
   }
 
   .logo {
@@ -467,10 +471,6 @@ footer {
     color: var(--color-milk);
   }
 
-  .nav .btn-primary {
-    order: 3;
-    width: 100%;
-  }
 
   .grid-2,
   .grid-3 {
