@@ -11,6 +11,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    const revealTargets = Array.from(
+      document.querySelectorAll("main > section:not(.hero), main > .logo-break")
+    );
+
+    function updateReveal() {
+      if (window.scrollY < 10) {
+        revealTargets.forEach((el) => el.classList.remove("is-visible"));
+        return;
+      }
+      revealTargets.forEach((el) => {
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.96) {
+          el.classList.add("is-visible");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", updateReveal, { passive: true });
+  }
+
   document.querySelectorAll(".nav").forEach((nav) => {
     if (nav.querySelector(".nav-toggle") || !nav.querySelector(".menu")) return;
     const toggle = document.createElement("button");

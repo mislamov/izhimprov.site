@@ -1,13 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(New-Item -ItemType Directory -Force \"c:\\\\WORK\\\\IzhImprov\\\\IzhImpro.site\\\\legal\\\\offer-archive\")",
-      "Bash(Out-Null)",
-      "Bash(Move-Item \"c:\\\\WORK\\\\IzhImprov\\\\IzhImpro.site\\\\legal\\\\offer-archive-2026-04\" \"c:\\\\WORK\\\\IzhImprov\\\\IzhImpro.site\\\\legal\\\\offer-archive\\\\2026-04\" -Force)",
-      "Bash(Write-Host \"Moved\")",
-      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\WORK\\\\IzhImprov\\\\IzhImpro.site\\\\legal\\\\offer-archive\")",
-      "PowerShell(Move-Item \"c:\\\\WORK\\\\IzhImprov\\\\IzhImpro.site\\\\legal\\\\offer-archive-2026-04\" \"c:\\\\WORK\\\\IzhImprov\\\\IzhImpro.site\\\\legal\\\\offer-archive\\\\2026-04\" -Force)",
-      "WebFetch(domain:tochkaimpro.ru)"
+      "Bash(*)",
+      "PowerShell(*)",
+      "WebFetch(*)"
     ]
   }
 }
