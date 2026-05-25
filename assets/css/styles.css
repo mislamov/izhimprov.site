@@ -572,6 +572,11 @@ footer {
     padding-bottom: 92px;
   }
 
+  .footer-logo {
+    display: flex;
+    justify-content: center;
+  }
+
   .logo-break {
     display: flex;
     justify-content: center;
