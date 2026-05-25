@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const mobileCta = document.querySelector(".mobile-cta");
+  if (mobileCta) {
+    const heroBtn = document.querySelector(".hero .btn-row .btn-primary");
+    if (heroBtn) {
+      new IntersectionObserver(([entry]) => {
+        mobileCta.classList.toggle("is-visible", !entry.isIntersecting);
+      }).observe(heroBtn);
+    } else {
+      mobileCta.classList.add("is-visible");
+    }
+  }
+
   document.querySelectorAll(".nav").forEach((nav) => {
     if (nav.querySelector(".nav-toggle") || !nav.querySelector(".menu")) return;
     const toggle = document.createElement("button");
