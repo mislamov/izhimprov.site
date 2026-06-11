@@ -5,6 +5,7 @@
 .claude
 .secrets
 scripts
+TOOLS.md
 
 
 SPEC/TZ
@@ -20,4 +21,6 @@ WORK
 scripts/*
 !scripts/generate_markdown.py
 !scripts/check-markdown-negotiation.ps1
+!scripts/deploy-agent-ready-worker.ps1
 !SPEC/markdown-for-agents.md
+!cloudflare-agent-ready-worker.js

@@ -2,35 +2,38 @@
 
 ## Current state
 
-As of 2026-06-11, `https://izhimpro.ru/` is served by GitHub Pages/Fastly.
+As of 2026-06-11, `https://izhimpro.ru/` is served by GitHub Pages behind Cloudflare.
 
-Requests with `Accept: text/markdown` still return:
+Requests with `Accept: text/markdown` on the same public URL now return:
 
-- `Content-Type: text/html; charset=utf-8`
-- no `x-markdown-tokens`
+- `Content-Type: text/markdown; charset=utf-8`
+- `Vary: Accept`
+- `x-markdown-tokens` on `GET` responses
 
-This means the site does not currently support HTTP content negotiation for Markdown.
+This means the site now supports HTTP content negotiation for Markdown at the edge.
 
 ## Constraint
 
 GitHub Pages does not allow per-request response negotiation or custom response headers for this use case.
 
-Because of that, this repository can prepare Markdown sidecar documents, but it cannot make the same URL return Markdown based on `Accept: text/markdown` while it is hosted on GitHub Pages.
+Because of that, the negotiation is implemented in Cloudflare Worker code instead of the GitHub Pages origin.
 
 ## What is implemented here
 
 - `scripts/generate_markdown.py` generates `*.md` sidecar files from the public HTML pages.
+- `cloudflare-agent-ready-worker.js` proxies the public site through Cloudflare and:
+  - maps human URLs such as `/faq/` to repo files such as `/faq/index.html`
+  - maps Markdown negotiation to sidecars such as `/faq/index.md`
+  - adds `Vary: Accept`
+  - returns `x-markdown-tokens` on Markdown `GET`
+- `scripts/deploy-agent-ready-worker.ps1` deploys the Worker through the Cloudflare API and attaches it to `izhimpro.ru/*`.
 - `scripts/check-markdown-negotiation.ps1` verifies:
   - the live response to `Accept: text/markdown`
   - the default HTML response
   - the published sidecar Markdown URL such as `/faq/index.md`
 
-## Full compliance path
+## Notes
 
-To fully satisfy Markdown negotiation, move the site behind a host or proxy that can inspect `Accept` and return:
-
-- `Content-Type: text/markdown`
-- `Vary: Accept`
-- `x-markdown-tokens` when available
-
-Cloudflare `Markdown for Agents` is the shortest path once the zone is proxied through Cloudflare.
+- The current Worker origin is `https://cdn.jsdelivr.net/gh/mislamov/izhimprov.site@main`.
+- This keeps the solution within Cloudflare Free plan constraints.
+- DNS `DS` publication for `_agents.izhimpro.ru` remains a separate task and does not affect Markdown negotiation.

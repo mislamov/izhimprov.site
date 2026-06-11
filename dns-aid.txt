@@ -5,20 +5,35 @@ Goal
 
 Publish DNS for AI Discovery (DNS-AID) records for the public organization index of izhimpro.ru.
 
-This repository can expose the HTTP discovery document, but the actual DNS records and DNSSEC must be published in the DNS provider panel for izhimpro.ru.
+This repository exposes the HTTP discovery documents. The DNS-AID record itself must now be published in the authoritative Cloudflare DNS zone for `izhimpro.ru`.
 
-Current HTTP discovery endpoint
+Current authoritative DNS
 
-- Organization index: https://izhimpro.ru/.well-known/agents-index.json
-- Site description: https://izhimpro.ru/.well-known/site-description.json
-- API catalog: https://izhimpro.ru/.well-known/api-catalog
-- Service description: https://izhimpro.ru/.well-known/service-desc.json
+As of 2026-06-11, the public zone is authoritative on Cloudflare:
+
+- `joan.ns.cloudflare.com`
+- `rommy.ns.cloudflare.com`
+
+Current HTTP discovery endpoints
+
+- Organization index: `https://izhimpro.ru/.well-known/agents-index.json`
+- Site description: `https://izhimpro.ru/.well-known/site-description.json`
+- API catalog: `https://izhimpro.ru/.well-known/api-catalog`
+- Service description: `https://izhimpro.ru/.well-known/service-desc.json`
+
+Current state
+
+- HTTP discovery on the website is working through Cloudflare.
+- Homepage `Link` headers are published.
+- `/.well-known/api-catalog` is published with `application/linkset+json`.
+- DNS-AID is currently missing from public DNS.
+- `_index._agents.izhimpro.ru` currently returns `NXDOMAIN`.
 
 Recommended DNS-AID record
 
-Use an HTTPS record at the well-known owner name _index._agents.izhimpro.ru.
+Use an HTTPS record at the well-known owner name `_index._agents.izhimpro.ru`.
 
-key65400 is used as a private-use SvcParamKey for the HTTP path of the organization index until DNS-AID keys are registered by IANA.
+`key65400` is used as a private-use `SvcParamKey` for the HTTP path of the organization index until DNS-AID keys are registered by IANA.
 
 Multiline form:
 
@@ -29,56 +44,41 @@ _index._agents.izhimpro.ru. 3600 IN HTTPS 1 izhimpro.ru. (
   key65400="/.well-known/agents-index.json"
 )
 
-Single-line form for DNS panels:
+Single-line form:
 
 _index._agents 3600 HTTPS 1 izhimpro.ru. alpn="h2,h3" port=443 mandatory=alpn,port,key65400 key65400="/.well-known/agents-index.json"
 
 Why only _index._agents
 
 - The site currently publishes an organization-level machine-readable index.
-- There is no confirmed a2a or mcp endpoint on izhimpro.ru, so publishing _a2a._agents.izhimpro.ru now would be inaccurate.
-- If a real A2A or MCP endpoint is introduced later, publish a separate SVCB or HTTPS record for that exact protocol endpoint.
+- There is no confirmed `a2a` or `mcp` endpoint on `izhimpro.ru`, so publishing `_a2a._agents.izhimpro.ru` now would be inaccurate.
+- If a real A2A or MCP endpoint is introduced later, publish a separate `SVCB` or `HTTPS` record for that exact protocol endpoint.
 
 DNSSEC requirement
 
-DNS-AID is materially stronger with DNSSEC. Enable DNSSEC for the public zone at the DNS provider and confirm that the parent zone publishes a DS record for izhimpro.ru.
+DNS-AID is materially stronger with DNSSEC. Enable DNSSEC for the public zone in Cloudflare and confirm that the parent zone publishes a `DS` record for `izhimpro.ru`.
 
 Minimum checks after enabling DNSSEC:
 
-- _index._agents.izhimpro.ru HTTPS returns the HTTPS RRset
-- izhimpro.ru DS returns a DS record in the parent zone
-- _index._agents.izhimpro.ru RRSIG returns signatures for the discovery RRset
+- `_index._agents.izhimpro.ru` HTTPS returns the HTTPS RRset
+- `izhimpro.ru` DS returns a DS record in the parent zone
+- `_index._agents.izhimpro.ru` `RRSIG` returns signatures for the discovery RRset
 
 Validation
 
 Recheck after DNS publication:
 
-- https://isitagentready.com/
+- `https://isitagentready.com/`
 
 Expected result:
 
 - DNS-AID well-known entrypoint is found
 - DNSSEC-backed validation succeeds for the published discovery zone
 
-Notes for Beget
+Cloudflare implementation note
 
-As of 2026-06-11, izhimpro.ru is delegated to:
+The current zone is on the Cloudflare Free plan. The DNS-AID publication must therefore use only free Cloudflare DNS capabilities.
 
-- ns1.beget.com
-- ns2.beget.com
-- ns1.beget.pro
-- ns2.beget.pro
-- ns1.beget.ru
-- ns2.beget.ru
+Operational note
 
-If the Beget DNS panel does not support HTTPS/SVCB records, DNS-AID publication cannot be completed there directly. In that case:
-
-1. Move the authoritative zone to a provider with HTTPS/SVCB support and DNSSEC, or
-2. Delegate the _agents.izhimpro.ru subzone to a DNS provider that supports both features
-
-Example subzone delegation:
-
-_agents.izhimpro.ru. 3600 IN NS ns1.provider.example.
-_agents.izhimpro.ru. 3600 IN NS ns2.provider.example.
-
-Then publish the _index record inside that delegated _agents.izhimpro.ru zone.
+Before the nameserver cutover to Cloudflare, `_agents.izhimpro.ru` and `_index._agents.izhimpro.ru` were previously published outside the main zone. After the cutover, those records are no longer publicly visible and must be recreated in the current authoritative DNS path.
