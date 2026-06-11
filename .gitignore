@@ -3,7 +3,21 @@
 .idea
 .windsurf
 .claude
+.secrets
+scripts
 
 
 SPEC/TZ
 WORK
+!index.md
+!timer.md
+!*/index.md
+!*/*/index.md
+!*/*/*/index.md
+!legal/*/index.md
+!legal/*/*/index.md
+!scripts/
+scripts/*
+!scripts/generate_markdown.py
+!scripts/check-markdown-negotiation.ps1
+!SPEC/markdown-for-agents.md

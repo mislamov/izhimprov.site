@@ -1,0 +1,50 @@
+{
+  "organization": {
+    "name": "Shkola Izhevskogo Improva",
+    "domain": "izhimpro.ru",
+    "homepage": "https://izhimpro.ru/"
+  },
+  "updatedAt": "2026-06-11",
+  "discovery": {
+    "dnsAid": {
+      "owner": "_index._agents.izhimpro.ru",
+      "transport": "https",
+      "path": "/.well-known/agents-index.json"
+    }
+  },
+  "agents": [
+    {
+      "id": "public-site",
+      "name": "IzhImpro public website",
+      "endpoint": "https://izhimpro.ru/",
+      "protocols": [
+        "https"
+      ],
+      "documents": {
+        "siteDescription": "https://izhimpro.ru/.well-known/site-description.json",
+        "apiCatalog": "https://izhimpro.ru/.well-known/api-catalog",
+        "serviceDescription": "https://izhimpro.ru/.well-known/service-desc.json"
+      },
+      "capabilities": [
+        "public-site-navigation",
+        "course-information",
+        "contact-information",
+        "legal-information"
+      ]
+    },
+    {
+      "id": "lead-form-service",
+      "name": "IzhImpro lead form service",
+      "endpoint": "https://dark-brook-67a3.islamov-marat.workers.dev/",
+      "protocols": [
+        "https"
+      ],
+      "documents": {
+        "serviceDescription": "https://izhimpro.ru/.well-known/service-desc.json"
+      },
+      "capabilities": [
+        "trial-lesson-form-submission"
+      ]
+    }
+  ]
+}

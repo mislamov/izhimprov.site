@@ -1,0 +1,84 @@
+DNS-AID for izhimpro.ru
+Date: 2026-06-11
+
+Goal
+
+Publish DNS for AI Discovery (DNS-AID) records for the public organization index of izhimpro.ru.
+
+This repository can expose the HTTP discovery document, but the actual DNS records and DNSSEC must be published in the DNS provider panel for izhimpro.ru.
+
+Current HTTP discovery endpoint
+
+- Organization index: https://izhimpro.ru/.well-known/agents-index.json
+- Site description: https://izhimpro.ru/.well-known/site-description.json
+- API catalog: https://izhimpro.ru/.well-known/api-catalog
+- Service description: https://izhimpro.ru/.well-known/service-desc.json
+
+Recommended DNS-AID record
+
+Use an HTTPS record at the well-known owner name _index._agents.izhimpro.ru.
+
+key65400 is used as a private-use SvcParamKey for the HTTP path of the organization index until DNS-AID keys are registered by IANA.
+
+Multiline form:
+
+_index._agents.izhimpro.ru. 3600 IN HTTPS 1 izhimpro.ru. (
+  alpn="h2,h3"
+  port=443
+  mandatory=alpn,port,key65400
+  key65400="/.well-known/agents-index.json"
+)
+
+Single-line form for DNS panels:
+
+_index._agents 3600 HTTPS 1 izhimpro.ru. alpn="h2,h3" port=443 mandatory=alpn,port,key65400 key65400="/.well-known/agents-index.json"
+
+Why only _index._agents
+
+- The site currently publishes an organization-level machine-readable index.
+- There is no confirmed a2a or mcp endpoint on izhimpro.ru, so publishing _a2a._agents.izhimpro.ru now would be inaccurate.
+- If a real A2A or MCP endpoint is introduced later, publish a separate SVCB or HTTPS record for that exact protocol endpoint.
+
+DNSSEC requirement
+
+DNS-AID is materially stronger with DNSSEC. Enable DNSSEC for the public zone at the DNS provider and confirm that the parent zone publishes a DS record for izhimpro.ru.
+
+Minimum checks after enabling DNSSEC:
+
+- _index._agents.izhimpro.ru HTTPS returns the HTTPS RRset
+- izhimpro.ru DS returns a DS record in the parent zone
+- _index._agents.izhimpro.ru RRSIG returns signatures for the discovery RRset
+
+Validation
+
+Recheck after DNS publication:
+
+- https://isitagentready.com/
+
+Expected result:
+
+- DNS-AID well-known entrypoint is found
+- DNSSEC-backed validation succeeds for the published discovery zone
+
+Notes for Beget
+
+As of 2026-06-11, izhimpro.ru is delegated to:
+
+- ns1.beget.com
+- ns2.beget.com
+- ns1.beget.pro
+- ns2.beget.pro
+- ns1.beget.ru
+- ns2.beget.ru
+
+If the Beget DNS panel does not support HTTPS/SVCB records, DNS-AID publication cannot be completed there directly. In that case:
+
+1. Move the authoritative zone to a provider with HTTPS/SVCB support and DNSSEC, or
+2. Delegate the _agents.izhimpro.ru subzone to a DNS provider that supports both features
+
+Example subzone delegation:
+
+_agents.izhimpro.ru. 3600 IN NS ns1.provider.example.
+_agents.izhimpro.ru. 3600 IN NS ns2.provider.example.
+
+Then publish the _index record inside that delegated _agents.izhimpro.ru zone.

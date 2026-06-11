@@ -3,33 +3,49 @@
     "name": "Shkola Izhevskogo Improva",
     "url": "https://izhimpro.ru/",
     "language": "ru",
-    "description": "Improvisation classes, trial sessions, courses, and corporate workshops in Izhevsk."
+    "description": "Improvisation classes, trial sessions, courses, and corporate workshops in Izhevsk.",
+    "markdownSidecars": true,
+    "markdownUrl": "https://izhimpro.ru/index.md"
   },
   "navigation": [
     {
       "name": "Trial lesson",
-      "url": "https://izhimpro.ru/try/"
+      "url": "https://izhimpro.ru/try/",
+      "markdownUrl": "https://izhimpro.ru/try/index.md"
     },
     {
       "name": "Course",
-      "url": "https://izhimpro.ru/course/level-1/"
+      "url": "https://izhimpro.ru/course/level-1/",
+      "markdownUrl": "https://izhimpro.ru/course/level-1/index.md"
     },
     {
       "name": "Corporate workshops",
-      "url": "https://izhimpro.ru/corporate/"
+      "url": "https://izhimpro.ru/corporate/",
+      "markdownUrl": "https://izhimpro.ru/corporate/index.md"
     },
     {
       "name": "FAQ",
-      "url": "https://izhimpro.ru/faq/"
+      "url": "https://izhimpro.ru/faq/",
+      "markdownUrl": "https://izhimpro.ru/faq/index.md"
     },
     {
       "name": "Contacts",
-      "url": "https://izhimpro.ru/contacts/"
+      "url": "https://izhimpro.ru/contacts/",
+      "markdownUrl": "https://izhimpro.ru/contacts/index.md"
     }
   ],
   "legal": [
-    "https://izhimpro.ru/legal/offer/",
-    "https://izhimpro.ru/legal/privacy/",
-    "https://izhimpro.ru/legal/payment/"
+    {
+      "url": "https://izhimpro.ru/legal/offer/",
+      "markdownUrl": "https://izhimpro.ru/legal/offer/index.md"
+    },
+    {
+      "url": "https://izhimpro.ru/legal/privacy/",
+      "markdownUrl": "https://izhimpro.ru/legal/privacy/index.md"
+    },
+    {
+      "url": "https://izhimpro.ru/legal/payment/",
+      "markdownUrl": "https://izhimpro.ru/legal/payment/index.md"
+    }
   ]
 }
