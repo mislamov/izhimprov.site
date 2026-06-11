@@ -1,0 +1,35 @@
+{
+  "site": {
+    "name": "Shkola Izhevskogo Improva",
+    "url": "https://izhimpro.ru/",
+    "language": "ru",
+    "description": "Improvisation classes, trial sessions, courses, and corporate workshops in Izhevsk."
+  },
+  "navigation": [
+    {
+      "name": "Trial lesson",
+      "url": "https://izhimpro.ru/try/"
+    },
+    {
+      "name": "Course",
+      "url": "https://izhimpro.ru/course/level-1/"
+    },
+    {
+      "name": "Corporate workshops",
+      "url": "https://izhimpro.ru/corporate/"
+    },
+    {
+      "name": "FAQ",
+      "url": "https://izhimpro.ru/faq/"
+    },
+    {
+      "name": "Contacts",
+      "url": "https://izhimpro.ru/contacts/"
+    }
+  ],
+  "legal": [
+    "https://izhimpro.ru/legal/offer/",
+    "https://izhimpro.ru/legal/privacy/",
+    "https://izhimpro.ru/legal/payment/"
+  ]
+}

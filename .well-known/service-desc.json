@@ -1,0 +1,45 @@
+{
+  "service": {
+    "name": "IzhImpro website forms",
+    "homepage": "https://izhimpro.ru/",
+    "provider": "Shkola Izhevskogo Improva"
+  },
+  "resources": [
+    {
+      "name": "trial-lesson-form",
+      "description": "Public website lead capture form for trial lesson signups.",
+      "method": "POST",
+      "url": "https://dark-brook-67a3.islamov-marat.workers.dev/",
+      "requestContentType": "application/json",
+      "requestSchema": {
+        "type": "object",
+        "required": ["fio", "tel", "comment"],
+        "properties": {
+          "fio": {
+            "type": "string"
+          },
+          "tel": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          }
+        }
+      },
+      "responseSchema": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  ],
+  "docs": [
+    "https://izhimpro.ru/faq/",
+    "https://izhimpro.ru/contacts/",
+    "https://izhimpro.ru/legal/privacy/",
+    "https://izhimpro.ru/legal/offer/"
+  ]
+}

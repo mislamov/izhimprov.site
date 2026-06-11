@@ -1,0 +1,37 @@
+{
+  "name": "IzhImpro public resource catalog",
+  "publisher": {
+    "name": "Shkola Izhevskogo Improva",
+    "url": "https://izhimpro.ru/"
+  },
+  "description": "Machine-readable catalog for the public website and its form submission service.",
+  "apis": [
+    {
+      "name": "Lead form submission",
+      "baseURL": "https://dark-brook-67a3.islamov-marat.workers.dev/",
+      "description": "Accepts trial lesson, course, and corporate contact form submissions from the website.",
+      "specification": {
+        "url": "https://izhimpro.ru/.well-known/service-desc.json",
+        "type": "application/json"
+      },
+      "documentation": "https://izhimpro.ru/faq/"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://izhimpro.ru/.well-known/service-desc.json",
+      "rel": "service-desc",
+      "type": "application/json"
+    },
+    {
+      "href": "https://izhimpro.ru/.well-known/site-description.json",
+      "rel": "describedby",
+      "type": "application/json"
+    },
+    {
+      "href": "https://izhimpro.ru/faq/",
+      "rel": "service-doc",
+      "type": "text/html"
+    }
+  ]
+}

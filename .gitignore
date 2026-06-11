@@ -2,6 +2,8 @@
 *.md
 .idea
 .windsurf
+.claude
+
 
 SPEC/TZ
 WORK
