@@ -1,45 +1,94 @@
 {
-  "service": {
-    "name": "IzhImpro website forms",
-    "homepage": "https://izhimpro.ru/",
-    "provider": "Shkola Izhevskogo Improva"
+  "openapi": "3.1.0",
+  "info": {
+    "title": "IzhImpro Lead Form API",
+    "summary": "Public lead form submission endpoint used by the IzhImpro website.",
+    "description": "Accepts trial lesson, course, and corporate workshop lead submissions from the public website.",
+    "version": "2026-06-11"
   },
-  "resources": [
+  "servers": [
     {
-      "name": "trial-lesson-form",
-      "description": "Public website lead capture form for trial lesson signups.",
-      "method": "POST",
-      "url": "https://dark-brook-67a3.islamov-marat.workers.dev/",
-      "requestContentType": "application/json",
-      "requestSchema": {
-        "type": "object",
-        "required": ["fio", "tel", "comment"],
-        "properties": {
-          "fio": {
-            "type": "string"
-          },
-          "tel": {
-            "type": "string"
-          },
-          "comment": {
-            "type": "string"
+      "url": "https://dark-brook-67a3.islamov-marat.workers.dev/"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "operationId": "submitLeadForm",
+        "summary": "Submit a lead form",
+        "description": "Creates a lead submission for trial lessons, courses, and corporate workshop requests.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeadSubmission"
+              }
+            }
           }
-        }
-      },
-      "responseSchema": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
+        },
+        "responses": {
+          "200": {
+            "description": "Lead submission accepted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeadSubmissionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request payload."
+          },
+          "500": {
+            "description": "Unexpected server error."
           }
         }
       }
     }
-  ],
-  "docs": [
-    "https://izhimpro.ru/faq/",
-    "https://izhimpro.ru/contacts/",
-    "https://izhimpro.ru/legal/privacy/",
-    "https://izhimpro.ru/legal/offer/"
-  ]
+  },
+  "components": {
+    "schemas": {
+      "LeadSubmission": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fio",
+          "tel",
+          "comment"
+        ],
+        "properties": {
+          "fio": {
+            "type": "string",
+            "description": "Full name provided by the visitor.",
+            "minLength": 1
+          },
+          "tel": {
+            "type": "string",
+            "description": "Phone number provided by the visitor.",
+            "minLength": 1
+          },
+          "comment": {
+            "type": "string",
+            "description": "Free-form request details and source form metadata.",
+            "minLength": 1
+          }
+        }
+      },
+      "LeadSubmissionResponse": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "const": true
+          }
+        }
+      }
+    }
+  }
 }

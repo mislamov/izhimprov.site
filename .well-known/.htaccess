@@ -1,0 +1,20 @@
+<IfModule mod_mime.c>
+  <Files "api-catalog">
+    ForceType application/linkset+json
+  </Files>
+
+  <Files "form-service-status.json">
+    ForceType application/health+json
+  </Files>
+</IfModule>
+
+<IfModule mod_headers.c>
+  <Files "api-catalog">
+    Header set Content-Type "application/linkset+json; profile=\"https://www.rfc-editor.org/info/rfc9727\"; charset=utf-8"
+    Header set Link "<https://izhimpro.ru/.well-known/api-catalog>; rel=\"api-catalog\""
+  </Files>
+
+  <Files "form-service-status.json">
+    Header set Content-Type "application/health+json; charset=utf-8"
+  </Files>
+</IfModule>

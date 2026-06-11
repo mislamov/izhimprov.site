@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "serviceId": "izhimpro-lead-form",
+  "version": "2026-06-11",
+  "releaseId": "public-site",
+  "description": "Health document for the public lead form submission API listed in the API catalog.",
+  "links": {
+    "service": "https://dark-brook-67a3.islamov-marat.workers.dev/",
+    "serviceDesc": "https://izhimpro.ru/.well-known/service-desc.json",
+    "serviceDoc": "https://izhimpro.ru/faq/"
+  }
+}
