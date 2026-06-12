@@ -27,8 +27,8 @@ Current HTTP discovery endpoints
 
 Current state
 
-- HTTP discovery on the website is working through Cloudflare.
-- Homepage `Link` headers are published.
+- HTTP discovery documents are present in the repository and served by GitHub Pages for static `.well-known` files.
+- Homepage `Link` headers were previously published through the Cloudflare Worker; the apex site now bypasses the Worker for stability.
 - `/.well-known/api-catalog` is published with `application/linkset+json`.
 - `isitagentready` reports `https://izhimpro.ru/` at level `5` (`Agent-Native`) for HTTP-facing checks.
 - DNS-AID now resolves publicly for `_index._agents.izhimpro.ru`.
