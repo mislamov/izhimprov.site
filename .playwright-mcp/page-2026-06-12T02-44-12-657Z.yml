@@ -1,0 +1,1352 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "Cloudflare" [ref=e3] [cursor=pointer]:
+      - /url: /
+      - img "Cloudflare" [ref=e4]
+      - generic [ref=e47]: Is Your Site Agent-Ready?
+    - generic [ref=e5]:
+      - link "Learn more about Agents" [ref=e6] [cursor=pointer]:
+        - /url: https://agents.cloudflare.com/
+        - generic [ref=e7]: Learn more about Agents
+        - img [ref=e8]
+      - button "System mode — click for light" [ref=e10] [cursor=pointer]:
+        - img [ref=e11]
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - heading "Is Your Site Agent-Ready?" [level=1] [ref=e15]
+      - paragraph [ref=e16]:
+        - text: Scan your website to see how ready it is for AI agents. We check multiple emerging standards — from robots.txt and
+        - link "Markdown negotiation" [ref=e17] [cursor=pointer]:
+          - /url: https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/
+        - text: to
+        - link "MCP" [ref=e18] [cursor=pointer]:
+          - /url: https://modelcontextprotocol.io/
+        - text: ", OAuth,"
+        - link "Agent Skills" [ref=e19] [cursor=pointer]:
+          - /url: https://agentskills.io/home
+        - text: and agentic commerce.
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e23]: Website URL
+        - textbox "Website URL" [ref=e24]:
+          - /placeholder: https://example.com
+          - text: https://izhimpro.ru/
+        - button "Scan" [ref=e48] [cursor=pointer]:
+          - generic [ref=e49]: Scan
+      - button "Customize scan" [ref=e30] [cursor=pointer]:
+        - img [ref=e31]
+        - generic [ref=e33]: Customize scan
+        - img [ref=e34]
+      - paragraph [ref=e50]: Last scanned 12.06.2026 at 06:44:02
+    - generic [ref=e52]:
+      - generic [ref=e54]:
+        - button "Share score card" [ref=e55] [cursor=pointer]:
+          - img [ref=e56]
+          - generic [ref=e58]: Share
+        - generic [ref=e60]:
+          - generic [ref=e61]: Results for
+          - generic [ref=e62]: https://izhimpro.ru
+        - generic [ref=e63]:
+          - generic [ref=e65]:
+            - 'img "Overall score: 93 out of 100" [ref=e66]'
+            - generic [ref=e83]: "93"
+          - generic [ref=e85]:
+            - generic [ref=e86]: Level 5
+            - generic [ref=e87]: Agent-Native
+        - generic [ref=e88]:
+          - 'button "Discoverability: 4/4" [ref=e89] [cursor=pointer]':
+            - generic [ref=e90]:
+              - img [ref=e92]:
+                - generic [ref=e95]: "100"
+              - generic [ref=e96]: Discoverability
+              - generic [ref=e97]: 4/4
+          - 'button "Content: 1/1" [ref=e98] [cursor=pointer]':
+            - generic [ref=e99]:
+              - img [ref=e101]:
+                - generic [ref=e104]: "100"
+              - generic [ref=e105]: Content
+              - generic [ref=e106]: 1/1
+          - 'button "Bot Access Control: 2/2" [ref=e107] [cursor=pointer]':
+            - generic [ref=e108]:
+              - img [ref=e110]:
+                - generic [ref=e113]: "100"
+              - generic [ref=e114]: Bot Access Control
+              - generic [ref=e115]: 2/2
+          - 'button "API, Auth, MCP & Skill Discovery: 6/7" [ref=e116] [cursor=pointer]':
+            - generic [ref=e117]:
+              - img [ref=e119]:
+                - generic [ref=e122]: "86"
+              - generic [ref=e123]: API, Auth, MCP & Skill Discovery
+              - generic [ref=e124]: 6/7
+          - 'button "Commerce: Not checked" [ref=e125] [cursor=pointer]':
+            - generic [ref=e126]:
+              - img [ref=e128]:
+                - generic [ref=e130]: —
+              - generic [ref=e131]: Commerce
+              - generic [ref=e132]: Not checked
+      - button "Improve the score 1" [ref=e133] [cursor=pointer]:
+        - img [ref=e134]
+        - generic [ref=e136]: Improve the score
+        - generic [ref=e137]: "1"
+      - generic [ref=e138]:
+        - generic [ref=e139]:
+          - generic [ref=e140]:
+            - heading "Discoverability" [level=2] [ref=e142]
+            - generic [ref=e143]: 4/4
+          - generic [ref=e144]:
+            - generic [ref=e146]:
+              - button "Pass robots.txt" [ref=e149] [cursor=pointer]:
+                - generic [ref=e150]:
+                  - img "Pass" [ref=e151]:
+                    - img [ref=e152]
+                  - generic [ref=e154]: robots.txt
+                - img [ref=e156]
+              - generic [ref=e158]:
+                - generic [ref=e160]:
+                  - img [ref=e162]
+                  - generic [ref=e164]: robots.txt
+                - generic [ref=e165]:
+                  - generic [ref=e166]:
+                    - generic [ref=e167]:
+                      - generic [ref=e168]:
+                        - img [ref=e170]
+                        - generic [ref=e172]: GET /robots.txt
+                        - generic [ref=e173]: "200"
+                      - table [ref=e174]:
+                        - rowgroup [ref=e175]:
+                          - row "content-type text/plain; charset=utf-8" [ref=e176]:
+                            - cell "content-type" [ref=e177]
+                            - cell "text/plain; charset=utf-8" [ref=e178]
+                          - row [ref=e179]:
+                            - cell "link" [ref=e180]
+                            - cell [ref=e181]
+                          - row "cf-ray a0a582be52ef46e2-DFW" [ref=e182]:
+                            - cell "cf-ray" [ref=e183]
+                            - cell "a0a582be52ef46e2-DFW" [ref=e184]
+                      - generic [ref=e185]: "# As a condition of accessing this website, you agree to abide by the following # content signals: # (a) If a Content-Signal = yes, you may collect content for the corresponding # use. # (b) If a Content-Signal = no, you may not collect content for the # corresponding use. # (c) If the website operator does not include a Content-Signal for a # corresponding use, the website operator neither grants nor restricts # permission via Content-Signal with respect to the correspon..."
+                      - generic [ref=e188]: Received valid robots.txt (200, text/plain; charset=utf-8)
+                    - generic [ref=e189]:
+                      - generic [ref=e190]:
+                        - img [ref=e192]
+                        - generic [ref=e194]: Validate robots.txt structure
+                      - generic [ref=e197]: Contains valid User-agent directive(s)
+                    - generic [ref=e198]:
+                      - generic [ref=e199]:
+                        - img [ref=e201]
+                        - generic [ref=e203]: Conclusion
+                      - generic [ref=e206]: robots.txt exists with valid format
+                  - generic [ref=e207]: Completed in 0ms
+                - button "Back to results" [ref=e208] [cursor=pointer]:
+                  - img [ref=e209]
+                  - text: Back
+            - generic [ref=e212]:
+              - button "Pass Sitemap" [ref=e215] [cursor=pointer]:
+                - generic [ref=e216]:
+                  - img "Pass" [ref=e217]:
+                    - img [ref=e218]
+                  - generic [ref=e220]: Sitemap
+                - img [ref=e222]
+              - generic [ref=e224]:
+                - generic [ref=e226]:
+                  - img [ref=e228]
+                  - generic [ref=e230]: Sitemap
+                - generic [ref=e231]:
+                  - generic [ref=e232]:
+                    - generic [ref=e233]:
+                      - generic [ref=e234]:
+                        - img [ref=e236]
+                        - generic [ref=e238]: Extract Sitemap directives from robots.txt
+                      - generic [ref=e241]: Found 1 Sitemap directive(s) in robots.txt
+                    - generic [ref=e242]:
+                      - generic [ref=e243]:
+                        - img [ref=e245]
+                        - generic [ref=e247]: GET /sitemap.xml
+                        - generic [ref=e248]: "200"
+                      - table [ref=e249]:
+                        - rowgroup [ref=e250]:
+                          - row "content-type application/xml; charset=utf-8" [ref=e251]:
+                            - cell "content-type" [ref=e252]
+                            - cell "application/xml; charset=utf-8" [ref=e253]
+                          - row [ref=e254]:
+                            - cell "link" [ref=e255]
+                            - cell [ref=e256]
+                          - row "cf-ray a0a582bef33a46e2-DFW" [ref=e257]:
+                            - cell "cf-ray" [ref=e258]
+                            - cell "a0a582bef33a46e2-DFW" [ref=e259]
+                      - generic [ref=e262]: Found valid xml sitemap at https://izhimpro.ru/sitemap.xml
+                    - generic [ref=e263]:
+                      - generic [ref=e264]:
+                        - img [ref=e266]
+                        - generic [ref=e268]: Conclusion
+                      - generic [ref=e271]: sitemap.xml exists with valid structure
+                  - generic [ref=e272]: Completed in 83ms
+                - button "Back to results" [ref=e273] [cursor=pointer]:
+                  - img [ref=e274]
+                  - text: Back
+            - generic [ref=e277]:
+              - button "Pass Link headers" [ref=e280] [cursor=pointer]:
+                - generic [ref=e281]:
+                  - img "Pass" [ref=e282]:
+                    - img [ref=e283]
+                  - generic [ref=e285]: Link headers
+                - img [ref=e287]
+              - generic [ref=e289]:
+                - generic [ref=e291]:
+                  - img [ref=e293]
+                  - generic [ref=e295]: Link headers
+                - generic [ref=e296]:
+                  - generic [ref=e297]:
+                    - generic [ref=e298]:
+                      - generic [ref=e299]:
+                        - img [ref=e301]
+                        - generic [ref=e303]: GET /
+                        - generic [ref=e304]: "200"
+                      - table [ref=e305]:
+                        - rowgroup [ref=e306]:
+                          - row "content-type text/html; charset=utf-8" [ref=e307]:
+                            - cell "content-type" [ref=e308]
+                            - cell "text/html; charset=utf-8" [ref=e309]
+                          - row "link <https://izhimpro.ru/.well-known/api-catalog>; rel=\"api-catalog\", <https://izhimpro.ru/.well-known/service-desc.json>; rel=\"service-desc\", <https://izhimpro.ru/faq/>; rel=\"service-doc\"" [ref=e310]:
+                            - cell "link" [ref=e311]
+                            - cell "<https://izhimpro.ru/.well-known/api-catalog>; rel=\"api-catalog\", <https://izhimpro.ru/.well-known/service-desc.json>; rel=\"service-desc\", <https://izhimpro.ru/faq/>; rel=\"service-doc\"" [ref=e312]
+                          - row "cf-ray a0a582c1f5b046e2-DFW" [ref=e313]:
+                            - cell "cf-ray" [ref=e314]
+                            - cell "a0a582c1f5b046e2-DFW" [ref=e315]
+                      - generic [ref=e318]: Homepage returned 200 with Link header
+                    - generic [ref=e319]:
+                      - generic [ref=e320]:
+                        - img [ref=e322]
+                        - generic [ref=e324]: Parse Link header (RFC 8288)
+                      - generic [ref=e327]: Parsed 3 link(s) from header
+                    - generic [ref=e328]:
+                      - generic [ref=e329]:
+                        - img [ref=e331]
+                        - generic [ref=e333]: Match agent-useful relations
+                      - generic [ref=e336]: "Found agent-useful relations: api-catalog, service-desc, service-doc"
+                    - generic [ref=e337]:
+                      - generic [ref=e338]:
+                        - img [ref=e340]
+                        - generic [ref=e342]: Conclusion
+                      - generic [ref=e345]: "Found agent-useful Link relations: api-catalog, service-desc, service-doc"
+                  - generic [ref=e346]: Completed in 561ms
+                - button "Back to results" [ref=e347] [cursor=pointer]:
+                  - img [ref=e348]
+                  - text: Back
+            - generic [ref=e351]:
+              - button "Pass DNS for AI Discovery (DNS-AID)" [ref=e354] [cursor=pointer]:
+                - generic [ref=e355]:
+                  - img "Pass" [ref=e356]:
+                    - img [ref=e357]
+                  - generic [ref=e359]: DNS for AI Discovery (DNS-AID)
+                - img [ref=e361]
+              - generic [ref=e363]:
+                - generic [ref=e365]:
+                  - img [ref=e367]
+                  - generic [ref=e369]: DNS for AI Discovery (DNS-AID)
+                - generic [ref=e370]:
+                  - generic [ref=e371]:
+                    - generic [ref=e372]:
+                      - generic [ref=e373]:
+                        - img [ref=e375]
+                        - generic [ref=e377]: DoH SVCB _index._agents.izhimpro.ru
+                        - generic [ref=e378]: "200"
+                      - generic [ref=e379]: Request
+                      - table [ref=e380]:
+                        - rowgroup [ref=e381]:
+                          - row "accept application/dns-json" [ref=e382]:
+                            - cell "accept" [ref=e383]
+                            - cell "application/dns-json" [ref=e384]
+                      - generic [ref=e385]: Response
+                      - table [ref=e386]:
+                        - rowgroup [ref=e387]:
+                          - row "content-type application/dns-json" [ref=e388]:
+                            - cell "content-type" [ref=e389]
+                            - cell "application/dns-json" [ref=e390]
+                      - generic [ref=e391]: "{\"Status\":0,\"TC\":false,\"RD\":true,\"RA\":true,\"AD\":true,\"CD\":false,\"Question\":[{\"name\":\"_index._agents.izhimpro.ru\",\"type\":64}],\"Authority\":[{\"name\":\"_agents.izhimpro.ru\",\"type\":6,\"TTL\":300,\"data\":\"get.desec.io. get.desec.io. 2026064047 86400 3600 2419200 3600\"},{\"name\":\"_agents.izhimpro.ru\",\"type\":46,\"TTL\":300,\"data\":\"SOA ECDSAP256SHA256 3 300 1782345600 1780531200 44164 _agents.izhimpro.ru. ouXsAeQjhLIVI8YB7hUZJqgUugfYowFUfihZRr8IOH3j111qH1A2EnWfiOZ8oDA0+egYnNdSTJ7WZa8FFRmUdg==\"},{\"name\":\"d9j9nj6..."
+                      - generic [ref=e394]: No SVCB answers (NOERROR)
+                    - generic [ref=e395]:
+                      - generic [ref=e396]:
+                        - img [ref=e398]
+                        - generic [ref=e400]: DoH HTTPS _index._agents.izhimpro.ru
+                        - generic [ref=e401]: "200"
+                      - generic [ref=e402]: Request
+                      - table [ref=e403]:
+                        - rowgroup [ref=e404]:
+                          - row "accept application/dns-json" [ref=e405]:
+                            - cell "accept" [ref=e406]
+                            - cell "application/dns-json" [ref=e407]
+                      - generic [ref=e408]: Response
+                      - table [ref=e409]:
+                        - rowgroup [ref=e410]:
+                          - row "content-type application/dns-json" [ref=e411]:
+                            - cell "content-type" [ref=e412]
+                            - cell "application/dns-json" [ref=e413]
+                      - generic [ref=e414]: "{\"Status\":0,\"TC\":false,\"RD\":true,\"RA\":true,\"AD\":true,\"CD\":false,\"Question\":[{\"name\":\"_index._agents.izhimpro.ru\",\"type\":65}],\"Answer\":[{\"name\":\"_index._agents.izhimpro.ru\",\"type\":65,\"TTL\":3600,\"data\":\"\\\\# 75 00 01 08 69 7a 68 69 6d 70 72 6f 02 72 75 00 00 00 00 06 00 01 00 03 ff 78 00 01 00 06 02 68 32 02 68 33 00 03 00 02 01 bb ff 78 00 1e 2f 2e 77 65 6c 6c 2d 6b 6e 6f 77 6e 2f 61 67 65 6e 74 73 2d 69 6e 64 65 78 2e 6a 73 6f 6e\"},{\"name\":\"_index._agents.izhimpro.ru\",\"type\":46,\"TTL\":3600,\"data\":..."
+                      - generic [ref=e417]: Found 1 HTTPS answer with AD=true
+                    - generic [ref=e418]:
+                      - generic [ref=e419]:
+                        - img [ref=e421]
+                        - generic [ref=e423]: DoH SVCB _a2a._agents.izhimpro.ru
+                        - generic [ref=e424]: "200"
+                      - generic [ref=e425]: Request
+                      - table [ref=e426]:
+                        - rowgroup [ref=e427]:
+                          - row "accept application/dns-json" [ref=e428]:
+                            - cell "accept" [ref=e429]
+                            - cell "application/dns-json" [ref=e430]
+                      - generic [ref=e431]: Response
+                      - table [ref=e432]:
+                        - rowgroup [ref=e433]:
+                          - row "content-type application/dns-json" [ref=e434]:
+                            - cell "content-type" [ref=e435]
+                            - cell "application/dns-json" [ref=e436]
+                      - generic [ref=e437]: "{\"Status\":3,\"TC\":false,\"RD\":true,\"RA\":true,\"AD\":true,\"CD\":false,\"Question\":[{\"name\":\"_a2a._agents.izhimpro.ru\",\"type\":64}],\"Authority\":[{\"name\":\"_agents.izhimpro.ru\",\"type\":6,\"TTL\":300,\"data\":\"get.desec.io. get.desec.io. 2026064047 86400 3600 2419200 3600\"},{\"name\":\"_agents.izhimpro.ru\",\"type\":46,\"TTL\":300,\"data\":\"SOA ECDSAP256SHA256 3 300 1782345600 1780531200 44164 _agents.izhimpro.ru. ouXsAeQjhLIVI8YB7hUZJqgUugfYowFUfihZRr8IOH3j111qH1A2EnWfiOZ8oDA0+egYnNdSTJ7WZa8FFRmUdg==\"},{\"name\":\"5ke49jpdk..."
+                      - generic [ref=e440]: No SVCB answers (NXDOMAIN)
+                    - generic [ref=e441]:
+                      - generic [ref=e442]:
+                        - img [ref=e444]
+                        - generic [ref=e446]: DoH HTTPS _a2a._agents.izhimpro.ru
+                        - generic [ref=e447]: "200"
+                      - generic [ref=e448]: Request
+                      - table [ref=e449]:
+                        - rowgroup [ref=e450]:
+                          - row "accept application/dns-json" [ref=e451]:
+                            - cell "accept" [ref=e452]
+                            - cell "application/dns-json" [ref=e453]
+                      - generic [ref=e454]: Response
+                      - table [ref=e455]:
+                        - rowgroup [ref=e456]:
+                          - row "content-type application/dns-json" [ref=e457]:
+                            - cell "content-type" [ref=e458]
+                            - cell "application/dns-json" [ref=e459]
+                      - generic [ref=e460]: "{\"Status\":3,\"TC\":false,\"RD\":true,\"RA\":true,\"AD\":true,\"CD\":false,\"Question\":[{\"name\":\"_a2a._agents.izhimpro.ru\",\"type\":65}],\"Authority\":[{\"name\":\"_agents.izhimpro.ru\",\"type\":6,\"TTL\":300,\"data\":\"get.desec.io. get.desec.io. 2026064047 86400 3600 2419200 3600\"},{\"name\":\"_agents.izhimpro.ru\",\"type\":46,\"TTL\":300,\"data\":\"SOA ECDSAP256SHA256 3 300 1782345600 1780531200 44164 _agents.izhimpro.ru. ouXsAeQjhLIVI8YB7hUZJqgUugfYowFUfihZRr8IOH3j111qH1A2EnWfiOZ8oDA0+egYnNdSTJ7WZa8FFRmUdg==\"},{\"name\":\"5ke49jpdk..."
+                      - generic [ref=e463]: No HTTPS answers (NXDOMAIN)
+                    - generic [ref=e464]:
+                      - generic [ref=e465]:
+                        - img [ref=e467]
+                        - generic [ref=e469]: DoH SVCB _mcp._agents.izhimpro.ru
+                        - generic [ref=e470]: "200"
+                      - generic [ref=e471]: Request
+                      - table [ref=e472]:
+                        - rowgroup [ref=e473]:
+                          - row "accept application/dns-json" [ref=e474]:
+                            - cell "accept" [ref=e475]
+                            - cell "application/dns-json" [ref=e476]
+                      - generic [ref=e477]: Response
+                      - table [ref=e478]:
+                        - rowgroup [ref=e479]:
+                          - row "content-type application/dns-json" [ref=e480]:
+                            - cell "content-type" [ref=e481]
+                            - cell "application/dns-json" [ref=e482]
+                      - generic [ref=e483]: "{\"Status\":3,\"TC\":false,\"RD\":true,\"RA\":true,\"AD\":true,\"CD\":false,\"Question\":[{\"name\":\"_mcp._agents.izhimpro.ru\",\"type\":64}],\"Authority\":[{\"name\":\"_agents.izhimpro.ru\",\"type\":6,\"TTL\":300,\"data\":\"get.desec.io. get.desec.io. 2026064047 86400 3600 2419200 3600\"},{\"name\":\"_agents.izhimpro.ru\",\"type\":46,\"TTL\":300,\"data\":\"SOA ECDSAP256SHA256 3 300 1782345600 1780531200 44164 _agents.izhimpro.ru. ouXsAeQjhLIVI8YB7hUZJqgUugfYowFUfihZRr8IOH3j111qH1A2EnWfiOZ8oDA0+egYnNdSTJ7WZa8FFRmUdg==\"},{\"name\":\"d9j9nj6vk..."
+                      - generic [ref=e486]: No SVCB answers (NXDOMAIN)
+                    - generic [ref=e487]:
+                      - generic [ref=e488]:
+                        - img [ref=e490]
+                        - generic [ref=e492]: DoH HTTPS _mcp._agents.izhimpro.ru
+                        - generic [ref=e493]: "200"
+                      - generic [ref=e494]: Request
+                      - table [ref=e495]:
+                        - rowgroup [ref=e496]:
+                          - row "accept application/dns-json" [ref=e497]:
+                            - cell "accept" [ref=e498]
+                            - cell "application/dns-json" [ref=e499]
+                      - generic [ref=e500]: Response
+                      - table [ref=e501]:
+                        - rowgroup [ref=e502]:
+                          - row "content-type application/dns-json" [ref=e503]:
+                            - cell "content-type" [ref=e504]
+                            - cell "application/dns-json" [ref=e505]
+                      - generic [ref=e506]: "{\"Status\":3,\"TC\":false,\"RD\":true,\"RA\":true,\"AD\":true,\"CD\":false,\"Question\":[{\"name\":\"_mcp._agents.izhimpro.ru\",\"type\":65}],\"Authority\":[{\"name\":\"_agents.izhimpro.ru\",\"type\":6,\"TTL\":300,\"data\":\"get.desec.io. get.desec.io. 2026064047 86400 3600 2419200 3600\"},{\"name\":\"_agents.izhimpro.ru\",\"type\":46,\"TTL\":300,\"data\":\"SOA ECDSAP256SHA256 3 300 1782345600 1780531200 44164 _agents.izhimpro.ru. ouXsAeQjhLIVI8YB7hUZJqgUugfYowFUfihZRr8IOH3j111qH1A2EnWfiOZ8oDA0+egYnNdSTJ7WZa8FFRmUdg==\"},{\"name\":\"d9j9nj6vk..."
+                      - generic [ref=e509]: No HTTPS answers (NXDOMAIN)
+                    - generic [ref=e510]:
+                      - generic [ref=e511]:
+                        - img [ref=e513]
+                        - generic [ref=e515]: DoH TXT _index._agents.izhimpro.ru
+                        - generic [ref=e516]: "200"
+                      - generic [ref=e517]: Request
+                      - table [ref=e518]:
+                        - rowgroup [ref=e519]:
+                          - row "accept application/dns-json" [ref=e520]:
+                            - cell "accept" [ref=e521]
+                            - cell "application/dns-json" [ref=e522]
+                      - generic [ref=e523]: Response
+                      - table [ref=e524]:
+                        - rowgroup [ref=e525]:
+                          - row "content-type application/dns-json" [ref=e526]:
+                            - cell "content-type" [ref=e527]
+                            - cell "application/dns-json" [ref=e528]
+                      - generic [ref=e529]: "{\"Status\":0,\"TC\":false,\"RD\":true,\"RA\":true,\"AD\":true,\"CD\":false,\"Question\":[{\"name\":\"_index._agents.izhimpro.ru\",\"type\":16}],\"Authority\":[{\"name\":\"_agents.izhimpro.ru\",\"type\":6,\"TTL\":300,\"data\":\"get.desec.io. get.desec.io. 2026064047 86400 3600 2419200 3600\"},{\"name\":\"_agents.izhimpro.ru\",\"type\":46,\"TTL\":300,\"data\":\"SOA ECDSAP256SHA256 3 300 1782345600 1780531200 44164 _agents.izhimpro.ru. ouXsAeQjhLIVI8YB7hUZJqgUugfYowFUfihZRr8IOH3j111qH1A2EnWfiOZ8oDA0+egYnNdSTJ7WZa8FFRmUdg==\"},{\"name\":\"d9j9nj6..."
+                      - generic [ref=e532]: No TXT answers (NOERROR)
+                    - generic [ref=e533]:
+                      - generic [ref=e534]:
+                        - img [ref=e536]
+                        - generic [ref=e538]: Parse DNS for AI Discovery (DNS-AID) SVCB/HTTPS records
+                      - generic [ref=e541]: Found 1 DNSSEC-validated ServiceMode record
+                    - generic [ref=e542]:
+                      - generic [ref=e543]:
+                        - img [ref=e545]
+                        - generic [ref=e547]: Validate DNSSEC requirement
+                      - generic [ref=e550]: DNS-over-HTTPS resolver returned AD=true
+                    - generic [ref=e551]:
+                      - generic [ref=e552]:
+                        - img [ref=e554]
+                        - generic [ref=e556]: Conclusion
+                      - generic [ref=e559]: DNS for AI Discovery (DNS-AID) discovery record found at _index._agents.izhimpro.ru
+                  - generic [ref=e560]: Completed in 124ms
+                - button "Back to results" [ref=e561] [cursor=pointer]:
+                  - img [ref=e562]
+                  - text: Back
+        - generic [ref=e564]:
+          - generic [ref=e565]:
+            - heading "Content" [level=2] [ref=e567]
+            - generic [ref=e568]: 1/1
+          - generic [ref=e571]:
+            - button "Pass Markdown Negotiation" [ref=e574] [cursor=pointer]:
+              - generic [ref=e575]:
+                - img "Pass" [ref=e576]:
+                  - img [ref=e577]
+                - generic [ref=e579]: Markdown Negotiation
+              - img [ref=e581]
+            - generic [ref=e583]:
+              - generic [ref=e585]:
+                - img [ref=e587]
+                - generic [ref=e589]: Markdown Negotiation
+              - generic [ref=e590]:
+                - generic [ref=e591]:
+                  - generic [ref=e592]:
+                    - generic [ref=e593]:
+                      - img [ref=e595]
+                      - generic [ref=e597]: "GET homepage (Accept: text/markdown)"
+                      - generic [ref=e598]: "200"
+                    - generic [ref=e599]: Request
+                    - table [ref=e600]:
+                      - rowgroup [ref=e601]:
+                        - row "accept text/markdown" [ref=e602]:
+                          - cell "accept" [ref=e603]
+                          - cell "text/markdown" [ref=e604]
+                    - generic [ref=e605]: Response
+                    - table [ref=e606]:
+                      - rowgroup [ref=e607]:
+                        - row "content-type text/markdown; charset=utf-8" [ref=e608]:
+                          - cell "content-type" [ref=e609]
+                          - cell "text/markdown; charset=utf-8" [ref=e610]
+                        - row "cf-ray a0a582cfec8af092-DFW" [ref=e611]:
+                          - cell "cf-ray" [ref=e612]
+                          - cell "a0a582cfec8af092-DFW" [ref=e613]
+                    - generic [ref=e616]: Response content-type is text/markdown; charset=utf-8 -- site supports markdown negotiation
+                  - generic [ref=e617]:
+                    - generic [ref=e618]:
+                      - img [ref=e620]
+                      - generic [ref=e622]: Conclusion
+                    - generic [ref=e625]: Site supports Markdown for Agents
+                - generic [ref=e626]: Completed in 538ms
+              - button "Back to results" [ref=e627] [cursor=pointer]:
+                - img [ref=e628]
+                - text: Back
+        - generic [ref=e630]:
+          - generic [ref=e631]:
+            - heading "Bot Access Control" [level=2] [ref=e633]
+            - generic [ref=e634]: 2/2
+          - generic [ref=e635]:
+            - generic [ref=e637]:
+              - button "Pass AI bot rules in robots.txt" [ref=e640] [cursor=pointer]:
+                - generic [ref=e641]:
+                  - img "Pass" [ref=e642]:
+                    - img [ref=e643]
+                  - generic [ref=e645]: AI bot rules in robots.txt
+                - img [ref=e647]
+              - generic [ref=e649]:
+                - generic [ref=e651]:
+                  - img [ref=e653]
+                  - generic [ref=e655]: AI bot rules in robots.txt
+                - generic [ref=e656]:
+                  - generic [ref=e657]:
+                    - generic [ref=e658]:
+                      - generic [ref=e659]:
+                        - img [ref=e661]
+                        - generic [ref=e663]: GET /robots.txt
+                        - generic [ref=e664]: "200"
+                      - table [ref=e665]:
+                        - rowgroup [ref=e666]:
+                          - row "content-type text/plain; charset=utf-8" [ref=e667]:
+                            - cell "content-type" [ref=e668]
+                            - cell "text/plain; charset=utf-8" [ref=e669]
+                          - row [ref=e670]:
+                            - cell "link" [ref=e671]
+                            - cell [ref=e672]
+                          - row "cf-ray a0a582be52ef46e2-DFW" [ref=e673]:
+                            - cell "cf-ray" [ref=e674]
+                            - cell "a0a582be52ef46e2-DFW" [ref=e675]
+                      - generic [ref=e676]: "# As a condition of accessing this website, you agree to abide by the following # content signals: # (a) If a Content-Signal = yes, you may collect content for the corresponding # use. # (b) If a Content-Signal = no, you may not collect content for the # corresponding use. # (c) If the website operator does not include a Content-Signal for a # corresponding use, the website operator neither grants nor restricts # permission via Content-Signal with respect to the correspon..."
+                      - generic [ref=e679]: Received valid robots.txt (200, text/plain; charset=utf-8)
+                    - generic [ref=e680]:
+                      - generic [ref=e681]:
+                        - img [ref=e683]
+                        - generic [ref=e685]: Scan for AI bot User-agent directives
+                      - generic [ref=e688]: "Found rules for AI bots: gptbot, google-extended, ccbot, bytespider, applebot-extended, amazonbot, meta-externalagent"
+                    - generic [ref=e689]:
+                      - generic [ref=e690]:
+                        - img [ref=e692]
+                        - generic [ref=e694]: Conclusion
+                      - generic [ref=e697]: Found rules for 7 AI bots
+                  - generic [ref=e698]: Completed in 0ms
+                - button "Back to results" [ref=e699] [cursor=pointer]:
+                  - img [ref=e700]
+                  - text: Back
+            - generic [ref=e703]:
+              - button "Pass Content Signals in robots.txt" [ref=e706] [cursor=pointer]:
+                - generic [ref=e707]:
+                  - img "Pass" [ref=e708]:
+                    - img [ref=e709]
+                  - generic [ref=e711]: Content Signals in robots.txt
+                - img [ref=e713]
+              - generic [ref=e715]:
+                - generic [ref=e717]:
+                  - img [ref=e719]
+                  - generic [ref=e721]: Content Signals in robots.txt
+                - generic [ref=e722]:
+                  - generic [ref=e723]:
+                    - generic [ref=e724]:
+                      - generic [ref=e725]:
+                        - img [ref=e727]
+                        - generic [ref=e729]: GET /robots.txt
+                        - generic [ref=e730]: "200"
+                      - table [ref=e731]:
+                        - rowgroup [ref=e732]:
+                          - row "content-type text/plain; charset=utf-8" [ref=e733]:
+                            - cell "content-type" [ref=e734]
+                            - cell "text/plain; charset=utf-8" [ref=e735]
+                          - row [ref=e736]:
+                            - cell "link" [ref=e737]
+                            - cell [ref=e738]
+                          - row "cf-ray a0a582be52ef46e2-DFW" [ref=e739]:
+                            - cell "cf-ray" [ref=e740]
+                            - cell "a0a582be52ef46e2-DFW" [ref=e741]
+                      - generic [ref=e742]: "# As a condition of accessing this website, you agree to abide by the following # content signals: # (a) If a Content-Signal = yes, you may collect content for the corresponding # use. # (b) If a Content-Signal = no, you may not collect content for the # corresponding use. # (c) If the website operator does not include a Content-Signal for a # corresponding use, the website operator neither grants nor restricts # permission via Content-Signal with respect to the correspon..."
+                      - generic [ref=e745]: Received valid robots.txt (200, text/plain; charset=utf-8)
+                    - generic [ref=e746]:
+                      - generic [ref=e747]:
+                        - img [ref=e749]
+                        - generic [ref=e751]: Parse Content-Signal directives
+                      - generic [ref=e754]: Found 2 Content-Signal directive(s)
+                    - generic [ref=e755]:
+                      - generic [ref=e756]:
+                        - img [ref=e758]
+                        - generic [ref=e760]: Conclusion
+                      - generic [ref=e763]: Content Signals found in robots.txt
+                  - generic [ref=e764]: Completed in 0ms
+                - button "Back to results" [ref=e765] [cursor=pointer]:
+                  - img [ref=e766]
+                  - text: Back
+            - generic [ref=e769]:
+              - generic [ref=e771]:
+                - button "Not applicable Web Bot Auth request signing" [ref=e772] [cursor=pointer]:
+                  - generic [ref=e773]:
+                    - img "Not applicable" [ref=e774]:
+                      - img [ref=e775]
+                    - generic [ref=e777]: Web Bot Auth request signing
+                  - img [ref=e779]
+                - text: Paste into your coding agent to fix this check
+              - generic [ref=e781]:
+                - generic [ref=e783]:
+                  - img [ref=e785]
+                  - generic [ref=e787]: Web Bot Auth request signing
+                - generic [ref=e788]:
+                  - generic [ref=e789]:
+                    - generic [ref=e790]:
+                      - generic [ref=e791]:
+                        - img [ref=e793]
+                        - generic [ref=e795]: GET /.well-known/http-message-signatures-directory
+                        - generic [ref=e796]: "404"
+                      - table [ref=e797]:
+                        - rowgroup [ref=e798]:
+                          - row "content-type text/plain; charset=utf-8" [ref=e799]:
+                            - cell "content-type" [ref=e800]
+                            - cell "text/plain; charset=utf-8" [ref=e801]
+                          - row [ref=e802]:
+                            - cell "link" [ref=e803]
+                            - cell [ref=e804]
+                          - row "cf-ray a0a582bf135146e2-DFW" [ref=e805]:
+                            - cell "cf-ray" [ref=e806]
+                            - cell "a0a582bf135146e2-DFW" [ref=e807]
+                      - generic [ref=e810]: Server returned 404 -- Web Bot Auth directory not found
+                    - generic [ref=e811]:
+                      - generic [ref=e812]:
+                        - img [ref=e814]
+                        - generic [ref=e816]: Conclusion
+                      - generic [ref=e819]: Web Bot Auth directory not found
+                  - generic [ref=e820]: Completed in 442ms
+                - button "Back to results" [ref=e821] [cursor=pointer]:
+                  - img [ref=e822]
+                  - text: Back
+        - generic [ref=e824]:
+          - generic [ref=e825]:
+            - heading "API, Auth, MCP & Skill Discovery" [level=2] [ref=e827]
+            - generic [ref=e828]: 6/7
+          - generic [ref=e829]:
+            - generic [ref=e831]:
+              - button "Pass API Catalog" [ref=e834] [cursor=pointer]:
+                - generic [ref=e835]:
+                  - img "Pass" [ref=e836]:
+                    - img [ref=e837]
+                  - generic [ref=e839]: API Catalog
+                - img [ref=e841]
+              - generic [ref=e843]:
+                - generic [ref=e845]:
+                  - img [ref=e847]
+                  - generic [ref=e849]: API Catalog
+                - generic [ref=e850]:
+                  - generic [ref=e851]:
+                    - generic [ref=e852]:
+                      - generic [ref=e853]:
+                        - img [ref=e855]
+                        - generic [ref=e857]: GET /.well-known/api-catalog
+                        - generic [ref=e858]: "200"
+                      - generic [ref=e859]: Request
+                      - table [ref=e860]:
+                        - rowgroup [ref=e861]:
+                          - row "accept application/linkset+json, application/json" [ref=e862]:
+                            - cell "accept" [ref=e863]
+                            - cell "application/linkset+json, application/json" [ref=e864]
+                      - generic [ref=e865]: Response
+                      - table [ref=e866]:
+                        - rowgroup [ref=e867]:
+                          - row "content-type application/linkset+json; profile=\"https://www.rfc-editor.org/info/rfc9727\"" [ref=e868]:
+                            - cell "content-type" [ref=e869]
+                            - cell "application/linkset+json; profile=\"https://www.rfc-editor.org/info/rfc9727\"" [ref=e870]
+                          - row "content-length 779" [ref=e871]:
+                            - cell "content-length" [ref=e872]
+                            - cell "779" [ref=e873]
+                          - row "link <https://izhimpro.ru/.well-known/api-catalog>; rel=\"api-catalog\"" [ref=e874]:
+                            - cell "link" [ref=e875]
+                            - cell "<https://izhimpro.ru/.well-known/api-catalog>; rel=\"api-catalog\"" [ref=e876]
+                          - row "cf-ray a0a582bf838446e2-DFW" [ref=e877]:
+                            - cell "cf-ray" [ref=e878]
+                            - cell "a0a582bf838446e2-DFW" [ref=e879]
+                      - generic [ref=e880]: "{\"linkset\":[{\"anchor\":\"https://dark-brook-67a3.islamov-marat.workers.dev/\",\"service-desc\":[{\"href\":\"https://izhimpro.ru/.well-known/service-desc.json\",\"type\":\"application/openapi+json\"}],\"service-doc\":[{\"href\":\"https://izhimpro.ru/faq/\",\"type\":\"text/html\"},{\"href\":\"https://izhimpro.ru/contacts/\",\"type\":\"text/html\"},{\"href\":\"https://izhimpro.ru/legal/privacy/\",\"type\":\"text/html\"}],\"status\":[{\"href\":\"https://izhimpro.ru/.well-known/form-service-status.json\",\"type\":\"application/health+json\"}]}]}"
+                      - generic [ref=e883]: Received 200 with valid JSON response
+                    - generic [ref=e884]:
+                      - generic [ref=e885]:
+                        - img [ref=e887]
+                        - generic [ref=e889]: Validate Linkset structure
+                      - generic [ref=e892]: Found "linkset" array with 1 entries
+                    - generic [ref=e893]:
+                      - generic [ref=e894]:
+                        - img [ref=e896]
+                        - generic [ref=e898]: Analyze linkset entries
+                      - generic [ref=e901]: 1 API listed, correct content-type
+                    - generic [ref=e902]:
+                      - generic [ref=e903]:
+                        - img [ref=e905]
+                        - generic [ref=e907]: Conclusion
+                      - generic [ref=e910]: API Catalog found with 1 API listed
+                  - generic [ref=e911]: Completed in 168ms
+                - button "Back to results" [ref=e912] [cursor=pointer]:
+                  - img [ref=e913]
+                  - text: Back
+            - generic [ref=e916]:
+              - button "Pass OAuth / OIDC discovery" [ref=e919] [cursor=pointer]:
+                - generic [ref=e920]:
+                  - img "Pass" [ref=e921]:
+                    - img [ref=e922]
+                  - generic [ref=e924]: OAuth / OIDC discovery
+                - img [ref=e926]
+              - generic [ref=e928]:
+                - generic [ref=e930]:
+                  - img [ref=e932]
+                  - generic [ref=e934]: OAuth / OIDC discovery
+                - generic [ref=e935]:
+                  - generic [ref=e936]:
+                    - generic [ref=e937]:
+                      - generic [ref=e938]:
+                        - img [ref=e940]
+                        - generic [ref=e942]: GET /.well-known/oauth-authorization-server
+                        - generic [ref=e943]: "200"
+                      - table [ref=e944]:
+                        - rowgroup [ref=e945]:
+                          - row "content-type application/json; charset=utf-8" [ref=e946]:
+                            - cell "content-type" [ref=e947]
+                            - cell "application/json; charset=utf-8" [ref=e948]
+                          - row "content-length 538" [ref=e949]:
+                            - cell "content-length" [ref=e950]
+                            - cell "538" [ref=e951]
+                          - row [ref=e952]:
+                            - cell "link" [ref=e953]
+                            - cell [ref=e954]
+                          - row "cf-ray a0a582bf636b46e2-DFW" [ref=e955]:
+                            - cell "cf-ray" [ref=e956]
+                            - cell "a0a582bf636b46e2-DFW" [ref=e957]
+                      - generic [ref=e960]: Received JSON from oauth-authorization-server
+                    - generic [ref=e961]:
+                      - generic [ref=e962]:
+                        - img [ref=e964]
+                        - generic [ref=e966]: Validate oauth-authorization-server structure
+                      - generic [ref=e969]: "Valid metadata with issuer: https://izhimpro.ru"
+                    - generic [ref=e970]:
+                      - generic [ref=e971]:
+                        - img [ref=e973]
+                        - generic [ref=e975]: GET /.well-known/openid-configuration
+                        - generic [ref=e976]: "404"
+                      - table [ref=e977]:
+                        - rowgroup [ref=e978]:
+                          - row "content-type text/plain; charset=utf-8" [ref=e979]:
+                            - cell "content-type" [ref=e980]
+                            - cell "text/plain; charset=utf-8" [ref=e981]
+                          - row [ref=e982]:
+                            - cell "link" [ref=e983]
+                            - cell [ref=e984]
+                          - row "cf-ray a0a582bf536546e2-DFW" [ref=e985]:
+                            - cell "cf-ray" [ref=e986]
+                            - cell "a0a582bf536546e2-DFW" [ref=e987]
+                      - generic [ref=e990]: openid-configuration returned 404
+                    - generic [ref=e991]:
+                      - generic [ref=e992]:
+                        - img [ref=e994]
+                        - generic [ref=e996]: Conclusion
+                      - generic [ref=e999]: OAuth 2.0 (RFC 8414) discovery metadata found
+                  - generic [ref=e1000]: Completed in 523ms
+                - button "Back to results" [ref=e1001] [cursor=pointer]:
+                  - img [ref=e1002]
+                  - text: Back
+            - generic [ref=e1005]:
+              - button "Pass OAuth Protected Resource" [ref=e1008] [cursor=pointer]:
+                - generic [ref=e1009]:
+                  - img "Pass" [ref=e1010]:
+                    - img [ref=e1011]
+                  - generic [ref=e1013]: OAuth Protected Resource
+                - img [ref=e1015]
+              - generic [ref=e1017]:
+                - generic [ref=e1019]:
+                  - img [ref=e1021]
+                  - generic [ref=e1023]: OAuth Protected Resource
+                - generic [ref=e1024]:
+                  - generic [ref=e1025]:
+                    - generic [ref=e1026]:
+                      - generic [ref=e1027]:
+                        - img [ref=e1029]
+                        - generic [ref=e1031]: GET /.well-known/oauth-protected-resource
+                        - generic [ref=e1032]: "200"
+                      - table [ref=e1033]:
+                        - rowgroup [ref=e1034]:
+                          - row "content-type application/json; charset=utf-8" [ref=e1035]:
+                            - cell "content-type" [ref=e1036]
+                            - cell "application/json; charset=utf-8" [ref=e1037]
+                          - row "content-length 226" [ref=e1038]:
+                            - cell "content-length" [ref=e1039]
+                            - cell "226" [ref=e1040]
+                          - row [ref=e1041]:
+                            - cell "link" [ref=e1042]
+                            - cell [ref=e1043]
+                          - row "cf-ray a0a582bf636c46e2-DFW" [ref=e1044]:
+                            - cell "cf-ray" [ref=e1045]
+                            - cell "a0a582bf636c46e2-DFW" [ref=e1046]
+                      - generic [ref=e1049]: Received JSON response (200)
+                    - generic [ref=e1050]:
+                      - generic [ref=e1051]:
+                        - img [ref=e1053]
+                        - generic [ref=e1055]: Validate resource metadata
+                      - generic [ref=e1058]: "Valid metadata with resource: https://izhimpro.ru/"
+                    - generic [ref=e1059]:
+                      - generic [ref=e1060]:
+                        - img [ref=e1062]
+                        - generic [ref=e1064]: GET /
+                        - generic [ref=e1065]: "200"
+                      - table [ref=e1066]:
+                        - rowgroup [ref=e1067]:
+                          - row "content-type text/html; charset=utf-8" [ref=e1068]:
+                            - cell "content-type" [ref=e1069]
+                            - cell "text/html; charset=utf-8" [ref=e1070]
+                          - row "link <https://izhimpro.ru/.well-known/api-catalog>; rel=\"api-catalog\", <https://izhimpro.ru/.well-known/service-desc.json>; rel=\"service-desc\", <https://izhimpro.ru/faq/>; rel=\"service-doc\"" [ref=e1071]:
+                            - cell "link" [ref=e1072]
+                            - cell "<https://izhimpro.ru/.well-known/api-catalog>; rel=\"api-catalog\", <https://izhimpro.ru/.well-known/service-desc.json>; rel=\"service-desc\", <https://izhimpro.ru/faq/>; rel=\"service-doc\"" [ref=e1073]
+                          - row "cf-ray a0a582bf536646e2-DFW" [ref=e1074]:
+                            - cell "cf-ray" [ref=e1075]
+                            - cell "a0a582bf536646e2-DFW" [ref=e1076]
+                      - generic [ref=e1079]: Homepage returned 200 (no WWW-Authenticate header)
+                    - generic [ref=e1080]:
+                      - generic [ref=e1081]:
+                        - img [ref=e1083]
+                        - generic [ref=e1085]: Conclusion
+                      - generic [ref=e1088]: OAuth Protected Resource Metadata found (well-known)
+                  - generic [ref=e1089]: Completed in 135ms
+                - button "Back to results" [ref=e1090] [cursor=pointer]:
+                  - img [ref=e1091]
+                  - text: Back
+            - generic [ref=e1094]:
+              - button "Pass Auth.md agent registration" [ref=e1097] [cursor=pointer]:
+                - generic [ref=e1098]:
+                  - img "Pass" [ref=e1099]:
+                    - img [ref=e1100]
+                  - generic [ref=e1102]: Auth.md agent registration
+                - img [ref=e1104]
+              - generic [ref=e1106]:
+                - generic [ref=e1108]:
+                  - img [ref=e1110]
+                  - generic [ref=e1112]: Auth.md agent registration
+                - generic [ref=e1113]:
+                  - generic [ref=e1114]:
+                    - generic [ref=e1115]:
+                      - generic [ref=e1116]:
+                        - img [ref=e1118]
+                        - generic [ref=e1120]: GET /auth.md
+                        - generic [ref=e1121]: "200"
+                      - generic [ref=e1122]: Request
+                      - table [ref=e1123]:
+                        - rowgroup [ref=e1124]:
+                          - row "accept text/markdown, text/plain, */*" [ref=e1125]:
+                            - cell "accept" [ref=e1126]
+                            - cell "text/markdown, text/plain, */*" [ref=e1127]
+                      - generic [ref=e1128]: Response
+                      - table [ref=e1129]:
+                        - rowgroup [ref=e1130]:
+                          - row "content-type text/markdown; charset=utf-8" [ref=e1131]:
+                            - cell "content-type" [ref=e1132]
+                            - cell "text/markdown; charset=utf-8" [ref=e1133]
+                          - row "content-length 2349" [ref=e1134]:
+                            - cell "content-length" [ref=e1135]
+                            - cell "2349" [ref=e1136]
+                          - row [ref=e1137]:
+                            - cell "link" [ref=e1138]
+                            - cell [ref=e1139]
+                          - row "cf-ray a0a582bf536946e2-DFW" [ref=e1140]:
+                            - cell "cf-ray" [ref=e1141]
+                            - cell "a0a582bf536946e2-DFW" [ref=e1142]
+                      - generic [ref=e1143]: "# auth.md ## Agent access overview This site exposes public, unauthenticated website content and a public lead submission API for trial lessons, courses, and corporate workshop requests. ## Audience AI agents that need to: - read public information about improvisation classes in Izhevsk - discover legal and contact information - submit a lead request on behalf of a user with the user's consent ## Public resources - Site description: https://izhimpro.ru/.well-known/site-description.json - ..."
+                      - generic [ref=e1146]: "Received 200 response with content-type: text/markdown; charset=utf-8"
+                    - generic [ref=e1147]:
+                      - generic [ref=e1148]:
+                        - img [ref=e1150]
+                        - generic [ref=e1152]: Detect Auth.md registration markers
+                      - generic [ref=e1155]: Found 1 Auth.md marker(s)
+                    - generic [ref=e1156]:
+                      - generic [ref=e1157]:
+                        - img [ref=e1159]
+                        - generic [ref=e1161]: Detect self-contained Auth.md registration flow
+                      - generic [ref=e1164]: No complete standalone registration flow found in auth.md
+                    - generic [ref=e1165]:
+                      - generic [ref=e1166]:
+                        - img [ref=e1168]
+                        - generic [ref=e1170]: GET /.well-known/oauth-protected-resource
+                        - generic [ref=e1171]: "200"
+                      - generic [ref=e1172]: Request
+                      - table [ref=e1173]:
+                        - rowgroup [ref=e1174]:
+                          - row "accept application/json" [ref=e1175]:
+                            - cell "accept" [ref=e1176]
+                            - cell "application/json" [ref=e1177]
+                      - generic [ref=e1178]: Response
+                      - table [ref=e1179]:
+                        - rowgroup [ref=e1180]:
+                          - row "content-type application/json; charset=utf-8" [ref=e1181]:
+                            - cell "content-type" [ref=e1182]
+                            - cell "application/json; charset=utf-8" [ref=e1183]
+                          - row "content-length 226" [ref=e1184]:
+                            - cell "content-length" [ref=e1185]
+                            - cell "226" [ref=e1186]
+                          - row [ref=e1187]:
+                            - cell "link" [ref=e1188]
+                            - cell [ref=e1189]
+                          - row "cf-ray a0a582c215c646e2-DFW" [ref=e1190]:
+                            - cell "cf-ray" [ref=e1191]
+                            - cell "a0a582c215c646e2-DFW" [ref=e1192]
+                      - generic [ref=e1193]: "{\"resource\":\"https://izhimpro.ru/\",\"authorization_servers\":[\"https://izhimpro.ru\"],\"scopes_supported\":[\"public-site:read\",\"lead-form:submit\"],\"bearer_methods_supported\":[\"header\"]}"
+                      - generic [ref=e1196]: Received JSON response (200)
+                    - generic [ref=e1197]:
+                      - generic [ref=e1198]:
+                        - img [ref=e1200]
+                        - generic [ref=e1202]: Validate Protected Resource Metadata
+                      - generic [ref=e1205]: Valid metadata with resource https://izhimpro.ru/ and 1 authorization server(s)
+                    - generic [ref=e1206]:
+                      - generic [ref=e1207]:
+                        - img [ref=e1209]
+                        - generic [ref=e1211]: GET /.well-known/oauth-authorization-server
+                        - generic [ref=e1212]: "200"
+                      - generic [ref=e1213]: Request
+                      - table [ref=e1214]:
+                        - rowgroup [ref=e1215]:
+                          - row "accept application/json" [ref=e1216]:
+                            - cell "accept" [ref=e1217]
+                            - cell "application/json" [ref=e1218]
+                      - generic [ref=e1219]: Response
+                      - table [ref=e1220]:
+                        - rowgroup [ref=e1221]:
+                          - row "content-type application/json; charset=utf-8" [ref=e1222]:
+                            - cell "content-type" [ref=e1223]
+                            - cell "application/json; charset=utf-8" [ref=e1224]
+                          - row "content-length 538" [ref=e1225]:
+                            - cell "content-length" [ref=e1226]
+                            - cell "538" [ref=e1227]
+                          - row [ref=e1228]:
+                            - cell "link" [ref=e1229]
+                            - cell [ref=e1230]
+                          - row "cf-ray a0a582c235d446e2-DFW" [ref=e1231]:
+                            - cell "cf-ray" [ref=e1232]
+                            - cell "a0a582c235d446e2-DFW" [ref=e1233]
+                      - generic [ref=e1234]: "{\"issuer\":\"https://izhimpro.ru\",\"service_documentation\":\"https://izhimpro.ru/auth.md\",\"scopes_supported\":[\"public-site:read\",\"lead-form:submit\"],\"agent_auth\":{\"skill\":\"https://izhimpro.ru/auth.md\",\"register_uri\":\"https://izhimpro.ru/contacts/\",\"claim_uri\":\"https://izhimpro.ru/contacts/\",\"identity_types_supported\":[\"anonymous\"],\"anonymous\":{\"credential_types_supported\":[\"none\"],\"claim_uri\":\"https://izhimpro.ru/contacts/\"}}}"
+                      - generic [ref=e1237]: Received JSON response (200)
+                    - generic [ref=e1238]:
+                      - generic [ref=e1239]:
+                        - img [ref=e1241]
+                        - generic [ref=e1243]: Validate agent_auth metadata
+                      - generic [ref=e1246]: Found agent_auth with register_uri and supported methods
+                    - generic [ref=e1247]:
+                      - generic [ref=e1248]:
+                        - img [ref=e1250]
+                        - generic [ref=e1252]: Conclusion
+                      - generic [ref=e1255]: Auth.md support detected (anonymous)
+                  - generic [ref=e1256]: Completed in 586ms
+                - button "Back to results" [ref=e1257] [cursor=pointer]:
+                  - img [ref=e1258]
+                  - text: Back
+            - generic [ref=e1261]:
+              - button "Pass MCP Server Card" [ref=e1264] [cursor=pointer]:
+                - generic [ref=e1265]:
+                  - img "Pass" [ref=e1266]:
+                    - img [ref=e1267]
+                  - generic [ref=e1269]: MCP Server Card
+                - img [ref=e1271]
+              - generic [ref=e1273]:
+                - generic [ref=e1275]:
+                  - img [ref=e1277]
+                  - generic [ref=e1279]: MCP Server Card
+                - generic [ref=e1280]:
+                  - generic [ref=e1281]:
+                    - generic [ref=e1282]:
+                      - generic [ref=e1283]:
+                        - img [ref=e1285]
+                        - generic [ref=e1287]: GET /.well-known/mcp/server-card.json
+                        - generic [ref=e1288]: "200"
+                      - table [ref=e1289]:
+                        - rowgroup [ref=e1290]:
+                          - row "content-type application/json; charset=utf-8" [ref=e1291]:
+                            - cell "content-type" [ref=e1292]
+                            - cell "application/json; charset=utf-8" [ref=e1293]
+                          - row "content-length 222" [ref=e1294]:
+                            - cell "content-length" [ref=e1295]
+                            - cell "222" [ref=e1296]
+                          - row [ref=e1297]:
+                            - cell "link" [ref=e1298]
+                            - cell [ref=e1299]
+                          - row "cf-ray a0a582bf637046e2-DFW" [ref=e1300]:
+                            - cell "cf-ray" [ref=e1301]
+                            - cell "a0a582bf637046e2-DFW" [ref=e1302]
+                      - generic [ref=e1305]: Found valid MCP Server Card (sep format) at /.well-known/mcp/server-card.json
+                    - generic [ref=e1306]:
+                      - generic [ref=e1307]:
+                        - img [ref=e1309]
+                        - generic [ref=e1311]: GET /.well-known/mcp/server-cards.json
+                        - generic [ref=e1312]: "404"
+                      - table [ref=e1313]:
+                        - rowgroup [ref=e1314]:
+                          - row "content-type application/json; charset=utf-8" [ref=e1315]:
+                            - cell "content-type" [ref=e1316]
+                            - cell "application/json; charset=utf-8" [ref=e1317]
+                          - row [ref=e1318]:
+                            - cell "link" [ref=e1319]
+                            - cell [ref=e1320]
+                          - row "cf-ray a0a582bf737646e2-DFW" [ref=e1321]:
+                            - cell "cf-ray" [ref=e1322]
+                            - cell "a0a582bf737646e2-DFW" [ref=e1323]
+                      - generic [ref=e1326]: /.well-known/mcp/server-cards.json returned 404
+                    - generic [ref=e1327]:
+                      - generic [ref=e1328]:
+                        - img [ref=e1330]
+                        - generic [ref=e1332]: GET /.well-known/mcp.json
+                        - generic [ref=e1333]: "404"
+                      - table [ref=e1334]:
+                        - rowgroup [ref=e1335]:
+                          - row "content-type application/json; charset=utf-8" [ref=e1336]:
+                            - cell "content-type" [ref=e1337]
+                            - cell "application/json; charset=utf-8" [ref=e1338]
+                          - row [ref=e1339]:
+                            - cell "link" [ref=e1340]
+                            - cell [ref=e1341]
+                          - row "cf-ray a0a582bf737346e2-DFW" [ref=e1342]:
+                            - cell "cf-ray" [ref=e1343]
+                            - cell "a0a582bf737346e2-DFW" [ref=e1344]
+                      - generic [ref=e1347]: /.well-known/mcp.json returned 404
+                    - generic [ref=e1348]:
+                      - generic [ref=e1349]:
+                        - img [ref=e1351]
+                        - generic [ref=e1353]: Validate Server Card
+                      - generic [ref=e1356]: SEP-format card found at /.well-known/mcp/server-card.json
+                    - generic [ref=e1357]:
+                      - generic [ref=e1358]:
+                        - img [ref=e1360]
+                        - generic [ref=e1362]: Conclusion
+                      - generic [ref=e1365]: MCP Server Card found at /.well-known/mcp/server-card.json
+                  - generic [ref=e1366]: Completed in 473ms
+                - button "Back to results" [ref=e1367] [cursor=pointer]:
+                  - img [ref=e1368]
+                  - text: Back
+            - generic [ref=e1371]:
+              - button "Pass Agent Skills index" [ref=e1374] [cursor=pointer]:
+                - generic [ref=e1375]:
+                  - img "Pass" [ref=e1376]:
+                    - img [ref=e1377]
+                  - generic [ref=e1379]: Agent Skills index
+                - img [ref=e1381]
+              - generic [ref=e1383]:
+                - generic [ref=e1385]:
+                  - img [ref=e1387]
+                  - generic [ref=e1389]: Agent Skills index
+                - generic [ref=e1390]:
+                  - generic [ref=e1391]:
+                    - generic [ref=e1392]:
+                      - generic [ref=e1393]:
+                        - img [ref=e1395]
+                        - generic [ref=e1397]: GET /.well-known/agent-skills/index.json
+                        - generic [ref=e1398]: "200"
+                      - table [ref=e1399]:
+                        - rowgroup [ref=e1400]:
+                          - row "content-type application/json; charset=utf-8" [ref=e1401]:
+                            - cell "content-type" [ref=e1402]
+                            - cell "application/json; charset=utf-8" [ref=e1403]
+                          - row "content-length 1180" [ref=e1404]:
+                            - cell "content-length" [ref=e1405]
+                            - cell "1180" [ref=e1406]
+                          - row [ref=e1407]:
+                            - cell "link" [ref=e1408]
+                            - cell [ref=e1409]
+                          - row "cf-ray a0a582bf837b46e2-DFW" [ref=e1410]:
+                            - cell "cf-ray" [ref=e1411]
+                            - cell "a0a582bf837b46e2-DFW" [ref=e1412]
+                      - generic [ref=e1415]: "Received 200 response with content-type: application/json; charset=utf-8"
+                    - generic [ref=e1416]:
+                      - generic [ref=e1417]:
+                        - img [ref=e1419]
+                        - generic [ref=e1421]: Detect spec version
+                      - generic [ref=e1424]: Found $schema field — v0.2.0 format detected
+                    - generic [ref=e1425]:
+                      - generic [ref=e1426]:
+                        - img [ref=e1428]
+                        - generic [ref=e1430]: Count skills
+                      - generic [ref=e1433]: Found "skills" array with 3 entries (3 with valid v0.2.0 fields)
+                    - generic [ref=e1434]:
+                      - generic [ref=e1435]:
+                        - img [ref=e1437]
+                        - generic [ref=e1439]: Validate skill count
+                      - generic [ref=e1442]: Index contains 3 skills
+                    - generic [ref=e1443]:
+                      - generic [ref=e1444]:
+                        - img [ref=e1446]
+                        - generic [ref=e1448]: Conclusion
+                      - generic [ref=e1451]: Agent Skills index exists with valid JSON
+                  - generic [ref=e1452]: Completed in 152ms
+                - button "Back to results" [ref=e1453] [cursor=pointer]:
+                  - img [ref=e1454]
+                  - text: Back
+            - generic [ref=e1457]:
+              - generic [ref=e1459]:
+                - button "Fail WebMCP" [ref=e1460] [cursor=pointer]:
+                  - generic [ref=e1461]:
+                    - img "Fail" [ref=e1462]:
+                      - img [ref=e1463]
+                    - generic [ref=e1465]: WebMCP
+                  - img [ref=e1467]
+                - generic [ref=e1469]:
+                  - generic [ref=e1470]:
+                    - generic [ref=e1471]:
+                      - term [ref=e1472]: Goal
+                      - definition [ref=e1473]: Support WebMCP to expose site tools to AI agents via the browser
+                    - generic [ref=e1474]:
+                      - term [ref=e1475]: Issue
+                      - definition [ref=e1476]: No WebMCP tools detected on page load
+                  - generic [ref=e1477]:
+                    - generic [ref=e1478]: How to implement
+                    - generic [ref=e1479]: Implement the WebMCP API by calling navigator.modelContext.provideContext() with tool definitions that expose your site's key actions to AI agents. Each tool needs a name, description, inputSchema (JSON Schema), and an execute callback function.
+                  - generic [ref=e1480]:
+                    - generic [ref=e1481]: Resources
+                    - generic [ref=e1482]:
+                      - link "webmachinelearning.github.io" [ref=e1483] [cursor=pointer]:
+                        - /url: https://webmachinelearning.github.io/webmcp/
+                        - text: webmachinelearning.github.io
+                        - img [ref=e1484]
+                      - link "developer.chrome.com" [ref=e1486] [cursor=pointer]:
+                        - /url: https://developer.chrome.com/blog/webmcp-epp
+                        - text: developer.chrome.com
+                        - img [ref=e1487]
+                      - link "Skill" [ref=e1489] [cursor=pointer]:
+                        - /url: https://isitagentready.com/.well-known/agent-skills/webmcp/SKILL.md
+                        - text: Skill
+                        - img [ref=e1490]
+                  - generic [ref=e1492]:
+                    - button "Copy prompt Paste into your coding agent to fix this check" [ref=e1493] [cursor=pointer]:
+                      - img [ref=e1494]
+                      - generic [ref=e1496]: Copy prompt
+                      - text: Paste into your coding agent to fix this check
+                    - button "View audit details" [ref=e1497] [cursor=pointer]:
+                      - text: Audit details
+                      - img [ref=e1498]
+              - generic [ref=e1500]:
+                - generic [ref=e1502]:
+                  - img [ref=e1504]
+                  - generic [ref=e1506]: WebMCP
+                - generic [ref=e1507]:
+                  - generic [ref=e1508]:
+                    - generic [ref=e1509]:
+                      - generic [ref=e1510]:
+                        - img [ref=e1512]
+                        - generic [ref=e1514]: WebMCP detection
+                      - generic [ref=e1517]: Checking page for WebMCP tool registrations
+                    - generic [ref=e1518]:
+                      - generic [ref=e1519]:
+                        - img [ref=e1521]
+                        - generic [ref=e1523]: Navigate to https://izhimpro.ru
+                      - generic [ref=e1526]: Loading page to detect WebMCP tool registrations
+                    - generic [ref=e1527]:
+                      - generic [ref=e1528]:
+                        - img [ref=e1530]
+                        - generic [ref=e1532]: Check imperative WebMCP API
+                      - generic [ref=e1535]: No tools registered via navigator.modelContext
+                    - generic [ref=e1536]:
+                      - generic [ref=e1537]:
+                        - img [ref=e1539]
+                        - generic [ref=e1541]: Conclusion
+                      - generic [ref=e1544]: No WebMCP tools detected on page load
+                  - generic [ref=e1545]: Completed in 4931ms
+                - button "Back to results" [ref=e1546] [cursor=pointer]:
+                  - img [ref=e1547]
+                  - text: Back
+        - generic [ref=e1549]:
+          - generic [ref=e1550]:
+            - heading "Commerce Optional" [level=2] [ref=e1552]
+            - generic [ref=e1553]: 0/0
+          - paragraph [ref=e1554]: No e-commerce signals were detected on this site. These checks are shown for informational purposes and do not affect the score.
+          - generic [ref=e1555]:
+            - generic [ref=e1557]:
+              - generic [ref=e1559]:
+                - button "Not applicable x402 Protocol" [ref=e1560] [cursor=pointer]:
+                  - generic [ref=e1561]:
+                    - img "Not applicable" [ref=e1562]:
+                      - img [ref=e1563]
+                    - generic [ref=e1565]: x402 Protocol
+                  - img [ref=e1567]
+                - text: Paste into your coding agent to fix this check
+              - generic [ref=e1569]:
+                - generic [ref=e1571]:
+                  - img [ref=e1573]
+                  - generic [ref=e1575]: x402 Protocol
+                - generic [ref=e1576]:
+                  - generic [ref=e1577]:
+                    - generic [ref=e1578]:
+                      - generic [ref=e1579]:
+                        - img [ref=e1581]
+                        - generic [ref=e1583]: GET /
+                        - generic [ref=e1584]: "200"
+                      - table [ref=e1585]:
+                        - rowgroup [ref=e1586]:
+                          - row "content-type text/html; charset=utf-8" [ref=e1587]:
+                            - cell "content-type" [ref=e1588]
+                            - cell "text/html; charset=utf-8" [ref=e1589]
+                          - row "link <https://izhimpro.ru/.well-known/api-catalog>; rel=\"api-catalog\", <https://izhimpro.ru/.well-known/service-desc.json>; rel=\"service-desc\", <https://izhimpro.ru/faq/>; rel=\"service-doc\"" [ref=e1590]:
+                            - cell "link" [ref=e1591]
+                            - cell "<https://izhimpro.ru/.well-known/api-catalog>; rel=\"api-catalog\", <https://izhimpro.ru/.well-known/service-desc.json>; rel=\"service-desc\", <https://izhimpro.ru/faq/>; rel=\"service-doc\"" [ref=e1592]
+                          - row "cf-ray a0a582c1554846e2-DFW" [ref=e1593]:
+                            - cell "cf-ray" [ref=e1594]
+                            - cell "a0a582c1554846e2-DFW" [ref=e1595]
+                      - generic [ref=e1598]: / returned 200 (not 402)
+                    - generic [ref=e1599]:
+                      - generic [ref=e1600]:
+                        - img [ref=e1602]
+                        - generic [ref=e1604]: GET /platform/v2/x402/discovery/resources
+                        - generic [ref=e1605]: "200"
+                      - table [ref=e1606]:
+                        - rowgroup [ref=e1607]:
+                          - row "content-type application/json" [ref=e1608]:
+                            - cell "content-type" [ref=e1609]
+                            - cell "application/json" [ref=e1610]
+                          - row "cf-ray a0a582bfb3a646e2-DFW" [ref=e1611]:
+                            - cell "cf-ray" [ref=e1612]
+                            - cell "a0a582bfb3a646e2-DFW" [ref=e1613]
+                    - generic [ref=e1614]:
+                      - generic [ref=e1615]:
+                        - img [ref=e1617]
+                        - generic [ref=e1619]: GET Bazaar discovery API
+                      - generic [ref=e1622]: Network error querying Bazaar API
+                    - generic [ref=e1623]:
+                      - generic [ref=e1624]:
+                        - img [ref=e1626]
+                        - generic [ref=e1628]: GET /api/v1
+                        - generic [ref=e1629]: "404"
+                      - table [ref=e1630]:
+                        - rowgroup [ref=e1631]:
+                          - row "content-type text/html; charset=utf-8" [ref=e1632]:
+                            - cell "content-type" [ref=e1633]
+                            - cell "text/html; charset=utf-8" [ref=e1634]
+                          - row [ref=e1635]:
+                            - cell "link" [ref=e1636]
+                            - cell [ref=e1637]
+                          - row "cf-ray a0a582c1755646e2-DFW" [ref=e1638]:
+                            - cell "cf-ray" [ref=e1639]
+                            - cell "a0a582c1755646e2-DFW" [ref=e1640]
+                      - generic [ref=e1643]: /api/v1 returned 404 (not 402)
+                    - generic [ref=e1644]:
+                      - generic [ref=e1645]:
+                        - img [ref=e1647]
+                        - generic [ref=e1649]: GET /api
+                        - generic [ref=e1650]: "404"
+                      - table [ref=e1651]:
+                        - rowgroup [ref=e1652]:
+                          - row "content-type text/html; charset=utf-8" [ref=e1653]:
+                            - cell "content-type" [ref=e1654]
+                            - cell "text/html; charset=utf-8" [ref=e1655]
+                          - row [ref=e1656]:
+                            - cell "link" [ref=e1657]
+                            - cell [ref=e1658]
+                          - row "cf-ray a0a582c1654a46e2-DFW" [ref=e1659]:
+                            - cell "cf-ray" [ref=e1660]
+                            - cell "a0a582c1654a46e2-DFW" [ref=e1661]
+                      - generic [ref=e1664]: /api returned 404 (not 402)
+                    - generic [ref=e1665]:
+                      - generic [ref=e1666]:
+                        - img [ref=e1668]
+                        - generic [ref=e1670]: Conclusion
+                      - generic [ref=e1673]: x402 payment protocol not detected
+                  - generic [ref=e1674]: Completed in 986ms
+                - button "Back to results" [ref=e1675] [cursor=pointer]:
+                  - img [ref=e1676]
+                  - text: Back
+            - generic [ref=e1679]:
+              - generic [ref=e1681]:
+                - button "Not applicable MPP (Machine Payment Protocol)" [ref=e1682] [cursor=pointer]:
+                  - generic [ref=e1683]:
+                    - img "Not applicable" [ref=e1684]:
+                      - img [ref=e1685]
+                    - generic [ref=e1687]: MPP (Machine Payment Protocol)
+                  - img [ref=e1689]
+                - text: Paste into your coding agent to fix this check
+              - generic [ref=e1691]:
+                - generic [ref=e1693]:
+                  - img [ref=e1695]
+                  - generic [ref=e1697]: MPP (Machine Payment Protocol)
+                - generic [ref=e1698]:
+                  - generic [ref=e1699]:
+                    - generic [ref=e1700]:
+                      - generic [ref=e1701]:
+                        - img [ref=e1703]
+                        - generic [ref=e1705]: GET /openapi.json
+                        - generic [ref=e1706]: "404"
+                      - table [ref=e1707]:
+                        - rowgroup [ref=e1708]:
+                          - row "content-type application/json; charset=utf-8" [ref=e1709]:
+                            - cell "content-type" [ref=e1710]
+                            - cell "application/json; charset=utf-8" [ref=e1711]
+                          - row [ref=e1712]:
+                            - cell "link" [ref=e1713]
+                            - cell [ref=e1714]
+                          - row "cf-ray a0a582c1856546e2-DFW" [ref=e1715]:
+                            - cell "cf-ray" [ref=e1716]
+                            - cell "a0a582c1856546e2-DFW" [ref=e1717]
+                      - generic [ref=e1720]: /openapi.json returned 404
+                    - generic [ref=e1721]:
+                      - generic [ref=e1722]:
+                        - img [ref=e1724]
+                        - generic [ref=e1726]: Conclusion
+                      - generic [ref=e1729]: MPP payment discovery not detected
+                  - generic [ref=e1730]: Completed in 930ms
+                - button "Back to results" [ref=e1731] [cursor=pointer]:
+                  - img [ref=e1732]
+                  - text: Back
+            - generic [ref=e1735]:
+              - generic [ref=e1737]:
+                - button "Not applicable Universal Commerce Protocol" [ref=e1738] [cursor=pointer]:
+                  - generic [ref=e1739]:
+                    - img "Not applicable" [ref=e1740]:
+                      - img [ref=e1741]
+                    - generic [ref=e1743]: Universal Commerce Protocol
+                  - img [ref=e1745]
+                - text: Paste into your coding agent to fix this check
+              - generic [ref=e1747]:
+                - generic [ref=e1749]:
+                  - img [ref=e1751]
+                  - generic [ref=e1753]: Universal Commerce Protocol
+                - generic [ref=e1754]:
+                  - generic [ref=e1755]:
+                    - generic [ref=e1756]:
+                      - generic [ref=e1757]:
+                        - img [ref=e1759]
+                        - generic [ref=e1761]: GET /.well-known/ucp
+                        - generic [ref=e1762]: "404"
+                      - table [ref=e1763]:
+                        - rowgroup [ref=e1764]:
+                          - row "content-type text/plain; charset=utf-8" [ref=e1765]:
+                            - cell "content-type" [ref=e1766]
+                            - cell "text/plain; charset=utf-8" [ref=e1767]
+                          - row [ref=e1768]:
+                            - cell "link" [ref=e1769]
+                            - cell [ref=e1770]
+                          - row "cf-ray a0a582bf938546e2-DFW" [ref=e1771]:
+                            - cell "cf-ray" [ref=e1772]
+                            - cell "a0a582bf938546e2-DFW" [ref=e1773]
+                      - generic [ref=e1776]: Server returned 404 -- UCP profile not found
+                    - generic [ref=e1777]:
+                      - generic [ref=e1778]:
+                        - img [ref=e1780]
+                        - generic [ref=e1782]: Conclusion
+                      - generic [ref=e1785]: UCP profile not found
+                  - generic [ref=e1786]: Completed in 445ms
+                - button "Back to results" [ref=e1787] [cursor=pointer]:
+                  - img [ref=e1788]
+                  - text: Back
+            - generic [ref=e1791]:
+              - generic [ref=e1793]:
+                - button "Not applicable ACP (Agentic Commerce Protocol)" [ref=e1794] [cursor=pointer]:
+                  - generic [ref=e1795]:
+                    - img "Not applicable" [ref=e1796]:
+                      - img [ref=e1797]
+                    - generic [ref=e1799]: ACP (Agentic Commerce Protocol)
+                  - img [ref=e1801]
+                - text: Paste into your coding agent to fix this check
+              - generic [ref=e1803]:
+                - generic [ref=e1805]:
+                  - img [ref=e1807]
+                  - generic [ref=e1809]: ACP (Agentic Commerce Protocol)
+                - generic [ref=e1810]:
+                  - generic [ref=e1811]:
+                    - generic [ref=e1812]:
+                      - generic [ref=e1813]:
+                        - img [ref=e1815]
+                        - generic [ref=e1817]: GET /.well-known/acp.json
+                        - generic [ref=e1818]: "404"
+                      - table [ref=e1819]:
+                        - rowgroup [ref=e1820]:
+                          - row "content-type application/json; charset=utf-8" [ref=e1821]:
+                            - cell "content-type" [ref=e1822]
+                            - cell "application/json; charset=utf-8" [ref=e1823]
+                          - row [ref=e1824]:
+                            - cell "link" [ref=e1825]
+                            - cell [ref=e1826]
+                          - row "cf-ray a0a582c1856646e2-DFW" [ref=e1827]:
+                            - cell "cf-ray" [ref=e1828]
+                            - cell "a0a582c1856646e2-DFW" [ref=e1829]
+                      - generic [ref=e1832]: Server returned 404 -- ACP discovery document not found
+                    - generic [ref=e1833]:
+                      - generic [ref=e1834]:
+                        - img [ref=e1836]
+                        - generic [ref=e1838]: Conclusion
+                      - generic [ref=e1841]: ACP discovery document not found
+                  - generic [ref=e1842]: Completed in 894ms
+                - button "Back to results" [ref=e1843] [cursor=pointer]:
+                  - img [ref=e1844]
+                  - text: Back
+      - button "Scan another site" [ref=e1847] [cursor=pointer]:
+        - img [ref=e1848]
+        - text: Scan another site
+  - paragraph [ref=e36]: These are AI-generated recommendations. AI can make mistakes. Please use your professional judgment when implementing these tips, as they are provided "as-is" and Cloudflare assumes no liability for any actions taken or outcomes based on this automated content.
+  - contentinfo [ref=e37]:
+    - generic [ref=e38]:
+      - paragraph [ref=e39]:
+        - text: © 2026
+        - link "Cloudflare, Inc." [ref=e40] [cursor=pointer]:
+          - /url: https://cloudflare.com
+      - navigation [ref=e41]:
+        - link "Privacy Policy" [ref=e42] [cursor=pointer]:
+          - /url: https://www.cloudflare.com/privacypolicy/
+        - generic [ref=e43]: "|"
+        - link "Terms of Use" [ref=e44] [cursor=pointer]:
+          - /url: https://www.cloudflare.com/website-terms/
+        - generic [ref=e45]: "|"
+        - link "Docs" [ref=e46] [cursor=pointer]:
+          - /url: https://developers.cloudflare.com

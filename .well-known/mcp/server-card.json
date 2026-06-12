@@ -1,0 +1,12 @@
+{
+  "serverInfo": {
+    "name": "IzhImpro Public Site MCP",
+    "version": "2026-06-11"
+  },
+  "endpoint": "https://izhimpro.ru/mcp",
+  "capabilities": {
+    "tools": true,
+    "resources": true,
+    "prompts": false
+  }
+}

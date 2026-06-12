@@ -1,0 +1,13 @@
+{
+  "resource": "https://izhimpro.ru/",
+  "authorization_servers": [
+    "https://izhimpro.ru"
+  ],
+  "scopes_supported": [
+    "public-site:read",
+    "lead-form:submit"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ]
+}

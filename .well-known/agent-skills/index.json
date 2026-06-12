@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "browse-public-site",
+      "type": "skill-md",
+      "description": "Read public pages, Markdown sidecars, and discovery documents from the IzhImpro website.",
+      "url": "https://izhimpro.ru/.well-known/agent-skills/browse-public-site/SKILL.md",
+      "digest": "sha256:07187be68613956051cba957f77dfe17cef244b369f70b39aeabce03037f4bc4"
+    },
+    {
+      "name": "submit-lead-form",
+      "type": "skill-md",
+      "description": "Discover and use the public lead form API for user-authorized contact requests.",
+      "url": "https://izhimpro.ru/.well-known/agent-skills/submit-lead-form/SKILL.md",
+      "digest": "sha256:37f794863e7b8c7d3594026053be0c171d9880ba4483add6ae442485b52a85a3"
+    },
+    {
+      "name": "retrieve-legal-info",
+      "type": "skill-md",
+      "description": "Read current and archived public legal documents published on the IzhImpro website.",
+      "url": "https://izhimpro.ru/.well-known/agent-skills/retrieve-legal-info/SKILL.md",
+      "digest": "sha256:c10497f3398b3b49ceeb6bbbebe15c0b363693445f5637250a3ac55cd5edb5a4"
+    }
+  ]
+}

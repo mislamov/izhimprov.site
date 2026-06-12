@@ -20,14 +20,18 @@ Current HTTP discovery endpoints
 - Site description: `https://izhimpro.ru/.well-known/site-description.json`
 - API catalog: `https://izhimpro.ru/.well-known/api-catalog`
 - Service description: `https://izhimpro.ru/.well-known/service-desc.json`
+- MCP server card: `https://izhimpro.ru/.well-known/mcp/server-card.json`
+- A2A agent card: `https://izhimpro.ru/.well-known/agent-card.json`
+- Agent skills index: `https://izhimpro.ru/.well-known/agent-skills/index.json`
+- Auth.md: `https://izhimpro.ru/auth.md`
 
 Current state
 
 - HTTP discovery on the website is working through Cloudflare.
 - Homepage `Link` headers are published.
 - `/.well-known/api-catalog` is published with `application/linkset+json`.
-- DNS-AID is currently missing from public DNS.
-- `_index._agents.izhimpro.ru` currently returns `NXDOMAIN`.
+- `isitagentready` reports `https://izhimpro.ru/` at level `5` (`Agent-Native`) for HTTP-facing checks.
+- DNS-AID now resolves publicly for `_index._agents.izhimpro.ru`, but DNSSEC validation is not yet confirmed by scanners.
 
 Recommended DNS-AID record
 
@@ -51,8 +55,8 @@ _index._agents 3600 HTTPS 1 izhimpro.ru. alpn="h2,h3" port=443 mandatory=alpn,po
 Why only _index._agents
 
 - The site currently publishes an organization-level machine-readable index.
-- There is no confirmed `a2a` or `mcp` endpoint on `izhimpro.ru`, so publishing `_a2a._agents.izhimpro.ru` now would be inaccurate.
-- If a real A2A or MCP endpoint is introduced later, publish a separate `SVCB` or `HTTPS` record for that exact protocol endpoint.
+- Read-only `a2a` and `mcp` HTTP endpoints now exist on `https://izhimpro.ru/a2a` and `https://izhimpro.ru/mcp`.
+- Separate `_a2a._agents` or `_mcp._agents` DNS publication is still optional and should only be added if dedicated DNS-AID protocol entrypoints are needed.
 
 DNSSEC requirement
 
@@ -74,6 +78,7 @@ Expected result:
 
 - DNS-AID well-known entrypoint is found
 - DNSSEC-backed validation succeeds for the published discovery zone
+- The remaining `isitagentready` DNS-AID failure clears once DNSSEC validation succeeds
 
 Cloudflare implementation note
 

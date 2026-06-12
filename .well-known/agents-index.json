@@ -10,7 +10,11 @@
       "owner": "_index._agents.izhimpro.ru",
       "transport": "https",
       "path": "/.well-known/agents-index.json"
-    }
+    },
+    "agentSkills": "https://izhimpro.ru/.well-known/agent-skills/index.json",
+    "a2aAgentCard": "https://izhimpro.ru/.well-known/agent-card.json",
+    "mcpServerCard": "https://izhimpro.ru/.well-known/mcp/server-card.json",
+    "authMd": "https://izhimpro.ru/auth.md"
   },
   "agents": [
     {
@@ -23,7 +27,11 @@
       "documents": {
         "siteDescription": "https://izhimpro.ru/.well-known/site-description.json",
         "apiCatalog": "https://izhimpro.ru/.well-known/api-catalog",
-        "serviceDescription": "https://izhimpro.ru/.well-known/service-desc.json"
+        "serviceDescription": "https://izhimpro.ru/.well-known/service-desc.json",
+        "agentSkills": "https://izhimpro.ru/.well-known/agent-skills/index.json",
+        "a2aAgentCard": "https://izhimpro.ru/.well-known/agent-card.json",
+        "mcpServerCard": "https://izhimpro.ru/.well-known/mcp/server-card.json",
+        "authMd": "https://izhimpro.ru/auth.md"
       },
       "capabilities": [
         "public-site-navigation",

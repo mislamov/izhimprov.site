@@ -1,0 +1,35 @@
+{
+  "name": "IzhImpro Public Agent",
+  "version": "2026-06-11",
+  "description": "Agent-facing discovery card for the IzhImpro public website and lead submission workflow.",
+  "supportedInterfaces": [
+    {
+      "url": "https://izhimpro.ru/a2a",
+      "transportProtocol": "https"
+    }
+  ],
+  "capabilities": [
+    "public-site-navigation",
+    "course-information",
+    "contact-information",
+    "legal-information",
+    "lead-submission-discovery"
+  ],
+  "skills": [
+    {
+      "id": "browse-public-site",
+      "name": "Browse public site",
+      "description": "Read public pages, Markdown sidecars, and discovery documents."
+    },
+    {
+      "id": "submit-lead-form",
+      "name": "Submit lead form",
+      "description": "Discover and use the public lead form API for user-authorized contact requests."
+    },
+    {
+      "id": "retrieve-legal-info",
+      "name": "Retrieve legal information",
+      "description": "Read offer, privacy, and payment documents from the public site."
+    }
+  ]
+}

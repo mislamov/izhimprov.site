@@ -1,0 +1,22 @@
+{
+  "issuer": "https://izhimpro.ru",
+  "service_documentation": "https://izhimpro.ru/auth.md",
+  "scopes_supported": [
+    "public-site:read",
+    "lead-form:submit"
+  ],
+  "agent_auth": {
+    "skill": "https://izhimpro.ru/auth.md",
+    "register_uri": "https://izhimpro.ru/contacts/",
+    "claim_uri": "https://izhimpro.ru/contacts/",
+    "identity_types_supported": [
+      "anonymous"
+    ],
+    "anonymous": {
+      "credential_types_supported": [
+        "none"
+      ],
+      "claim_uri": "https://izhimpro.ru/contacts/"
+    }
+  }
+}

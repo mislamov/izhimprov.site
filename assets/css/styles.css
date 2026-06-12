@@ -350,6 +350,72 @@ summary:focus-visible {
   gap: 16px;
 }
 
+.benefit-card {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.benefit-icon {
+  width: 44px;
+  height: 44px;
+  color: var(--color-orange);
+}
+
+.benefit-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.format-card {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  isolation: isolate;
+  background: var(--color-black);
+}
+
+.format-card::before,
+.format-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.format-card::before {
+  background: linear-gradient(180deg, rgba(19, 19, 19, 0.08) 0%, rgba(19, 19, 19, 0.92) 78%);
+}
+
+.format-card::after {
+  background: linear-gradient(90deg, rgba(19, 19, 19, 0.82) 0%, rgba(19, 19, 19, 0.18) 62%);
+}
+
+.format-card-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.format-card-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 14px;
+  max-width: 360px;
+}
+
 .list {
   margin: 0;
   padding-left: 24px;
@@ -673,6 +739,28 @@ footer {
     width: auto;
     padding-left: 36px;
     padding-right: 36px;
+  }
+
+  .benefit-card {
+    grid-template-columns: 44px 1fr;
+    align-items: start;
+  }
+
+  .benefit-card h3,
+  .benefit-card p {
+    grid-column: 2;
+  }
+
+  .benefit-icon {
+    grid-row: 1 / span 2;
+  }
+
+  .format-card {
+    min-height: 280px;
+  }
+
+  .format-card-content {
+    max-width: none;
   }
 }
 
