@@ -4,13 +4,7 @@
 
 As of 2026-06-12, `https://izhimpro.ru/` is served directly by GitHub Pages. Cloudflare remains authoritative DNS, but the apex A records are DNS-only.
 
-Requests with `Accept: text/markdown` on the same public URL now return:
-
-- `Content-Type: text/markdown; charset=utf-8`
-- `Vary: Accept`
-- `x-markdown-tokens` on `GET` responses
-
-This means the site now supports HTTP content negotiation for Markdown at the edge.
+Requests with `Accept: text/markdown` on the same public URL currently return normal GitHub Pages HTML. Markdown negotiation on the apex site is intentionally disabled because the broad Worker route that provided it made static delivery unstable in some networks.
 
 ## Constraint
 
@@ -27,13 +21,11 @@ The Cloudflare Worker implementation is retained for dedicated agent endpoints, 
   - adds `Vary: Accept`
   - returns `x-markdown-tokens` on Markdown `GET`
 - `scripts/deploy-agent-ready-worker.ps1` deploys the Worker through the Cloudflare API, attaches it only to dedicated agent paths, and keeps `izhimpro.ru/*` as a no-script bypass.
-- `scripts/check-markdown-negotiation.ps1` verifies:
-  - the live response to `Accept: text/markdown`
-  - the default HTML response
-  - the published sidecar Markdown URL such as `/faq/index.md`
+- `scripts/check-markdown-negotiation.ps1` is historical for the broad Worker implementation. Do not use it as a deployment gate while the apex site is DNS-only.
 
 ## Notes
 
 - The Worker origin remains `https://cdn.jsdelivr.net/gh/mislamov/izhimprov.site@main` for Worker-handled requests only.
 - This keeps the solution within Cloudflare Free plan constraints.
 - DNS `DS` publication for `_agents.izhimpro.ru` remains a separate task and does not affect Markdown negotiation.
+- See `SPEC/agent-readiness-balance.md` for the current operating balance between scanner score and public site stability.
