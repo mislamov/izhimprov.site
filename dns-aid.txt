@@ -1,5 +1,5 @@
 DNS-AID for izhimpro.ru
-Date: 2026-06-11
+Date: 2026-06-12
 
 Goal
 
@@ -31,7 +31,8 @@ Current state
 - Homepage `Link` headers are published.
 - `/.well-known/api-catalog` is published with `application/linkset+json`.
 - `isitagentready` reports `https://izhimpro.ru/` at level `5` (`Agent-Native`) for HTTP-facing checks.
-- DNS-AID now resolves publicly for `_index._agents.izhimpro.ru`, but DNSSEC validation is not yet confirmed by scanners.
+- DNS-AID now resolves publicly for `_index._agents.izhimpro.ru`.
+- As of 2026-06-12, `isitagentready` passes Discoverability `4/4` for `https://izhimpro.ru/`, so the published DNS-AID entrypoint is scanner-visible.
 
 Recommended DNS-AID record
 
@@ -78,7 +79,7 @@ Expected result:
 
 - DNS-AID well-known entrypoint is found
 - DNSSEC-backed validation succeeds for the published discovery zone
-- The remaining `isitagentready` DNS-AID failure clears once DNSSEC validation succeeds
+- `isitagentready` continues to pass Discoverability for `https://izhimpro.ru/`
 
 Cloudflare implementation note
 
