@@ -12,6 +12,7 @@ SPEC/TZ
 WORK
 !index.md
 !timer.md
+!auth.md
 !*/index.md
 !*/*/index.md
 !*/*/*/index.md

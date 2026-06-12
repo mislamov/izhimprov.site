@@ -26,7 +26,8 @@
       ],
       "documents": {
         "siteDescription": "https://izhimpro.ru/.well-known/site-description.json",
-        "apiCatalog": "https://izhimpro.ru/.well-known/api-catalog",
+        "apiCatalog": "https://izhimpro.ru/.well-known/api-catalog.json",
+        "apiCatalogLegacy": "https://izhimpro.ru/.well-known/api-catalog",
         "serviceDescription": "https://izhimpro.ru/.well-known/service-desc.json",
         "agentSkills": "https://izhimpro.ru/.well-known/agent-skills/index.json",
         "a2aAgentCard": "https://izhimpro.ru/.well-known/agent-card.json",

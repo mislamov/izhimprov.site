@@ -13,6 +13,8 @@
     "agentSkillsUrl": "https://izhimpro.ru/.well-known/agent-skills/index.json",
     "a2aAgentCardUrl": "https://izhimpro.ru/.well-known/agent-card.json",
     "mcpServerCardUrl": "https://izhimpro.ru/.well-known/mcp/server-card.json",
+    "apiCatalogUrl": "https://izhimpro.ru/.well-known/api-catalog.json",
+    "apiCatalogLegacyUrl": "https://izhimpro.ru/.well-known/api-catalog",
     "oauthProtectedResourceUrl": "https://izhimpro.ru/.well-known/oauth-protected-resource",
     "oauthAuthorizationServerUrl": "https://izhimpro.ru/.well-known/oauth-authorization-server"
   },
