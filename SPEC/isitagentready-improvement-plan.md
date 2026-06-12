@@ -20,6 +20,21 @@ Observed on 2026-06-12:
 - API, Auth, MCP & Skill Discovery: `5/7`
 - Commerce: not checked
 
+## Realistic Ceiling Without Proxying
+
+Conservative score expectation while keeping the apex site DNS-only:
+
+- Phase 1 may recover one API/Auth point if `/auth.md` is accepted.
+- Phases 2, 3, and 5 are expected to add `0` direct scanner points, though they can improve real-agent usability and metadata quality.
+- Phase 7 may recover one WebMCP point if implemented inline and detected.
+- The Content `0/1` Markdown Negotiation point is not realistically reachable on the apex site without an edge or hosting layer that can vary the homepage by `Accept: text/markdown`.
+
+Expected practical range:
+
+- Conservative static-only work: about `73-75`.
+- With successful inline WebMCP: about `76-78`.
+- Higher scores likely require routing or response-header capabilities that are currently rejected by the stability constraints.
+
 Production routing baseline:
 
 - `izhimpro.ru` apex is DNS-only in Cloudflare.
@@ -84,7 +99,8 @@ Change:
 Verification:
 
 - `GET https://izhimpro.ru/auth.md` returns `200`.
-- `Content-Type` may be GitHub Pages default for Markdown; scanner currently accepts the document presence check as the key factor.
+- Record the exact `Content-Type`. GitHub Pages may serve `.md` as `text/plain` rather than `text/markdown`.
+- If the scanner requires `Content-Type: text/markdown`, do not add a proxy just for this point; document the failed check and leave the static file in place only if it is useful for real agents.
 - Run the performance gate.
 - Rescan `https://isitagentready.com/izhimpro.ru`.
 
@@ -131,8 +147,8 @@ Risk:
 
 Expected score impact:
 
-- May partially compensate for missing HTTP `Link` headers for agents that parse HTML.
-- May not improve `isitagentready` if the scanner requires response headers only.
+- Expected direct `isitagentready` score impact: `0`.
+- This phase is for real agents and crawlers that parse HTML. It should not be treated as a replacement for HTTP `Link:` response headers.
 
 Change:
 
@@ -157,7 +173,7 @@ Verification:
 - Homepage remains visually unchanged.
 - Browser navigation remains stable.
 - Run the performance gate.
-- Rescan and record whether the `Link headers` score changes. If it does not, keep the links only if they are useful for real agents and harmless.
+- Rescan and record whether the `Link headers` score changes, but assume it will not. If it does not, keep the links only if they are useful for real agents and harmless.
 
 Rollback:
 
@@ -167,11 +183,12 @@ Risk:
 
 - Low to medium. HTML-only, but scanner may not count it.
 
-## Phase 4: DNS-AID Dedicated Protocol Records
+## Phase 4: DNS-AID Dedicated Protocol Records (Blocked Until Stable Targets Exist)
 
 Expected score impact:
 
-- Discoverability may improve from `3/4` to `4/4` if the missing point is related to dedicated `_a2a` or `_mcp` records.
+- Current direct score impact: `0`, because stable direct HTTP targets do not exist for `/a2a` and `/mcp`.
+- Later, Discoverability may improve from `3/4` to `4/4` if the missing point is related to dedicated `_a2a` or `_mcp` records.
 
 Current scanner detail:
 
@@ -181,7 +198,7 @@ Current scanner detail:
 
 Change:
 
-- Add DNS-AID HTTPS records for dedicated protocol entrypoints only if the corresponding HTTP endpoints are real and stable.
+- Later: add DNS-AID HTTPS records for dedicated protocol entrypoints only if the corresponding HTTP endpoints are real and stable.
 - Because the apex is DNS-only and `/a2a` and `/mcp` are currently Worker-only concepts, do not publish records pointing to broken `https://izhimpro.ru/a2a` or `https://izhimpro.ru/mcp`.
 
 Safe prerequisite:
@@ -284,10 +301,9 @@ Risk:
 3. Phase 3: add static HTML discovery links if harmless.
 4. Rescan and stop if the score is acceptable.
 5. Phase 7 only if WebMCP is truly useful to users or agents.
-6. Phase 4 only after stable targets exist.
+6. Phase 4 only after stable direct targets exist.
 7. Phase 6 only on a test hostname.
 
 ## Stop Condition
 
 Stop improving the scanner score when the next available point requires broad proxying, edge HTML rewriting for all traffic, or any routing change that moves normal website delivery away from direct GitHub Pages.
-
