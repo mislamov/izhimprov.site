@@ -1,5 +1,5 @@
 import { fetchScheduledLessons } from "./alfacrm.js";
-import { buildCalendarIcs } from "./ics.js";
+import { buildCalendarIcs, normalizeLesson } from "./ics.js";
 
 const ICS_KEY = "calendar:alfacrm:ics";
 const META_KEY = "calendar:alfacrm:meta";
@@ -137,6 +137,72 @@ async function handleCalendar(request, env) {
   });
 }
 
+async function isAuthorized(request, env) {
+  const url = new URL(request.url);
+  return safeSecretEquals(url.searchParams.get("token"), env.CALENDAR_SECRET);
+}
+
+async function handleManualSync(request, env) {
+  if (!(await isAuthorized(request, env))) {
+    return new Response("Forbidden", {
+      status: 403,
+      headers: {
+        "Cache-Control": "no-cache"
+      }
+    });
+  }
+
+  try {
+    const meta = await syncCalendar(env);
+    return jsonResponse({
+      ok: true,
+      sync_status: meta.status,
+      generated_at: meta.generated_at,
+      lesson_count: meta.lesson_count,
+      date_from: meta.date_from,
+      date_to: meta.date_to
+    });
+  } catch (error) {
+    await recordSyncFailure(env, error);
+    return jsonResponse(
+      {
+        ok: false,
+        error: sanitizeError(error)
+      },
+      502
+    );
+  }
+}
+
+async function handleDebugLesson(request, env) {
+  if (!(await isAuthorized(request, env))) {
+    return new Response("Forbidden", {
+      status: 403,
+      headers: {
+        "Cache-Control": "no-cache"
+      }
+    });
+  }
+
+  const url = new URL(request.url);
+  const lessonId = Number(url.searchParams.get("id"));
+  if (!Number.isFinite(lessonId)) {
+    return jsonResponse({ ok: false, error: "Invalid id" }, 400);
+  }
+
+  const { lessons } = await fetchScheduledLessons(env);
+  const lesson = lessons.find((item) => Number(item.id) === lessonId);
+  if (!lesson) {
+    return jsonResponse({ ok: false, error: "Lesson not found" }, 404);
+  }
+
+  return jsonResponse({
+    ok: true,
+    lesson,
+    normalized: normalizeLesson(lesson, env.CALENDAR_TIMEZONE || "Europe/Samara")
+  });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -147,6 +213,17 @@ export default {
 
     if (request.method === "GET" && url.pathname === "/calendar/alfacrm.ics") {
       return handleCalendar(request, env);
+    }
+
+    if (
+      (request.method === "POST" || request.method === "GET") &&
+      url.pathname === "/admin/run-sync"
+    ) {
+      return handleManualSync(request, env);
+    }
+
+    if (request.method === "GET" && url.pathname === "/admin/debug-lesson") {
+      return handleDebugLesson(request, env);
     }
 
     return new Response("Not found", { status: 404 });
@@ -163,4 +240,12 @@ export default {
   }
 };
 
-export { handleCalendar, handleHealth, recordSyncFailure, sanitizeError, syncCalendar };
+export {
+  handleCalendar,
+  handleDebugLesson,
+  handleHealth,
+  handleManualSync,
+  recordSyncFailure,
+  sanitizeError,
+  syncCalendar
+};

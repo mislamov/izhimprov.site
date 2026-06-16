@@ -25,9 +25,34 @@ test("normalizeLesson builds stable UID and times", () => {
   );
 
   assert.equal(lesson.uid, "alfacrm-lesson-77@improizh.s20.online");
-  assert.equal(lesson.summary, "Improvisation - Scene work");
+  assert.equal(lesson.summary, "Scene work");
   assert.equal(lesson.start.toISOString(), "2026-06-18T15:00:00.000Z");
   assert.equal(lesson.end.toISOString(), "2026-06-18T17:00:00.000Z");
+});
+
+test("normalizeLesson falls back to lesson type and teacher when topic is absent", () => {
+  const lesson = normalizeLesson(
+    {
+      id: 80,
+      date: "2026-06-16",
+      time_from: "2026-06-16 20:00:01",
+      time_to: "2026-06-16 23:00:00",
+      teachers: [{ name: "Исламов Марат Шамилевич" }],
+      room_name: "Советская",
+      lesson_type_name: "Командный"
+    },
+    "Europe/Samara"
+  );
+
+  assert.equal(lesson.summary, "Командный • Исламов Марат");
+  assert.equal(lesson.location, "Советская");
+  assert.equal(
+    lesson.description,
+    [
+      "Преподаватель: Исламов Марат Шамилевич",
+      "Тип занятия: Командный"
+    ].join("\n")
+  );
 });
 
 test("buildCalendarIcs emits required calendar properties", () => {

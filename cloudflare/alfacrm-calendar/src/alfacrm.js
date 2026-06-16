@@ -1,6 +1,7 @@
 import { addDays, formatDateInTimeZone } from "./time.js";
 
 const AUTH_CACHE_KEY = "calendar:alfacrm:auth";
+const LOOKUP_CACHE_PREFIX = "calendar:lookup:";
 const DEFAULT_HTTP_TIMEOUT_MS = 10000;
 const DEFAULT_TOKEN_TTL_SECONDS = 3300;
 
@@ -252,6 +253,165 @@ async function postAlfa(env, path, body, options = {}) {
   return response.json();
 }
 
+async function fetchIndexItems(env, resourcePath, body = { page: 0 }) {
+  const payload = await postAlfa(env, resourcePath, body);
+  return extractLessonItems(payload);
+}
+
+async function getLookupCache(env, cacheKey) {
+  return (await env.CALENDAR_CACHE.get(cacheKey, "json")) || {};
+}
+
+async function putLookupCache(env, cacheKey, value) {
+  await env.CALENDAR_CACHE.put(cacheKey, JSON.stringify(value));
+}
+
+function cacheKeyForLookup(name) {
+  return `${LOOKUP_CACHE_PREFIX}${name}`;
+}
+
+function minimalLookupEntry(kind, item) {
+  if (kind === "teacher") {
+    return {
+      id: item.id,
+      name: item.name
+    };
+  }
+
+  if (kind === "group") {
+    return {
+      id: item.id,
+      name: item.name,
+      teachers: Array.isArray(item.teachers)
+        ? item.teachers.map((teacher) => ({
+            id: teacher.id,
+            name: teacher.name
+          }))
+        : []
+    };
+  }
+
+  if (kind === "room") {
+    return {
+      id: item.id,
+      name: item.name,
+      note: item.note ?? ""
+    };
+  }
+
+  return item;
+}
+
+function collectLookupIds(lessons) {
+  const teacherIds = new Set();
+  const groupIds = new Set();
+  const roomIds = new Set();
+
+  for (const lesson of lessons) {
+    for (const id of lesson.teacher_ids ?? []) {
+      if (id !== null && id !== undefined && `${id}` !== "") {
+        teacherIds.add(Number(id));
+      }
+    }
+
+    for (const id of lesson.group_ids ?? []) {
+      if (id !== null && id !== undefined && `${id}` !== "") {
+        groupIds.add(Number(id));
+      }
+    }
+
+    if (lesson.room_id !== null && lesson.room_id !== undefined && `${lesson.room_id}` !== "") {
+      roomIds.add(Number(lesson.room_id));
+    }
+  }
+
+  return {
+    teacherIds,
+    groupIds,
+    roomIds
+  };
+}
+
+async function ensureLookupEntries(env, kind, resourcePath, requiredIds) {
+  const cacheKey = cacheKeyForLookup(kind);
+  const cache = await getLookupCache(env, cacheKey);
+  const missingIds = [...requiredIds].filter((id) => !cache[String(id)]);
+
+  if (!missingIds.length) {
+    return cache;
+  }
+
+  const items = await fetchIndexItems(env, resourcePath);
+  const nextCache = { ...cache };
+  for (const item of items) {
+    if (item?.id !== undefined && item?.id !== null) {
+      nextCache[String(item.id)] = minimalLookupEntry(kind, item);
+    }
+  }
+
+  await putLookupCache(env, cacheKey, nextCache);
+  return nextCache;
+}
+
+function indexById(items) {
+  const map = new Map();
+  for (const item of items) {
+    if (item?.id !== undefined && item?.id !== null) {
+      map.set(Number(item.id), item);
+    }
+  }
+  return map;
+}
+
+function cloneLesson(lesson) {
+  return JSON.parse(JSON.stringify(lesson));
+}
+
+export async function enrichLessons(env, lessons) {
+  const branchId = getBranchId(env);
+  const { teacherIds, groupIds, roomIds } = collectLookupIds(lessons);
+
+  const [teacherCache, groupCache, roomCache] = await Promise.all([
+    ensureLookupEntries(env, "teacher", `/v2api/${branchId}/teacher/index`, teacherIds),
+    ensureLookupEntries(env, "group", `/v2api/${branchId}/group/index`, groupIds),
+    ensureLookupEntries(env, "room", `/v2api/${branchId}/room/index`, roomIds)
+  ]);
+
+  const teacherById = indexById(Object.values(teacherCache));
+  const groupById = indexById(Object.values(groupCache));
+  const roomById = indexById(Object.values(roomCache));
+
+  return lessons.map((sourceLesson) => {
+    const lesson = cloneLesson(sourceLesson);
+    const primaryGroup = Array.isArray(lesson.group_ids) ? groupById.get(Number(lesson.group_ids[0])) : null;
+    const primaryRoom = roomById.get(Number(lesson.room_id));
+    const teacherItems = (lesson.teacher_ids ?? [])
+      .map((id) => teacherById.get(Number(id)))
+      .filter(Boolean);
+
+    if (primaryGroup) {
+      lesson.group = primaryGroup;
+      lesson.group_name = lesson.group_name || primaryGroup.name;
+      if (!teacherItems.length && Array.isArray(primaryGroup.teachers)) {
+        teacherItems.push(...primaryGroup.teachers);
+      }
+    }
+
+    if (primaryRoom) {
+      lesson.room = primaryRoom;
+      lesson.room_name = lesson.room_name || primaryRoom.name;
+      lesson.location_name = lesson.location_name || primaryRoom.note || "";
+    }
+
+    if (teacherItems.length) {
+      lesson.teachers = teacherItems;
+      lesson.teacher_name = lesson.teacher_name || teacherItems.map((item) => item.name).join(", ");
+    }
+
+    return lesson;
+  });
+}
+
 export function getCalendarWindow(env, now = new Date()) {
   const timeZone = requiredEnv(env, "CALENDAR_TIMEZONE");
   const today = formatDateInTimeZone(now, timeZone);
@@ -295,7 +455,7 @@ export async function fetchScheduledLessons(env, now = new Date()) {
   }
 
   return {
-    lessons,
+    lessons: await enrichLessons(env, lessons),
     dateFrom,
     dateTo,
     total: totals[totals.length - 1] ?? lessons.length

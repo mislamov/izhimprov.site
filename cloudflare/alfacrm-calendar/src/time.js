@@ -1,5 +1,9 @@
 const DATE_PARTS_FORMATTER_CACHE = new Map();
 
+export function isValidDate(value) {
+  return value instanceof Date && !Number.isNaN(value.getTime());
+}
+
 function getFormatter(timeZone) {
   if (!DATE_PARTS_FORMATTER_CACHE.has(timeZone)) {
     DATE_PARTS_FORMATTER_CACHE.set(
@@ -60,6 +64,17 @@ export function zonedDateTimeToUtc(dateString, timeString, timeZone) {
   const [year, month, day] = dateString.split("-").map(Number);
   const [hours, minutes, seconds = "00"] = normalizedTime.split(":");
 
+  if (
+    !Number.isFinite(year) ||
+    !Number.isFinite(month) ||
+    !Number.isFinite(day) ||
+    !Number.isFinite(Number(hours)) ||
+    !Number.isFinite(Number(minutes)) ||
+    !Number.isFinite(Number(seconds))
+  ) {
+    return new Date(Number.NaN);
+  }
+
   let guess = Date.UTC(
     year,
     month - 1,
@@ -103,7 +118,7 @@ export function parseApiDateTime(value, fallbackTimeZone) {
 
   if (/[zZ]$|[+-]\d{2}:\d{2}$/.test(trimmed)) {
     const date = new Date(trimmed);
-    return Number.isNaN(date.getTime()) ? null : date;
+    return isValidDate(date) ? date : null;
   }
 
   const match = trimmed.match(
@@ -118,5 +133,5 @@ export function parseApiDateTime(value, fallbackTimeZone) {
   }
 
   const parsed = new Date(trimmed);
-  return Number.isNaN(parsed.getTime()) ? null : parsed;
+  return isValidDate(parsed) ? parsed : null;
 }
