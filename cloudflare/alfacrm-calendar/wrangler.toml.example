@@ -1,0 +1,20 @@
+name = "izhimpro-alfacrm-calendar"
+main = "src/index.js"
+compatibility_date = "2026-06-16"
+
+routes = [
+  { pattern = "calendar.izhimpro.ru/*", custom_domain = true }
+]
+
+kv_namespaces = [
+  { binding = "CALENDAR_CACHE", id = "replace-with-kv-namespace-id", preview_id = "replace-with-kv-preview-id" }
+]
+
+[triggers]
+crons = ["0 * * * *"]
+
+[vars]
+ALFACRM_BASE_URL = "https://improizh.s20.online"
+ALFACRM_BRANCH_ID = "1"
+CALENDAR_DAYS_FORWARD = "180"
+CALENDAR_TIMEZONE = "Europe/Samara"

@@ -17,7 +17,8 @@
   <meta name="theme-color" content="#131313">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="api-catalog" href="/.well-known/api-catalog" type="application/linkset+json">
+  <link rel="api-catalog" href="/.well-known/api-catalog.json" type="application/json">
+  <link rel="alternate" href="/.well-known/api-catalog" type="application/linkset+json" title="Legacy API catalog URL">
   <link rel="alternate" href="/.well-known/agents-index.json" type="application/json" title="DNS-AID organization index">
   <link rel="service-desc" href="/.well-known/service-desc.json" type="application/openapi+json">
   <link rel="describedby" href="/.well-known/site-description.json" type="application/json">
@@ -277,6 +278,108 @@
   </div>
 
   <script src="/assets/js/analytics.js" defer></script>
+  <script>
+    (() => {
+      const contexts = [document.modelContext, navigator.modelContext]
+        .filter((context, index, items) => context && items.indexOf(context) === index);
+      if (!contexts.length) {
+        return;
+      }
+
+      const tools = [
+        {
+          name: "get_site_overview",
+          description: "Return the main public sections of the IzhImpro website for quick navigation.",
+          inputSchema: {
+            type: "object",
+            additionalProperties: false,
+            properties: {}
+          },
+          execute: async () => ({
+            organization: "IzhImpro",
+            city: "Izhevsk",
+            audience: "Adults with or without stage experience",
+            sections: [
+              { name: "Trial lesson", url: "https://izhimpro.ru/try/" },
+              { name: "Course level 1", url: "https://izhimpro.ru/course/level-1/" },
+              { name: "Corporate workshops", url: "https://izhimpro.ru/corporate/" },
+              { name: "Coaches", url: "https://izhimpro.ru/coaches/" },
+              { name: "FAQ", url: "https://izhimpro.ru/faq/" },
+              { name: "Contacts", url: "https://izhimpro.ru/contacts/" }
+            ]
+          })
+        },
+        {
+          name: "get_legal_links",
+          description: "Return current public legal document URLs for the IzhImpro website.",
+          inputSchema: {
+            type: "object",
+            additionalProperties: false,
+            properties: {
+              document: {
+                type: "string",
+                enum: ["offer", "privacy", "payment", "rules", "all"]
+              }
+            }
+          },
+          execute: async (args = {}) => {
+            const links = {
+              offer: "https://izhimpro.ru/legal/offer/",
+              privacy: "https://izhimpro.ru/legal/privacy/",
+              payment: "https://izhimpro.ru/legal/payment/",
+              rules: "https://izhimpro.ru/rules/"
+            };
+            const selected = args.document || "all";
+            return selected === "all"
+              ? links
+              : { document: selected, url: links[selected] || null };
+          }
+        },
+        {
+          name: "get_contact_path",
+          description: "Return the public contact channel for a real user request to IzhImpro.",
+          inputSchema: {
+            type: "object",
+            additionalProperties: false,
+            properties: {
+              purpose: {
+                type: "string",
+                enum: ["trial", "course", "corporate", "general"]
+              }
+            }
+          },
+          execute: async (args = {}) => ({
+            purpose: args.purpose || "general",
+            contactsPage: "https://izhimpro.ru/contacts/",
+            trialPage: "https://izhimpro.ru/try/",
+            email: "info@izhimpro.ru"
+          })
+        }
+      ];
+
+      for (const context of contexts) {
+        if (typeof context.provideContext === "function") {
+          try {
+            const result = context.provideContext({ tools });
+            if (result && typeof result.catch === "function") {
+              result.catch(() => {});
+            }
+          } catch {}
+        }
+
+        if (typeof context.registerTool === "function") {
+          for (const tool of tools) {
+            try {
+              const result = context.registerTool(tool);
+              if (result && typeof result.catch === "function") {
+                result.catch(() => {});
+              }
+            } catch {}
+          }
+        }
+      }
+    })();
+  </script>
   <script src="/assets/js/mobile-nav.js" defer></script>
 </body>
 </html>

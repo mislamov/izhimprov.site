@@ -1,0 +1,33 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://dark-brook-67a3.islamov-marat.workers.dev/",
+      "service-desc": [
+        {
+          "href": "https://izhimpro.ru/.well-known/service-desc.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://izhimpro.ru/faq/",
+          "type": "text/html"
+        },
+        {
+          "href": "https://izhimpro.ru/contacts/",
+          "type": "text/html"
+        },
+        {
+          "href": "https://izhimpro.ru/legal/privacy/",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://izhimpro.ru/.well-known/form-service-status.json",
+          "type": "application/health+json"
+        }
+      ]
+    }
+  ]
+}

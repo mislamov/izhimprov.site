@@ -18,7 +18,8 @@ const AUTH_MD = [
   "",
   "- Site description: https://izhimpro.ru/.well-known/site-description.json",
   "- Agents index: https://izhimpro.ru/.well-known/agents-index.json",
-  "- API catalog: https://izhimpro.ru/.well-known/api-catalog",
+  "- API catalog: https://izhimpro.ru/.well-known/api-catalog.json",
+  "- Legacy API catalog URL: https://izhimpro.ru/.well-known/api-catalog",
   "- Lead form service description: https://izhimpro.ru/.well-known/service-desc.json",
   "- MCP server card: https://izhimpro.ru/.well-known/mcp/server-card.json",
   "- A2A agent card: https://izhimpro.ru/.well-known/agent-card.json",
@@ -106,7 +107,7 @@ const SUBMIT_LEAD_FORM_SKILL = [
   "",
   "## API discovery",
   "",
-  "- API catalog: https://izhimpro.ru/.well-known/api-catalog",
+  "- API catalog: https://izhimpro.ru/.well-known/api-catalog.json",
   "- Service description: https://izhimpro.ru/.well-known/service-desc.json",
   "",
   "## Request shape",
@@ -194,7 +195,7 @@ const STATIC_DOCUMENTS = {
     body: JSON.stringify({
       serverInfo: {
         name: "IzhImpro Public Site MCP",
-        version: "2026-06-11"
+        version: "2026-06-12"
       },
       endpoint: "https://izhimpro.ru/mcp",
       capabilities: {
@@ -208,7 +209,7 @@ const STATIC_DOCUMENTS = {
     contentType: "application/json; charset=utf-8",
     body: JSON.stringify({
       name: "IzhImpro Public Agent",
-      version: "2026-06-11",
+      version: "2026-06-12",
       description: "Agent-facing discovery card for the IzhImpro public website and lead submission workflow.",
       supportedInterfaces: [
         {
@@ -285,7 +286,8 @@ const STATIC_DOCUMENTS = {
   }
 };
 const DISCOVERY_LINKS = [
-  '<https://izhimpro.ru/.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
+  '<https://izhimpro.ru/.well-known/api-catalog.json>; rel="api-catalog"; type="application/json"',
+  '<https://izhimpro.ru/.well-known/api-catalog>; rel="alternate"; type="application/linkset+json"; title="Legacy API catalog URL"',
   '<https://izhimpro.ru/.well-known/agents-index.json>; rel="alternate"; type="application/json"; title="DNS-AID organization index"',
   '<https://izhimpro.ru/.well-known/site-description.json>; rel="describedby"; type="application/json"',
   '<https://izhimpro.ru/.well-known/service-desc.json>; rel="service-desc"; type="application/openapi+json"',
@@ -556,7 +558,7 @@ async function handleMcpRequest(request, method) {
       },
       serverInfo: {
         name: "IzhImpro Public Site MCP",
-        version: "2026-06-11"
+        version: "2026-06-12"
       }
     });
   }
@@ -576,7 +578,7 @@ async function handleMcpRequest(request, method) {
           mimeType: "application/json"
         },
         {
-          uri: "https://izhimpro.ru/.well-known/api-catalog",
+          uri: "https://izhimpro.ru/.well-known/api-catalog.json",
           name: "API catalog",
           mimeType: "application/linkset+json"
         },
@@ -593,7 +595,7 @@ async function handleMcpRequest(request, method) {
     const requestedUri = payload.params?.uri;
     const allowedUris = new Set([
       "https://izhimpro.ru/.well-known/site-description.json",
-      "https://izhimpro.ru/.well-known/api-catalog",
+      "https://izhimpro.ru/.well-known/api-catalog.json",
       "https://izhimpro.ru/.well-known/service-desc.json"
     ]);
 

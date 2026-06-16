@@ -1,0 +1,3 @@
+ALFACRM_EMAIL=replace-with-alfacrm-email
+ALFACRM_API_KEY=replace-with-alfacrm-api-key
+CALENDAR_SECRET=replace-with-long-random-secret

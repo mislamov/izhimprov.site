@@ -4,6 +4,9 @@
 .windsurf
 .claude
 .secrets
+cloudflare/alfacrm-calendar/.dev.vars
+cloudflare/alfacrm-calendar/node_modules/
+cloudflare/alfacrm-calendar/.wrangler/
 scripts
 TOOLS.md
 
@@ -25,3 +28,4 @@ scripts/*
 !scripts/deploy-agent-ready-worker.ps1
 !SPEC/markdown-for-agents.md
 !cloudflare-agent-ready-worker.js
+!cloudflare/alfacrm-calendar/README.md
