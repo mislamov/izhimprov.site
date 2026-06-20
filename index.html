@@ -54,14 +54,67 @@
   <main>
     <section class="hero section-accent">
       <div class="spotlight"></div>
+      <div class="hero-flash" aria-hidden="true"></div>
+      <picture>
+        <source srcset="/assets/img/comunity3.webp" type="image/webp">
+        <img class="hero-bg" src="/assets/img/comunity3.png" alt="" aria-hidden="true" fetchpriority="high">
+      </picture>
+      <div class="hero-overlay" aria-hidden="true"></div>
       <div class="container hero-content">
-        <img class="hero-logo" src="/assets/img/logo_tr.png" alt="Школа Ижевского Импрова">
-        <span class="badge">Ижевск · занятия для взрослых · пробное каждое воскресенье</span>
-        <h1>Импровизация для тех, кто хочет проявляться свободнее</h1>
-        <p class="lead">Учимся играть, слышать партнёра, выходить на сцену и находить себя в моменте. В принимающей группе, через практику и живой контакт.</p>
-        <div class="btn-row">
-          <a class="btn-primary" href="/try/#form" data-track="cta_try_click_hero">Записаться на пробное</a>
-          <a class="btn-secondary" href="/course/level-1/" data-track="cta_course_click_home">Посмотреть курс</a>
+        <div class="hero-left">
+          <img class="hero-logo" src="/assets/img/logo_tr.png" alt="Школа Ижевского Импрова">
+          <span class="badge">Ижевск · занятия для взрослых · пробное каждое воскресенье</span>
+          <h1>Импровизация для тех, кто хочет проявляться свободнее</h1>
+          <p class="lead">Учимся играть, слышать партнёра, выходить на сцену и находить себя в моменте. В принимающей группе, через практику и живой контакт.</p>
+          <div class="btn-row">
+            <a class="btn-primary" href="/try/#form" data-track="cta_try_click_hero">Записаться на пробное</a>
+            <a class="btn-secondary" href="/course/level-1/" data-track="cta_course_click_home">Посмотреть курс</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="perks-section">
+      <div class="container">
+        <div class="perks-row">
+          <div class="perk-item">
+            <span class="perk-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+                <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+                <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
+              </svg>
+            </span>
+            <span>Реальные группы<br>без опыта</span>
+          </div>
+          <div class="perk-item">
+            <span class="perk-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.566" />
+              </svg>
+            </span>
+            <span>Бережный вход<br>и поддержка</span>
+          </div>
+          <div class="perk-item">
+            <span class="perk-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 20h16" />
+                <path d="M20 16v-10a2 2 0 0 0 -2 -2h-12a2 2 0 0 0 -2 2v10l4 -6c2.667 1.333 5.333 1.333 8 0l4 6" />
+              </svg>
+            </span>
+            <span>Практика<br>каждую неделю</span>
+          </div>
+          <div class="perk-item">
+            <span class="perk-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275l5.813 1.912l-5.813 1.912a2 2 0 0 0 -1.275 1.275l-1.912 5.813l-1.912 -5.813a2 2 0 0 0 -1.275 -1.275l-5.813 -1.912l5.813 -1.912a2 2 0 0 0 1.275 -1.275z" />
+              </svg>
+            </span>
+            <span>Выпускные шоу<br>и сцена</span>
+          </div>
         </div>
       </div>
     </section>
@@ -99,12 +152,12 @@
           <article class="card benefit-card">
             <span class="benefit-icon" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M4 20h16" />
-                <path d="M20 16v-10a2 2 0 0 0 -2 -2h-12a2 2 0 0 0 -2 2v10l4 -6c2.667 1.333 5.333 1.333 8 0l4 6" />
+                <path d="M12 6a3 3 0 0 0 -3 3v1h-1a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6a2 2 0 0 0 -2 -2h-1v-1a3 3 0 0 0 -3 -3z" />
+                <path d="M12 15v2" />
               </svg>
             </span>
-            <h3>Свободнее на сцене</h3>
-            <p class="small">Привыкаем быть видимыми без ощущения экзамена.</p>
+            <h3>Больше уверенности</h3>
+            <p class="small">Выходим на сцену без страха и самокритики.</p>
           </article>
           <article class="card benefit-card">
             <span class="benefit-icon" aria-hidden="true">
@@ -112,8 +165,8 @@
                 <path d="M3 12h4.5l1.5 -6l4 12l2 -9l1.5 3h4.5" />
               </svg>
             </span>
-            <h3>Живее в жизни</h3>
-            <p class="small">Быстрее реагируем, легче общаемся, проще пробуем новое.</p>
+            <h3>Больше жизни</h3>
+            <p class="small">Импровизация помогает быть в моменте и в кайф.</p>
           </article>
         </div>
       </div>
