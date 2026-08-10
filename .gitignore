@@ -29,3 +29,6 @@ scripts/*
 !SPEC/markdown-for-agents.md
 !cloudflare-agent-ready-worker.js
 !cloudflare/alfacrm-calendar/README.md
+
+.playwright-*
+assets/img/.picasa*
