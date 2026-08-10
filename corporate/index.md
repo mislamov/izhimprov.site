@@ -56,7 +56,7 @@ canonical: https://izhimpro.ru/corporate/
 
 Имя Телефон Telegram или email Компания
 
-Я согласен(-а) с [политикой конфиденциальности](/legal/privacy/) и [офертой](/legal/offer-2026-06-03/) <span type="submit">Обсудить формат</span>
+Я согласен(-а) с [политикой конфиденциальности](/legal/privacy/) и [офертой](/legal/offer-corporate/) <span type="submit">Обсудить формат</span>
 
 Заявка принята! Мы свяжемся с вами в ближайшее время.
 
