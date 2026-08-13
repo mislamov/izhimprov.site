@@ -313,13 +313,12 @@ summary:focus-visible {
 
 .hero-bg {
   position: absolute;
-  right: max(24px, calc((100% - var(--container-max)) / 2));
-  top: 50%;
-  transform: translateY(-50%);
-  height: 70%;
-  width: 34%;
-  object-fit: cover;
-  border-radius: 16px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: unset;
   z-index: 0;
   display: block;
 }
