@@ -55,6 +55,23 @@ test("normalizeLesson falls back to lesson type and teacher when topic is absent
   );
 });
 
+test("normalizeLesson uses event note as the title for entertainment events", () => {
+  const lesson = normalizeLesson(
+    {
+      id: 881,
+      date: "2026-10-02",
+      time_from: "19:00:01",
+      time_to: "22:00:00",
+      lesson_type_name: "Развлекательное мероприятие ",
+      topic: "",
+      note: "Мафия"
+    },
+    "Europe/Samara"
+  );
+
+  assert.equal(lesson.summary, "Мафия");
+});
+
 test("buildCalendarIcs emits required calendar properties", () => {
   const ics = buildCalendarIcs(
     [

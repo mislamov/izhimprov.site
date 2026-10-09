@@ -108,7 +108,16 @@ function extractLessonType(lesson) {
 }
 
 function extractTopic(lesson) {
-  return firstNonEmpty(lesson.topic, lesson.theme, lesson.subject_topic);
+  const topic = firstNonEmpty(lesson.topic, lesson.theme, lesson.subject_topic);
+  if (topic) {
+    return topic;
+  }
+
+  if (extractLessonType(lesson) === "Развлекательное мероприятие") {
+    return firstNonEmpty(lesson.note);
+  }
+
+  return "";
 }
 
 function extractStartAndEnd(lesson, timeZone) {
