@@ -24,6 +24,7 @@ WORK
 !scripts/
 scripts/*
 !scripts/generate_markdown.py
+!scripts/generate_brand_assets.py
 !scripts/check-markdown-negotiation.ps1
 !scripts/deploy-agent-ready-worker.ps1
 !SPEC/markdown-for-agents.md

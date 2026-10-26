@@ -16,6 +16,7 @@ The Cloudflare Worker implementation is retained for dedicated agent endpoints, 
 
 - `scripts/generate_markdown.py` generates `*.md` sidecar files from the public HTML pages.
 - Pages with `<meta name="markdown-generation" content="manual">` retain their hand-written Markdown sidecar. The generator requires that file to exist and never replaces it. Use this for concise agent instructions that differ from the rendered HTML.
+- Refresh a brand kit's local `assets.json` after changing its files with `python scripts/generate_brand_assets.py <kit-directory> <public-kit-url>`. This catalogs direct files and CSS tokens without adding the kit to public navigation or agent discovery. Text-file checksums and sizes use the LF bytes published by Git. The script requires Pillow for raster dimensions.
 - `cloudflare-agent-ready-worker.js` handles dedicated agent endpoints and can proxy repository files when invoked on a Worker route:
   - maps human URLs such as `/faq/` to repo files such as `/faq/index.html`
   - maps Markdown negotiation to sidecars such as `/faq/index.md`
