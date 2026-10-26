@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "name": "Школа Ижевского Импрова — файлы бренда",
+  "guide_url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/index.md",
+  "access": "unlisted; direct GET; no authentication; do not add to public discovery",
+  "checksum": "SHA-256 of the published file bytes; text uses LF line endings",
+  "assets": [
+    {
+      "id": "avatar-black",
+      "purpose": "Чёрный аватар",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/avatar-black.png",
+      "media_type": "image/png",
+      "bytes": 82845,
+      "sha256": "8f3c350a778b8424b9ef3ca76e039c332be5af9ab329887c216edbc5b596623a",
+      "width": 1125,
+      "height": 1125
+    },
+    {
+      "id": "avatar-gradient",
+      "purpose": "Градиентный аватар",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/avatar-gradient.png",
+      "media_type": "image/png",
+      "bytes": 537971,
+      "sha256": "3436ca8c37f64e363c01db7e09f1132cb83a36754dfb9eadf61f2e79305242ae",
+      "width": 1125,
+      "height": 1125
+    },
+    {
+      "id": "avatar-orange",
+      "purpose": "Оранжевый аватар",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/avatar-orange.png",
+      "media_type": "image/png",
+      "bytes": 107441,
+      "sha256": "d9a31272519d5053fa6ff9a560a7a156b719b99d4493e1fd273817e99eb5196f",
+      "width": 1125,
+      "height": 1125
+    },
+    {
+      "id": "brand-assets",
+      "purpose": "ZIP: логотипы, графика, аватары; без шрифтов и брендбука",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/brand-assets.zip",
+      "media_type": "application/zip",
+      "bytes": 3449769,
+      "sha256": "ac09c23e9506321a018750b843778128106494e02f66f307d860a4f798437c7f"
+    },
+    {
+      "id": "brandbook",
+      "purpose": "Исходный брендбук, 23 страницы",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/brandbook.pdf",
+      "media_type": "application/pdf",
+      "bytes": 18364563,
+      "sha256": "9f262fcb9127d6a0f9d7d7f7e3e54096f06064b3a6cb0eec87f41e07e09e04ec"
+    },
+    {
+      "id": "example-14",
+      "purpose": "Посты и карусели, страница 14 PDF",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/example-14.webp",
+      "media_type": "image/webp",
+      "bytes": 44364,
+      "sha256": "9494a846e107c81f82f544628512ffa856ceabf48a43be0b1bf60c9104c54ddf",
+      "width": 1248,
+      "height": 702
+    },
+    {
+      "id": "example-15",
+      "purpose": "Анонсы и афиши, страница 15 PDF",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/example-15.webp",
+      "media_type": "image/webp",
+      "bytes": 44214,
+      "sha256": "77eff4e10db45613452fc292d960866a7233a15a72b1b58acd620b96382df779",
+      "width": 1248,
+      "height": 702
+    },
+    {
+      "id": "example-17",
+      "purpose": "Ролл-ап, страница 17 PDF",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/example-17.webp",
+      "media_type": "image/webp",
+      "bytes": 16670,
+      "sha256": "8d09c87d0274108c387a4da807996b15088c6984c6aeebc12e875b9d21a4e548",
+      "width": 1248,
+      "height": 702
+    },
+    {
+      "id": "example-18",
+      "purpose": "Свитшот, страница 18 PDF",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/example-18.webp",
+      "media_type": "image/webp",
+      "bytes": 60780,
+      "sha256": "74dce0cfa0529f0c2c87d827006560e737732a8006cf2275effdd1735b862833",
+      "width": 1248,
+      "height": 702
+    },
+    {
+      "id": "example-21",
+      "purpose": "Сумка, страница 21 PDF",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/example-21.webp",
+      "media_type": "image/webp",
+      "bytes": 37530,
+      "sha256": "015bb7466265a0c8240f5fd1bb58646cc92bcb04f2604e331d2dd166776ae88e",
+      "width": 1248,
+      "height": 702
+    },
+    {
+      "id": "example-23",
+      "purpose": "Сертификат, страница 23 PDF",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/example-23.webp",
+      "media_type": "image/webp",
+      "bytes": 60110,
+      "sha256": "2409b8006c8f15e2bd83172bed809f9f0d170062fdb55864cd29435a77313a27",
+      "width": 1248,
+      "height": 702
+    },
+    {
+      "id": "example-4",
+      "purpose": "Охранное поле, страница 4 PDF",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/example-4.webp",
+      "media_type": "image/webp",
+      "bytes": 34062,
+      "sha256": "826c04fc201436a3100c5d960f30e423a92b5c0519199e851307767e8c697206",
+      "width": 1248,
+      "height": 702
+    },
+    {
+      "id": "graphic-beam-gradient",
+      "purpose": "Фоновый градиентный луч",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/graphic-beam-gradient.png",
+      "media_type": "image/png",
+      "bytes": 378407,
+      "sha256": "8e0ad405387ab0bd08b615681e79193bd420950af1cef77344c0a131a3816df0",
+      "width": 1028,
+      "height": 1321
+    },
+    {
+      "id": "graphic-beam-gradient",
+      "purpose": "Фоновый градиентный луч",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/graphic-beam-gradient.svg",
+      "media_type": "image/svg+xml",
+      "bytes": 1590,
+      "sha256": "458127bf49cd5076f83928301eec57e90127576223ddcb5830c824cba2a20ef5"
+    },
+    {
+      "id": "graphic-beam-solid",
+      "purpose": "Фоновый луч с заливкой",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/graphic-beam-solid.png",
+      "media_type": "image/png",
+      "bytes": 19558,
+      "sha256": "1ef2b207b30c8630c8187f60dc80465033167ab01c4f57039d677c54cc5a572e",
+      "width": 1028,
+      "height": 1321
+    },
+    {
+      "id": "graphic-beam-solid",
+      "purpose": "Фоновый луч с заливкой",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/graphic-beam-solid.svg",
+      "media_type": "image/svg+xml",
+      "bytes": 183,
+      "sha256": "d539b0e4a78be618795ffa02451a41bb067bed9301717d0e174323e5f8d47e5f"
+    },
+    {
+      "id": "graphic-circle-gradient",
+      "purpose": "Фоновый градиентный круг",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/graphic-circle-gradient.png",
+      "media_type": "image/png",
+      "bytes": 576192,
+      "sha256": "53bc153f6ed0fd3ae04c97e7d4b53bdbffbe09481e0226d187eeb26061d503e6",
+      "width": 794,
+      "height": 794
+    },
+    {
+      "id": "graphic-circle-gradient",
+      "purpose": "Фоновый градиентный круг",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/graphic-circle-gradient.svg",
+      "media_type": "image/svg+xml",
+      "bytes": 1752,
+      "sha256": "b0310f2a73b23d1afaec63647dba8c264922b7f10d60dcefc4bc728c0ad539d6"
+    },
+    {
+      "id": "graphic-circle-solid",
+      "purpose": "Фоновый круг с заливкой",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/graphic-circle-solid.png",
+      "media_type": "image/png",
+      "bytes": 11667,
+      "sha256": "e27e23d8054430a951fa072501891b533e05cde63969440b39430445d11496d6",
+      "width": 794,
+      "height": 794
+    },
+    {
+      "id": "graphic-circle-solid",
+      "purpose": "Фоновый круг с заливкой",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/graphic-circle-solid.svg",
+      "media_type": "image/svg+xml",
+      "bytes": 228,
+      "sha256": "7a0c0359d58bb344d5d14a943a388bdb3033d43d615f4c86df9b46dc586cb7e7"
+    },
+    {
+      "id": "logo-halftone",
+      "purpose": "Альтернатива с полутонами, если градиент технически недоступен",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-halftone.pdf",
+      "media_type": "application/pdf",
+      "bytes": 311667,
+      "sha256": "298780deaa424c729a77dd3d4a9c3135d8d2255c15291975675edbcb522a8fae"
+    },
+    {
+      "id": "logo-halftone",
+      "purpose": "Альтернатива с полутонами, если градиент технически недоступен",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-halftone.png",
+      "media_type": "image/png",
+      "bytes": 134182,
+      "sha256": "c7b0042fc9dfc841319d8d14eb0d64473f02972b3f41e3599dece14ecf07e28e",
+      "width": 1415,
+      "height": 1437
+    },
+    {
+      "id": "logo-halftone",
+      "purpose": "Альтернатива с полутонами, если градиент технически недоступен",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-halftone.svg",
+      "media_type": "image/svg+xml",
+      "bytes": 973542,
+      "sha256": "9c1fdf0e050032ccfefea8edeaca1dfd77dbef8177349552de61175e6462a598"
+    },
+    {
+      "id": "logo-horizontal",
+      "purpose": "Горизонтальная компоновка с названием",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-horizontal.pdf",
+      "media_type": "application/pdf",
+      "bytes": 28015,
+      "sha256": "0a8eaa080a2a0b902054225c59f96dcc26f84401d7bde14c450698b0abb79bce"
+    },
+    {
+      "id": "logo-horizontal",
+      "purpose": "Горизонтальная компоновка с названием",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-horizontal.png",
+      "media_type": "image/png",
+      "bytes": 177148,
+      "sha256": "73db2e4cea7df0c684cccea827f2e20acce6b26be1eaa722d06208b9148f701a",
+      "width": 1609,
+      "height": 719
+    },
+    {
+      "id": "logo-horizontal",
+      "purpose": "Горизонтальная компоновка с названием",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-horizontal.svg",
+      "media_type": "image/svg+xml",
+      "bytes": 33122,
+      "sha256": "ede0b4090d58c664a6dc0a57a8ff2396e13406d9fb83fb5524d4924a1c6fb905"
+    },
+    {
+      "id": "logo-main",
+      "purpose": "Основной знак",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-main.pdf",
+      "media_type": "application/pdf",
+      "bytes": 105778,
+      "sha256": "0ee8749380bbb0146b2cd1194accc35b98b840a8b86eb34706a0bd4d55befe1a"
+    },
+    {
+      "id": "logo-main",
+      "purpose": "Основной знак",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-main.png",
+      "media_type": "image/png",
+      "bytes": 80577,
+      "sha256": "e60961c1ac35b347030512a27c8ebc1b434334c662ef1fb7393b2f147b08acc3",
+      "width": 399,
+      "height": 432
+    },
+    {
+      "id": "logo-main",
+      "purpose": "Основной знак",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-main.svg",
+      "media_type": "image/svg+xml",
+      "bytes": 10965,
+      "sha256": "61fbf74d80b5c4355c1c55d53d808ae4b57fe2a163338871bb78e01e15ca06f0"
+    },
+    {
+      "id": "logo-solid",
+      "purpose": "Одноцветная альтернатива для штампов, тиснения, шелкографии",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-solid.pdf",
+      "media_type": "application/pdf",
+      "bytes": 13260,
+      "sha256": "506f3241a5a2579b8b4ff824119adeaa1b31d8227db48e720697065cf1be7096"
+    },
+    {
+      "id": "logo-solid",
+      "purpose": "Одноцветная альтернатива для штампов, тиснения, шелкографии",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-solid.png",
+      "media_type": "image/png",
+      "bytes": 31258,
+      "sha256": "219ad73ad4bec80ecbc2e181b21268dff65807d042d1cf3cb7bb32329e2bebde",
+      "width": 796,
+      "height": 860
+    },
+    {
+      "id": "logo-solid",
+      "purpose": "Одноцветная альтернатива для штампов, тиснения, шелкографии",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-solid.svg",
+      "media_type": "image/svg+xml",
+      "bytes": 8949,
+      "sha256": "f3b41034cf2951811e6e714d2f76a2ceaff9b940926c1029b5dd30734021997b"
+    },
+    {
+      "id": "logo-vertical",
+      "purpose": "Вертикальная компоновка с названием",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-vertical.pdf",
+      "media_type": "application/pdf",
+      "bytes": 255757,
+      "sha256": "e652ccd6c1e7944e667a8f290d83ce970f5dc0332304d7204a349fa5d4a6daf8"
+    },
+    {
+      "id": "logo-vertical",
+      "purpose": "Вертикальная компоновка с названием",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-vertical.png",
+      "media_type": "image/png",
+      "bytes": 222770,
+      "sha256": "3b80e87d981b54e883be51fd9763091400b54f2cbf57a4e458afd8d7f7316f3e",
+      "width": 1052,
+      "height": 990
+    },
+    {
+      "id": "logo-vertical",
+      "purpose": "Вертикальная компоновка с названием",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/logo-vertical.svg",
+      "media_type": "image/svg+xml",
+      "bytes": 34339,
+      "sha256": "8781b403f3ae90af74482b9c31c848b4937d8c9aca6d5ae4e8a274fecb35a47b"
+    },
+    {
+      "id": "rubik-light",
+      "purpose": "Сноски, weight 300",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/rubik-light.ttf",
+      "media_type": "font/ttf",
+      "bytes": 206700,
+      "sha256": "c234fd2ebb995bceb5dbe8aa61567b8115c76cca81bf2884e5615d185c60e131"
+    },
+    {
+      "id": "rubik-light",
+      "purpose": "Сноски, weight 300",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/rubik-light.woff2",
+      "media_type": "font/woff2",
+      "bytes": 55564,
+      "sha256": "0780071c53ec52d81b1b66f20e4304b8780541deb2aa806a49320b861e8c6e5a"
+    },
+    {
+      "id": "rubik-medium",
+      "purpose": "Заголовки, weight 500",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/rubik-medium.ttf",
+      "media_type": "font/ttf",
+      "bytes": 208204,
+      "sha256": "99699974e6a8122584cc6c74a6b7e2c431cd4c82bc47e121cb0b5b864cdfdf0d"
+    },
+    {
+      "id": "rubik-medium",
+      "purpose": "Заголовки, weight 500",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/rubik-medium.woff2",
+      "media_type": "font/woff2",
+      "bytes": 61772,
+      "sha256": "9766e90e136e7306283db29ad2761fe2b29c4566f90d3a40bf9fb57b67b52222"
+    },
+    {
+      "id": "rubik-OFL",
+      "purpose": "Лицензия Rubik, SIL OFL 1.1",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/rubik-OFL.txt",
+      "media_type": "text/plain",
+      "bytes": 4384,
+      "sha256": "472cbe7c25441df63e9c7864b43eb3c0f4b3df950c66a76224e6cfe1eae843fb"
+    },
+    {
+      "id": "rubik-regular",
+      "purpose": "Основной текст, weight 400",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/rubik-regular.ttf",
+      "media_type": "font/ttf",
+      "bytes": 207632,
+      "sha256": "7839aacdcb2c000467353ab4bdf313e87f813ec8e2beb4f5d42fdbcd8b6edd6c"
+    },
+    {
+      "id": "rubik-regular",
+      "purpose": "Основной текст, weight 400",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/files/rubik-regular.woff2",
+      "media_type": "font/woff2",
+      "bytes": 61116,
+      "sha256": "63301c2862b6c76b7751d2b597745353b81fd5693071d60593b79cb162f990a6"
+    },
+    {
+      "id": "tokens",
+      "purpose": "CSS-переменные бренда и @font-face",
+      "url": "https://izhimpro.ru/brand-kit-7e3c91a6b2f4/tokens.css",
+      "media_type": "text/css",
+      "bytes": 807,
+      "sha256": "3a6db1209a9de7c39c90dbaa8c2aea563076f0e0bd033aa36ca945524aed137c"
+    }
+  ]
+}

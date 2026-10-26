@@ -869,3 +869,26 @@ h1 span {
 .hero-art {
   overflow:hidden
 }
+
+.agent-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 28px;
+  margin-bottom: 32px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #1d1d1b;
+}
+.agent-panel h2 { font-size: 24px; }
+.agent-panel p { font-size: 14px; max-width: 660px; margin-top: 12px; }
+.agent-panel .actions { margin-top: 0; flex-shrink: 0; }
+@media (max-width: 1000px) {
+  .agent-panel { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 680px) {
+  .agent-panel { padding: 24px; }
+  .agent-panel .actions { width: 100%; }
+  .agent-panel .button { width: 100%; }
+}

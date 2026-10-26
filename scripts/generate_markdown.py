@@ -154,6 +154,12 @@ def main() -> int:
     generated = 0
     for html_path in iter_html_files():
         md_path = target_path_for(html_path)
+        soup = BeautifulSoup(html_path.read_text(encoding="utf-8"), "html.parser")
+        if soup.find("meta", attrs={"name": "markdown-generation", "content": "manual"}):
+            if not md_path.is_file():
+                raise FileNotFoundError(f"Manual Markdown source is missing: {md_path}")
+            print(f"preserved manual {md_path.relative_to(ROOT)}")
+            continue
         md_path.write_text(render_markdown(html_path), encoding="utf-8")
         generated += 1
         print(f"generated {md_path.relative_to(ROOT)}")

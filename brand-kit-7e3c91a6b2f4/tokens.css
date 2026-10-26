@@ -1,0 +1,15 @@
+/* Brand tokens. Values follow the school's brandbook. */
+@font-face { font-family: Rubik; src: url('files/rubik-light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: Rubik; src: url('files/rubik-regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: Rubik; src: url('files/rubik-medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+:root {
+  --brand-color-dark: #131313;
+  --brand-color-light: #EEE7D5;
+  --brand-color-accent: #FE4D00;
+  --brand-font-family: Rubik, Arial, sans-serif;
+  --brand-weight-heading: 500;
+  --brand-weight-body: 400;
+  --brand-weight-caption: 300;
+  --brand-radius-panel: 16px;
+  --brand-radius-button: 9999px;
+}

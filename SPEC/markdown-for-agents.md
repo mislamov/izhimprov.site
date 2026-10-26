@@ -15,6 +15,7 @@ The Cloudflare Worker implementation is retained for dedicated agent endpoints, 
 ## What is implemented here
 
 - `scripts/generate_markdown.py` generates `*.md` sidecar files from the public HTML pages.
+- Pages with `<meta name="markdown-generation" content="manual">` retain their hand-written Markdown sidecar. The generator requires that file to exist and never replaces it. Use this for concise agent instructions that differ from the rendered HTML.
 - `cloudflare-agent-ready-worker.js` handles dedicated agent endpoints and can proxy repository files when invoked on a Worker route:
   - maps human URLs such as `/faq/` to repo files such as `/faq/index.html`
   - maps Markdown negotiation to sidecars such as `/faq/index.md`
