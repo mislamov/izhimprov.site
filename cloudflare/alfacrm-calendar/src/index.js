@@ -139,6 +139,10 @@ async function handleCalendar(request, env) {
 
 async function isAuthorized(request, env) {
   const url = new URL(request.url);
+  const authorization = request.headers.get('Authorization') || '';
+  if (authorization.startsWith('Bearer ') && env.PRIMARY_CRM_CALENDAR_TOKEN?.length >= 32) {
+    return safeSecretEquals(authorization.slice(7), env.PRIMARY_CRM_CALENDAR_TOKEN);
+  }
   return safeSecretEquals(url.searchParams.get("token"), env.CALENDAR_SECRET);
 }
 
