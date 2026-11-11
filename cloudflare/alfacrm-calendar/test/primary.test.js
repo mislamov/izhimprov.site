@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { fetchScheduledLessons } from '../src/primary.js';
 import { buildCalendarIcs, normalizeLesson } from '../src/ics.js';
-import { syncCalendar, handleCalendar } from '../src/index.js';
+import { syncCalendar, handleCalendar, handleManualSync } from '../src/index.js';
 
 const env = { PRIMARY_CRM_URL:'https://crm.example.test', PRIMARY_CRM_CALENDAR_TOKEN:'synthetic-token'.padEnd(40,'x') };
 const row = { id:77, calendar_uid:'alfacrm-lesson-77@improizh.s20.online', date:'2026-11-04',
@@ -51,4 +51,16 @@ test('new primary cache cannot publish an old private Alfa calendar', async () =
   const response = await handleCalendar(new Request('https://calendar.example.test/calendar/crm.ics?token=synthetic-feed-token'),runtime);
   assert.equal(response.status,503);
   assert.doesNotMatch(await response.text(),/SECRET_CLIENT/);
+});
+
+test('scoped calendar bearer refreshes cache without exposing subscriber secret', async t => {
+  t.mock.method(globalThis, 'fetch', async () => Response.json({result:{items:[row],total:1,incomplete:false}}));
+  const writes = [];
+  const runtime = {...env,CALENDAR_CACHE:{put:async (...args)=>writes.push(args)}};
+  const request = token => new Request('https://calendar.example.test/admin/run-sync', {
+    method:'POST',headers:{Authorization:'Bearer '+token}});
+  assert.equal((await handleManualSync(request('invalid'),runtime)).status,403);
+  assert.equal(writes.length,0);
+  assert.equal((await handleManualSync(request(env.PRIMARY_CRM_CALENDAR_TOKEN),runtime)).status,200);
+  assert.equal(writes.length,2);
 });
