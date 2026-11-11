@@ -16,7 +16,7 @@ export async function fetchScheduledLessons(env, now = new Date()) {
   const dateFrom = formatDateInTimeZone(now, 'Europe/Samara');
   const dateTo = addDays(dateFrom, days);
   const response = await fetch(new URL('/api/ext/integration/calendar.events', base), {
-    method: 'POST', redirect: 'error', signal: AbortSignal.timeout(10000),
+    method: 'POST', redirect: 'manual', signal: AbortSignal.timeout(10000),
     headers: { Authorization: `Bearer ${env.PRIMARY_CRM_CALENDAR_TOKEN}`, 'X-CRM-UI': '1', 'Content-Type': 'application/json' },
     body: JSON.stringify({ date_from: dateFrom, date_to: dateTo })
   });

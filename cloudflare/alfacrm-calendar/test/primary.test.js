@@ -13,7 +13,7 @@ test('private primary fetch strips private fields and uses the calendar credenti
   t.mock.method(globalThis, 'fetch', async (url, options) => {
     assert.equal(String(url), 'https://crm.example.test/api/ext/integration/calendar.events');
     assert.equal(options.headers.Authorization,'Bearer '+env.PRIMARY_CRM_CALENDAR_TOKEN);
-    assert.equal(options.redirect,'error');
+    assert.equal(options.redirect,'manual');
     assert.deepEqual(JSON.parse(options.body),{date_from:'2026-11-04',date_to:'2027-05-03'});
     return Response.json({result:{items:[row],total:1,incomplete:false}});
   });
@@ -44,6 +44,14 @@ test('incomplete data and redirects never replace a known good cache', async t =
   const runtime = {...env,CALENDAR_CACHE:{put:(...args)=>writes.push(args)}};
   await assert.rejects(syncCalendar(runtime),/Incomplete/);
   assert.deepEqual(writes,[]);
+});
+
+test('Worker-compatible manual redirects never forward the scoped credential', async t => {
+  t.mock.method(globalThis,'fetch',async (url,options) => {
+    assert.equal(options.redirect,'manual');
+    return new Response('',{status:302,headers:{Location:'https://other.example.test'}});
+  });
+  await assert.rejects(fetchScheduledLessons(env),/Private CRM HTTP 302/);
 });
 
 test('new primary cache cannot publish an old private Alfa calendar', async () => {
