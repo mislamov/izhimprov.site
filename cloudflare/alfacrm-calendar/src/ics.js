@@ -1,4 +1,4 @@
-import ical, { ICalCalendarMethod } from "ical-generator";
+import ical, { ICalCalendarMethod, ICalEventStatus } from "ical-generator";
 import { isValidDate, parseApiDateTime, zonedDateTimeToUtc } from "./time.js";
 
 function compact(values) {
@@ -274,10 +274,12 @@ export function normalizeLesson(lesson, timeZone) {
 
   return {
     id,
-    uid: `alfacrm-lesson-${id}@improizh.s20.online`,
-    summary: buildSummary(lesson),
-    description: buildDescription(lesson),
-    location: buildLocation(lesson),
+    uid: lesson.calendar_uid || `alfacrm-lesson-${id}@improizh.s20.online`,
+    cancelled: lesson.status === 2,
+    sequence: Number.isInteger(lesson.version) ? lesson.version : 0,
+    summary: lesson.calendar_uid ? (lesson.lesson_type_name || "Мероприятие школы") : buildSummary(lesson),
+    description: lesson.calendar_uid ? "" : buildDescription(lesson),
+    location: lesson.calendar_uid ? "" : buildLocation(lesson),
     start,
     end,
     lastModified: buildLastModified(lesson)
@@ -286,10 +288,10 @@ export function normalizeLesson(lesson, timeZone) {
 
 export function buildCalendarIcs(lessons, generatedAt, timeZone) {
   const calendar = ical({
-    name: "IzhImprov AlfaCRM Calendar",
+    name: "IzhImprov Calendar",
     prodId: {
       company: "IzhImprov",
-      product: "AlfaCRM Calendar",
+      product: "CRM Calendar",
       language: "RU"
     }
   });
@@ -308,6 +310,8 @@ export function buildCalendarIcs(lessons, generatedAt, timeZone) {
       start: lesson.start,
       end: lesson.end,
       summary: lesson.summary,
+      sequence: lesson.sequence,
+      status: lesson.cancelled ? ICalEventStatus.CANCELLED : ICalEventStatus.CONFIRMED,
       description: lesson.description || undefined,
       location: lesson.location || undefined,
       stamp: generatedAt,

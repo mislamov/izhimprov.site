@@ -1,8 +1,8 @@
-import { fetchScheduledLessons } from "./alfacrm.js";
+import { fetchScheduledLessons } from "./primary.js";
 import { buildCalendarIcs, normalizeLesson } from "./ics.js";
 
-const ICS_KEY = "calendar:alfacrm:ics";
-const META_KEY = "calendar:alfacrm:meta";
+const ICS_KEY = "calendar:primary:ics";
+const META_KEY = "calendar:primary:meta";
 
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body, null, 2), {
@@ -211,7 +211,7 @@ export default {
       return handleHealth(env);
     }
 
-    if (request.method === "GET" && url.pathname === "/calendar/alfacrm.ics") {
+    if (request.method === "GET" && ["/calendar/alfacrm.ics", "/calendar/crm.ics"].includes(url.pathname)) {
       return handleCalendar(request, env);
     }
 
