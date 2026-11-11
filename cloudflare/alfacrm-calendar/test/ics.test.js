@@ -98,7 +98,7 @@ test("buildCalendarIcs emits required calendar properties", () => {
   assert.match(ics, /VERSION:2.0/);
   assert.match(ics, /METHOD:PUBLISH/);
   assert.match(ics, /CALSCALE:GREGORIAN/);
-  assert.match(ics, /PRODID:-\/\/IzhImprov\/\/AlfaCRM Calendar\/\/RU/);
+  assert.match(ics, /PRODID:-\/\/IzhImprov\/\/CRM Calendar\/\/RU/);
 
   const indexA = ics.indexOf("UID:alfacrm-lesson-1@improizh.s20.online");
   const indexB = ics.indexOf("UID:alfacrm-lesson-2@improizh.s20.online");
