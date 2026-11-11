@@ -91,11 +91,7 @@ async function handleHealth(env) {
 }
 
 async function handleCalendar(request, env) {
-  const url = new URL(request.url);
-  const providedToken = url.searchParams.get("token");
-  const expectedToken = env.CALENDAR_SECRET;
-
-  if (!(await safeSecretEquals(providedToken, expectedToken))) {
+  if (!(await isAuthorized(request, env))) {
     return new Response("Forbidden", {
       status: 403,
       headers: {

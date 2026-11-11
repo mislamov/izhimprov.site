@@ -63,4 +63,9 @@ test('scoped calendar bearer refreshes cache without exposing subscriber secret'
   assert.equal(writes.length,0);
   assert.equal((await handleManualSync(request(env.PRIMARY_CRM_CALENDAR_TOKEN),runtime)).status,200);
   assert.equal(writes.length,2);
+  runtime.CALENDAR_CACHE.get = async key => writes.find(entry=>entry[0]===key)?.[1];
+  const calendar = await handleCalendar(new Request('https://calendar.example.test/calendar/crm.ics', {
+    headers:{Authorization:'Bearer '+env.PRIMARY_CRM_CALENDAR_TOKEN}}), runtime);
+  assert.equal(calendar.status,200);
+  assert.match(await calendar.text(), /BEGIN:VCALENDAR/);
 });
